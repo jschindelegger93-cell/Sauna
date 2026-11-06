@@ -3,7 +3,7 @@ name: "No. 3 Heublume"
 nummer: "No. 3"
 kurz: "Saunaaufguss Heublume: warm, süßlich und kräuterig wie eine frisch gemähte Almwiese im Juli. Ein gemütlicher, nostalgischer Duft, der selten zu finden ist. 100 ml für rund 40 Aufgüsse."
 typ: duft
-preis: 14.90
+preis: 22.90
 inhalt: "100 ml"
 inhaltMl: 100
 anwendungen: 40

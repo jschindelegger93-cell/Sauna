@@ -100,11 +100,15 @@ collections:
       - { label: Name, name: name, widget: string }
       - { label: Nummer (z. B. No. 1), name: nummer, widget: string, required: false }
       - { label: "Kurzantwort (2–3 Sätze, erscheint oben und bei Google/KI)", name: kurz, widget: text }
-      - { label: Typ, name: typ, widget: select, options: [{ label: Einzelduft, value: duft }, { label: Set, value: set }] }
+      - { label: Typ, name: typ, widget: select, options: [{ label: Einzelduft, value: duft }, { label: Set, value: set }, { label: Zubehör, value: zubehoer }] }
       - { label: Preis (€ brutto), name: preis, widget: number, value_type: float }
       - { label: Streichpreis (€), name: preisAlt, widget: number, value_type: float, required: false }
       - { label: Inhalt (Text), name: inhalt, widget: string, hint: "z. B. 100 ml oder 4 × 100 ml" }
-      - { label: Inhalt in ml (für Grundpreis), name: inhaltMl, widget: number }
+      - { label: Inhalt in ml (für Grundpreis, nur Flüssigkeiten), name: inhaltMl, widget: number, required: false }
+      - { label: Material (Zubehör), name: material, widget: string, required: false }
+      - { label: Maße (Zubehör), name: masse, widget: string, required: false }
+      - { label: Limitierte Edition, name: limitiert, widget: boolean, default: false }
+      - { label: Highlights (Stichpunkte), name: highlights, widget: list, required: false }
       - { label: Anzahl Aufgüsse ca., name: anwendungen, widget: number, required: false }
       - { label: Akzentfarbe, name: farbe, widget: color, required: false }
       - { label: Produktbild, name: bild, widget: image, hint: "Quadratisch, mind. 1200 × 1200 px" }
@@ -145,6 +149,7 @@ collections:
           - { label: Heimsauna, value: heimsauna }
           - { label: Richtig saunieren, value: saunieren }
           - { label: Aufguss-Rituale, value: rituale }
+          - { label: Sauna-Zubehör, value: zubehoer }
       - { label: Veröffentlicht am, name: datum, widget: datetime, time_format: false, format: YYYY-MM-DD }
       - { label: Aktualisiert am, name: aktualisiert, widget: datetime, time_format: false, format: YYYY-MM-DD, required: false }
       - { label: Lesezeit (Min.), name: lesezeit, widget: number, default: 5 }

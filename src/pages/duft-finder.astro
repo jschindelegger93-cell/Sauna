@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import { euro, breadcrumbLd } from '../lib/site';
-const duefte = (await getCollection('produkte')).filter((p) => p.data.typ === 'duft').sort((a, b) => a.data.reihenfolge - b.data.reihenfolge);
+const duefte = (await getCollection('produkte')).filter((p) => p.data.typ === 'duft' && !p.data.limitiert).sort((a, b) => a.data.reihenfolge - b.data.reihenfolge);
 const crumbs = [{ name: 'Startseite', href: '/' }, { name: 'Duft-Finder', href: '/duft-finder/' }];
 const fragen = [
   { n: 'zeit', t: 'Wann saunierst du meistens?', o: [['abend', 'Am Abend, zum Runterkommen'], ['morgen', 'Morgens oder tagsüber'], ['sport', 'Nach dem Sport']] },

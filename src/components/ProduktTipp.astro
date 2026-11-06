@@ -1,6 +1,6 @@
 ---
 import { getEntry } from 'astro:content';
-import { euro } from '../lib/site';
+import { euro, produktUrl } from '../lib/site';
 interface Props { slug?: string }
 const p = Astro.props.slug ? await getEntry('produkte', Astro.props.slug) : undefined;
 ---
@@ -11,7 +11,7 @@ const p = Astro.props.slug ? await getEntry('produkte', Astro.props.slug) : unde
       <p class="augenbraue">Passend zum Thema</p>
       <p class="name">{p.data.name}</p>
       <p class="txt">{p.data.kurz.split('. ')[0]}.</p>
-      <a href={`/saunaaufguss/${p.id}/`} class="btn btn--dunkel">Ansehen · {euro(p.data.preis)}</a>
+      <a href={produktUrl(p)} class="btn btn--dunkel">Ansehen · {euro(p.data.preis)}</a>
     </div>
   </aside>
 )}

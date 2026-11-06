@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="800" height="800"><defs>
+  <linearGradient id="glas" x1="0" x2="1"><stop offset="0" stop-color="#1E0D03" stop-opacity=".6"/><stop offset=".35" stop-color="#B86426" stop-opacity=".22"/><stop offset=".7" stop-color="#1E0D03" stop-opacity=".18"/><stop offset="1" stop-color="#120700" stop-opacity=".65"/></linearGradient>
+  <linearGradient id="holz" x1="0" x2="1"><stop offset="0" stop-color="#6E4A26" stop-opacity=".5"/><stop offset=".5" stop-color="#EAD3B0" stop-opacity=".25"/><stop offset="1" stop-color="#5A3B1C" stop-opacity=".55"/></linearGradient>
+  <radialGradient id="buehne" cx=".5" cy=".38" r=".75"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#ECEAE6"/></radialGradient>
+</defs>
+<rect width="800" height="800" fill="url(#buehne)"/>
+  <defs><linearGradient id="vh" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFB36B"/><stop offset="1" stop-color="#D9481A"/></linearGradient><linearGradient id="filz" x1="0" x2="1"><stop offset="0" stop-color="#2C2C2E"/><stop offset=".5" stop-color="#48484A"/><stop offset="1" stop-color="#1D1D1F"/></linearGradient></defs>
+  <ellipse cx="400" cy="600" rx="270" ry="22" fill="#000" opacity=".12"/>
+  <path d="M150 560 Q140 540 180 528 L620 528 Q660 540 650 560 Q620 590 400 594 Q180 590 150 560 Z" fill="#1D1D1F"/>
+  <path d="M230 530 Q232 300 400 270 Q568 300 570 530 Z" fill="url(#filz)"/>
+  <path d="M232 470 Q400 490 568 470 L570 500 Q400 520 230 500 Z" fill="#E2622B" opacity=".9"/>
+  <g transform="translate(372 370) scale(0.55)"><path d="M30 52 L52 14 L74 52 Z" fill="url(#vh)"/><path d="M2 52 L28 6 L54 52 Z" fill="#F5F5F7"/></g>
+  <text x="400" y="690" text-anchor="middle" font-family="Inter, 'Inter Tight', Helvetica, Arial, sans-serif" font-weight="500" font-size="14" letter-spacing="5" fill="#1D1D1F">SAUNAHUT · LODEN</text>
+</svg>

@@ -10,21 +10,31 @@ const gruppen = [
     { q: 'Wie lange reicht eine Flasche?', a: '100 ml reichen bei 3–5 ml pro Liter Aufgusswasser für rund 40 Aufgüsse in der Heimsauna.' },
     { q: 'Wie lagere ich den Aufguss richtig?', a: 'Gut verschlossen, kühl, dunkel und außerhalb der Reichweite von Kindern. Nach dem Öffnen innerhalb von 12 Monaten verbrauchen.' },
     { q: 'Sind die Aufgüsse vegan?', a: '[PLATZHALTER: mit Lohnabfüller klären]' },
+    { q: 'Was ist der Unterschied zwischen No. 1 Zirbe und No. 0 Zirbe Reserve?', a: 'Die Reserve hat einen deutlich höheren Anteil an Zirbenöl aus Osttirol, wird in kleinen, nummerierten Chargen abgefüllt und ist limitiert. Dosierung: nur 2–3 ml pro Liter.' },
+    { q: 'Warum sind ALMGLUT-Aufgüsse teurer als im Drogeriemarkt?', a: 'Weil wir naturreine ätherische Öle mit klarer Herkunft statt Parfümöl verwenden und in Braunglas abfüllen. Pro Aufguss sind das trotzdem nur rund 57 Cent.' },
+    { q: 'Aus welchem Holz ist euer Zubehör?', a: 'Kübel und Kelle sind aus Tiroler Zirbenholz, der Kübel hat einen herausnehmbaren Edelstahleinsatz. Das Saunatuch ist aus 100 % Leinen, der Saunahut aus gewalktem Loden (Schafwolle).' },
+    { q: 'Gibt es Geschenksets?', a: 'Ja: das Probierset (19,90 €), die Almbox mit allen vier Düften (79 €) und das Ritual-Set mit Kübel, Kelle und Düften (249 €). Auf Wunsch mit Grußkarte.' },
   ]},
   { t: 'Anwendung', id: 'anwendung', f: [
     { q: 'Wie viel Aufguss nehme ich pro Liter?', a: '3–5 ml auf 1 Liter kaltes Wasser, bei Bergminze 2–4 ml. Für deine Saunagröße hilft der Aufguss-Rechner.' },
     { q: 'Kann ich die Aufgüsse auch im Dampfbad oder in der Infrarotkabine verwenden?', a: 'Sie sind für die finnische Sauna und Biosauna gemacht. Bei Dampfbädern und Infrarotkabinen bitte die Herstellerangaben des Geräts beachten.' },
+    { q: 'Darf ich den Aufguss pur auf die Steine geben?', a: 'Nein. Konzentrate enthalten ätherische Öle, die unverdünnt entflammbar sind. Immer zuerst in kaltes Aufgusswasser geben.' },
+    { q: 'Wie oft sollte ich in der Heimsauna aufgießen?', a: 'Pro Saunagang ein bis zwei Aufgüsse mit je 2–3 Kellen. Zwischen den Aufgüssen ein paar Minuten warten, bis sich die Hitze verteilt hat.' },
+    { q: 'Kann ich verschiedene Düfte mischen?', a: 'Ja. Beliebt sind Zirbe mit Latsche (warm-frisch) und Heublume mit Zirbe (Almhütte). Insgesamt nicht mehr als 5 ml pro Liter.' },
     { q: 'Sind die Aufgüsse für Kinder geeignet?', a: 'Minze und Eukalyptus sind für Säuglinge und Kleinkinder nicht geeignet. Für Saunagänge mit Kindern milde Düfte wie Zirbe oder Heublume niedrig dosieren und vorher ärztlich abklären.' },
   ]},
   { t: 'Bestellung & Versand', id: 'versand', f: [
     { q: 'Wohin liefert ihr?', a: `Nach Österreich und Deutschland. Lieferzeit ${S.lieferzeit}.` },
     { q: 'Was kostet der Versand?', a: `${S.versandkosten.toFixed(2).replace('.', ',')} €, ab ${S.versandkostenfrei_ab} € versandkostenfrei.` },
+    { q: 'Kann ich auf Rechnung zahlen?', a: '[PLATZHALTER: Zahlarten laut Shopify-Setup, z. B. Kreditkarte, PayPal, Klarna, Apple Pay, EPS]' },
+    { q: 'Liefert ihr in die Schweiz?', a: 'Aktuell nur nach Österreich und Deutschland. Die Schweiz ist geplant.' },
+    { q: 'Gibt es Firmengeschenke?', a: 'Ja, die Almbox und das Ritual-Set gibt es auch in größeren Mengen mit eigener Karte. Schreib uns über das Kontaktformular.' },
     { q: 'Kann ich zurückgeben?', a: 'Ungeöffnete Produkte innerhalb von 14 Tagen. Details unter Versand & Rückgabe.' },
   ]},
 ];
 const alle = gruppen.flatMap((g) => g.f);
 ---
-<Base title="Häufige Fragen zu ALMGLUT Saunaaufgüssen" description="Antworten auf häufige Fragen zu ALMGLUT: Inhaltsstoffe, Dosierung, Lagerung, Versand und Rückgabe." schema={[breadcrumbLd(crumbs), faqLd(alle)]}>
+<Base title="Häufige Fragen zu ALMGLUT Saunaaufgüssen" description="Antworten auf häufige Fragen zu ALMGLUT: Inhaltsstoffe, Dosierung, Reserve-Edition, Zubehör, Geschenksets, Versand und Rückgabe." schema={[breadcrumbLd(crumbs), faqLd(alle)]}>
   <Breadcrumbs items={crumbs} />
   <section class="schmal" style="padding-block:24px 96px">
     <h1>Häufige Fragen</h1>

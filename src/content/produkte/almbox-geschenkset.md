@@ -1,9 +1,9 @@
 ---
 name: "Almbox Geschenkset"
-kurz: "Das Saunaaufguss-Geschenkset von ALMGLUT: alle 4 alpinen Düfte (Zirbe, Latsche, Heublume, Bergminze) à 100 ml in einer tannengrünen Geschenkbox. Rund 160 Aufgüsse, perfekt für Weihnachten und Geburtstage."
+kurz: "Das Saunaaufguss-Geschenkset von ALMGLUT: alle 4 alpinen Düfte (Zirbe, Latsche, Heublume, Bergminze) à 100 ml in einer graphitfarbenen Geschenkbox. Rund 160 Aufgüsse, perfekt für Weihnachten und Geburtstage."
 typ: set
-preis: 49.90
-preisAlt: 59.60
+preis: 79.00
+preisAlt: 91.60
 inhalt: "4 × 100 ml"
 inhaltMl: 400
 anwendungen: 160
@@ -25,14 +25,14 @@ faq:
   - q: "Kann ich die Almbox direkt verschenken?"
     a: "Ja, die Box ist bereits als Geschenk verpackt. Auf Wunsch legen wir eine handgeschriebene Karte bei. [PLATZHALTER Geschenkkarten-Option im Checkout]"
   - q: "Wie viel spare ich gegenüber Einzelkauf?"
-    a: "Einzeln kosten die 4 Düfte 59,60 €, als Almbox 49,90 €. Du sparst also 9,70 €."
+    a: "Einzeln kosten die 4 Düfte 91,60 €, als Almbox 79,00 €. Du sparst also 12,60 €."
 seo:
   title: "Saunaaufguss Geschenkset – Almbox mit 4 alpinen Düften"
   description: "Saunaaufguss Geschenkset: Zirbe, Latsche, Heublume und Bergminze à 100 ml in der Almbox. Rund 160 Aufgüsse. Das Geschenk für Saunafans."
   keyword: "saunaaufguss geschenkset"
 ---
 
-Die **Almbox** ist das Geschenk für alle, die eine eigene Sauna haben oder gerne in die Therme gehen. Sie enthält alle vier ALMGLUT-Düfte in voller Größe, eingebettet in Holzwolle in einer tannengrünen Box.
+Die **Almbox** ist das Geschenk für alle, die eine eigene Sauna haben oder gerne in die Therme gehen. Sie enthält alle vier ALMGLUT-Düfte in voller Größe, eingebettet in Holzwolle in einer graphitfarbenen Box.
 
 ## Was drin ist
 

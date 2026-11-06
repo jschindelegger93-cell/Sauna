@@ -16,7 +16,9 @@ export const datum = (d: Date) =>
 export const iso = (d: Date) => d.toISOString().slice(0, 10);
 
 /** PNG-Variante eines Produkt-SVG (für Google, Open Graph) */
-export const png = (bild: string) => bild.replace(/\.(svg|webp)$/, '.png');
+export const png = (bild: string) => (bild.startsWith('/images/stock/') ? bild : bild.replace(/\.(svg|webp)$/, '.png'));
+/** URL je Produkt: Zubehör unter /sauna-zubehoer/, Düfte und Sets unter /saunaaufguss/ */
+export const produktUrl = (p: { id: string; data: { typ: string } }) => `/${p.data.typ === 'zubehoer' ? 'sauna-zubehoer' : 'saunaaufguss'}/${p.id}/`;
 
 /** Warenkorb-Link: Shopify-Cart-Permalink, sobald Domain + Variant-ID gesetzt sind */
 export const warenkorbUrl = (variantId?: string) =>
@@ -28,6 +30,7 @@ export const THEMEN = {
   heimsauna: 'Heimsauna',
   saunieren: 'Richtig saunieren',
   rituale: 'Aufguss-Rituale',
+  zubehoer: 'Sauna-Zubehör',
 } as const;
 
 export type ThemaKey = keyof typeof THEMEN;

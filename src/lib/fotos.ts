@@ -16,6 +16,21 @@ export const FOTOS = {
   'huette-sonnenuntergang': { alt: 'Berghütte im Hochgebirge bei Sonnenuntergang', von: 'Wolfgang Lutz', quelle: 'https://unsplash.com/' },
   'almhuette-schnee': { alt: 'Almhütte im Schnee vor einem Berggipfel', von: 'Hans Ott', quelle: 'https://unsplash.com/' },
   kuebel: { alt: 'Aufgusskübel und Holzkellen auf einer Saunabank', von: 'Lukas Kubica', quelle: 'https://unsplash.com/' },
+  'sauna-dunkel-glas': { alt: 'Dunkle Designsauna mit indirektem Licht und Steinofen', von: 'HUUM', quelle: 'https://unsplash.com/@huum' },
+  'sauna-holz-licht': { alt: 'Holzsauna im warmen indirekten Licht', von: 'Auroom Wellness', quelle: 'https://unsplash.com/@auroomwellness' },
+  'sauna-kerze': { alt: 'Dampfbad mit Kerzenlicht und warmem Licht', von: 'Dominik Neuner', quelle: 'https://unsplash.com/' },
+  'sauna-glut-mann': { alt: 'Mann schwitzt im dunklen Licht einer Sauna', von: 'Auroom Wellness', quelle: 'https://unsplash.com/@auroomwellness' },
+  'steine-nah': { alt: 'Nahaufnahme heißer Saunasteine', von: 'HUUM', quelle: 'https://unsplash.com/@huum' },
+  'winter-bergsee': { alt: 'Verschneiter Bergsee mit Nadelwald und Gipfeln', von: 'Joel & Jasmin Førestbird', quelle: 'https://unsplash.com/' },
+  nebelwald: { alt: 'Nadelwald im Nebel', von: 'Christian Grab', quelle: 'https://unsplash.com/' },
+  schneewald: { alt: 'Verschneiter Fichtenwald im Winter', von: 'Patrick Mueller', quelle: 'https://unsplash.com/' },
+  'alpental-sommer': { alt: 'Alpental mit Bergmassiv im goldenen Abendlicht', von: 'Marek Piwnicki', quelle: 'https://unsplash.com/@marekpiwnicki' },
+  'tuch-bank': { alt: 'Gemustertes Saunatuch auf einer Holzbank', von: 'Clay Banks', quelle: 'https://unsplash.com/@claybanks' },
+  'kuebel-dunkel': { alt: 'Holzkübel mit Kelle in einer Sauna mit Lichtleisten', von: 'Anne Nygård', quelle: 'https://unsplash.com/@polarmermaid' },
+  'aufguss-frau': { alt: 'Frau gießt Wasser auf die heißen Saunasteine', von: 'HUUM', quelle: 'https://unsplash.com/@huum' },
+  'sauna-gruppe-dampf': { alt: 'Freunde entspannen in einer dampfenden Holzsauna', von: 'HUUM', quelle: 'https://unsplash.com/@huum' },
+  'sauna-fenster': { alt: 'Sauna mit großem Fenster und Steinofen', von: 'Auroom Wellness', quelle: 'https://unsplash.com/@auroomwellness' },
+  'steine-dunkel': { alt: 'Saunasteine vor dunklen Saunabänken', von: 'HUUM', quelle: 'https://unsplash.com/@huum' },
 } as const;
 
 export type FotoKey = keyof typeof FOTOS;
@@ -24,8 +39,9 @@ export const foto = (k: FotoKey) => ({ src: `/images/stock/${k}.webp`, klein: `/
 /** Themenbild je Ratgeber-Cluster */
 export const THEMA_FOTO: Record<string, FotoKey> = {
   grundlagen: 'aufguss-kelle',
-  duftlexikon: 'sauna-waldblick',
-  heimsauna: 'sauna-ofen-wald',
+  duftlexikon: 'nebelwald',
+  heimsauna: 'sauna-holz-licht',
   saunieren: 'sauna-paar',
-  rituale: 'saunasteine-dampf',
+  rituale: 'sauna-kerze',
+  zubehoer: 'kuebel-dunkel',
 };

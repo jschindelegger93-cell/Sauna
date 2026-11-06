@@ -3,7 +3,7 @@ name: "No. 4 Bergminze"
 nummer: "No. 4"
 kurz: "Saunaaufguss mit Minze und Eukalyptus: kühl, frisch und kräftig. Der wache Duft für den ersten Saunagang oder nach dem Sport. 100 ml für rund 40 Aufgüsse."
 typ: duft
-preis: 14.90
+preis: 22.90
 inhalt: "100 ml"
 inhaltMl: 100
 anwendungen: 40
@@ -19,7 +19,7 @@ verfuegbar: false
 sku: "AG-004-100"
 reihenfolge: 4
 verwandt: ["latschenkiefer", "almbox-geschenkset", "probierset"]
-ratgeber: ["welcher-saunaduft-wofuer", "wie-viel-aufguss-pro-liter"]
+ratgeber: ["mentholkristalle-sauna", "welcher-saunaduft-wofuer", "wie-viel-aufguss-pro-liter"]
 faq:
   - q: "Wie intensiv ist der Minz-Aufguss?"
     a: "Recht intensiv, durch Minze und Eukalyptus wirkt die Luft kühl, obwohl die Sauna heiß ist. Starte mit 2 ml pro Liter und steigere bei Bedarf."

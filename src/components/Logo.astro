@@ -5,7 +5,7 @@ const id = 'lg' + Math.random().toString(36).slice(2, 8);
 ---
 <span class:list={['logo', { hell, klein }]}>
   <span class="zeile">
-    <svg viewBox="0 0 76 52" width={klein ? 30 : 38} height={klein ? 21 : 26} aria-hidden="true">
+    <svg viewBox="0 0 76 52" width={klein ? 46 : 56} height={klein ? 31 : 38} aria-hidden="true">
       <defs><linearGradient id={id} x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFB36B" /><stop offset="1" stop-color="#D9481A" /></linearGradient></defs>
       <path d="M30 52 L52 14 L74 52 Z" fill={`url(#${id})`} />
       <path d="M2 52 L28 6 L54 52 Z" fill="currentColor" />
@@ -17,8 +17,9 @@ const id = 'lg' + Math.random().toString(36).slice(2, 8);
 <style>
   .logo { display: inline-flex; flex-direction: column; gap: 8px; color: var(--graphit); }
   .logo.hell { color: #fff; }
-  .zeile { display: inline-flex; align-items: center; gap: 9px; }
-  .wort { font: 600 1.5rem/1 var(--titel); letter-spacing: -0.03em; }
-  .klein .wort { font-size: 1.25rem; }
-  .herkunft { font-size: 0.62rem; opacity: 0.8; }
+  .zeile { display: inline-flex; align-items: center; gap: 11px; }
+  .wort { font: 600 2.05rem/1 var(--titel); letter-spacing: -0.035em; }
+  .klein .wort { font-size: 1.8rem; }
+  @media (max-width: 600px) { .klein .wort { font-size: 1.55rem; } .klein svg { width: 40px; height: 27px; } }
+  .herkunft { font-size: 0.66rem; opacity: 0.8; }
 </style>

@@ -1,6 +1,6 @@
 ---
 import Logo from './Logo.astro';
-import { S, THEMEN } from '../lib/site';
+import { S, THEMEN, produktUrl } from '../lib/site';
 import { getCollection } from 'astro:content';
 const produkte = (await getCollection('produkte')).sort((a, b) => a.data.reihenfolge - b.data.reihenfolge);
 const jahr = new Date().getFullYear();
@@ -23,7 +23,7 @@ const jahr = new Date().getFullYear();
       </div>
       <nav aria-label="Shop">
         <h2>Saunaaufguss</h2>
-        <ul>{produkte.map((p) => <li><a href={`/saunaaufguss/${p.id}/`}>{p.data.name}</a></li>)}</ul>
+        <ul>{produkte.filter((p) => p.data.typ !== 'zubehoer').map((p) => <li><a href={produktUrl(p)}>{p.data.name}</a></li>)}<li><a href="/sauna-zubehoer/">Sauna-Zubehör</a></li></ul>
       </nav>
       <nav aria-label="Aufguss-Wissen">
         <h2>Aufguss-Wissen</h2>

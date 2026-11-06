@@ -3,7 +3,7 @@ name: "No. 1 Zirbe"
 nummer: "No. 1"
 kurz: "Saunaaufguss mit naturreinem Zirbenöl aus den österreichischen Alpen: warm, harzig und holzig. Der ruhige Duft für den letzten Saunagang am Abend. 100 ml reichen für rund 40 Aufgüsse."
 typ: duft
-preis: 14.90
+preis: 22.90
 inhalt: "100 ml"
 inhaltMl: 100
 anwendungen: 40
@@ -19,7 +19,7 @@ verfuegbar: false
 sku: "AG-001-100"
 reihenfolge: 1
 verwandt: ["latschenkiefer", "almbox-geschenkset", "probierset"]
-ratgeber: ["saunaaufguss-zirbe", "welcher-saunaduft-wofuer", "saunaaufguss-selber-machen"]
+ratgeber: ["saunaaufguss-zirbe", "saunaaufguss-bio-ohne-alkohol", "aetherische-oele-sauna"]
 faq:
   - q: "Wie riecht der Saunaaufguss Zirbe?"
     a: "Warm, holzig und leicht harzig, wie eine Zirbenstube in einer Almhütte. Der Duft ist ruhig und nicht scharf, deshalb passt er besonders gut zum Abend."

@@ -1,0 +1,107 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import ProduktKarte from '../../components/ProduktKarte.astro';
+import Faq from '../../components/Faq.astro';
+import Foto from '../../components/Foto.astro';
+import { abs, euro, breadcrumbLd, faqLd, png, produktUrl } from '../../lib/site';
+
+const alle = (await getCollection('produkte')).sort((a, b) => a.data.reihenfolge - b.data.reihenfolge);
+const zub = alle.filter((p) => p.data.typ === 'zubehoer');
+const ritual = alle.find((p) => p.id === 'ritual-set');
+const crumbs = [{ name: 'Startseite', href: '/' }, { name: 'Sauna-Zubehör', href: '/sauna-zubehoer/' }];
+
+const faq = [
+  { q: 'Welches Sauna-Zubehör braucht man wirklich?', a: 'Für den Aufguss brauchst du einen Aufgusskübel (3–5 Liter), eine Kelle mit langem Stiel und einen Saunaaufguss. Für dich selbst ein großes Saunatuch zum Liegen. Ein Saunahut und ein Salz-Peeling sind schöne Extras, aber kein Muss.' },
+  { q: 'Ist ein Aufgusskübel aus Holz oder Edelstahl besser?', a: 'Holz ist leichter, bleibt kühl und duftet, besonders Zirbe. Edelstahl ist pflegeleichter. Die beste Lösung ist ein Holzkübel mit Edelstahleinsatz: Er verbindet beides und wird nicht undicht.' },
+  { q: 'Wie groß sollte ein Aufgusskübel sein?', a: 'Für eine Heimsauna mit 6–10 m³ reichen 3–5 Liter. Damit hast du genug Aufgusswasser für einen ganzen Saunaabend mit mehreren Gängen.' },
+  { q: 'Warum Zubehör aus Zirbenholz?', a: 'Zirbenholz ist leicht, formstabil und duftet bei Wärme nach Alpenwald. Es ist das traditionelle Holz der Tiroler Stuben und passt perfekt zu einem alpinen Aufguss.' },
+  { q: 'Was ist das beste Geschenk für Saunafans?', a: 'Für Einsteiger das Probierset mit vier Düften, für Fortgeschrittene die Almbox, und zur neuen Heimsauna das Ritual-Set mit Kübel, Kelle und allen vier Aufgüssen.' },
+];
+const listeLd = {
+  '@type': 'CollectionPage',
+  '@id': abs('/sauna-zubehoer/') + '#seite',
+  name: 'Sauna-Zubehör aus Zirbenholz, Leinen und Loden',
+  url: abs('/sauna-zubehoer/'),
+  inLanguage: 'de-AT',
+  mainEntity: {
+    '@type': 'ItemList',
+    numberOfItems: zub.length,
+    itemListElement: zub.map((p, i) => ({ '@type': 'ListItem', position: i + 1, url: abs(produktUrl(p)), name: `ALMGLUT ${p.data.name}`, image: abs(png(p.data.bild)) })),
+  },
+};
+---
+<Base title="Sauna-Zubehör aus Zirbe, Leinen & Loden – ALMGLUT"
+  description="Premium Sauna-Zubehör aus den Alpen: Aufgusskübel und Kelle aus Zirbenholz, Saunatuch aus Leinen, Saunahut aus Loden, Alpensalz-Peeling."
+  schema={[listeLd, breadcrumbLd(crumbs), faqLd(faq)]} ueberFoto>
+  <header class="kopf-foto foto">
+    <Foto k="kuebel-dunkel" prio />
+    <div class="wrap">
+      <p class="herkunft">47° N · Gemacht für die Sauna</p>
+      <h1>Sauna-Zubehör</h1>
+      <p class="lead">Dinge, die bleiben: Aufgusskübel und Kelle aus Tiroler Zirbenholz, Saunatuch aus reinem Leinen, Saunahut aus Loden. Reduziert auf das, was ein guter Saunaabend braucht.</p>
+    </div>
+  </header>
+  <Breadcrumbs items={crumbs} />
+
+  <section class="wrap block">
+    <div class="raster raster--3">{zub.map((p) => <ProduktKarte p={p} />)}</div>
+  </section>
+
+  {ritual && (
+    <section class="wrap block">
+      <a class="ritual" href={produktUrl(ritual)}>
+        <div>
+          <p class="herkunft">Alles in einem</p>
+          <h2>Das Ritual-Set.</h2>
+          <p>Kübel und Kelle aus Zirbe plus alle vier Aufgüsse. Das komplette Aufguss-Ritual für die eigene Sauna.</p>
+          <span class="btn btn--glut">{euro(ritual.data.preis)} · statt {euro(ritual.data.preisAlt ?? 0)}</span>
+        </div>
+        <img src={ritual.data.bild} alt="ALMGLUT Ritual-Set mit Aufgusskübel, Kelle und vier Saunaaufgüssen" width="1200" height="1200" loading="lazy" />
+      </a>
+    </section>
+  )}
+
+  <section class="sektion sektion--nebel">
+    <div class="wrap prosa-wrap">
+      <div class="prosa">
+        <h2>Welches Sauna-Zubehör brauchst du?</h2>
+        <p>Gutes Sauna-Zubehör erkennt man daran, dass man es jahrelang benutzt. Für die Heimsauna reichen wenige Dinge, die aber hochwertig sein sollten:</p>
+        <table>
+          <thead><tr><th>Zubehör</th><th>Wofür</th><th>Worauf achten</th></tr></thead>
+          <tbody>
+            <tr><td><a href="/sauna-zubehoer/aufgusskuebel-zirbe/">Aufgusskübel</a></td><td>Aufgusswasser mit Duft</td><td>3–5 Liter, Holz mit Edelstahleinsatz</td></tr>
+            <tr><td><a href="/sauna-zubehoer/aufgusskelle-zirbe/">Aufgusskelle</a></td><td>Wasser auf die Steine geben</td><td>Langer Stiel (40 cm+), ca. 80 ml Schöpfteil</td></tr>
+            <tr><td><a href="/saunaaufguss/">Saunaaufguss</a></td><td>Duft und intensiveres Hitzegefühl</td><td>Naturreine ätherische Öle, klare Herkunft</td></tr>
+            <tr><td><a href="/sauna-zubehoer/leinen-saunatuch/">Saunatuch</a></td><td>Hygiene auf der Bank</td><td>Mind. 80 × 200 cm, saugstark</td></tr>
+            <tr><td><a href="/sauna-zubehoer/saunahut-loden/">Saunahut</a></td><td>Kopf und Haare schützen</td><td>Reine Wolle oder Filz</td></tr>
+            <tr><td><a href="/sauna-zubehoer/alpensalz-peeling/">Salz-Peeling</a></td><td>Pflege zwischen den Gängen</td><td>Feines Salz, natürliche Öle</td></tr>
+          </tbody>
+        </table>
+        <h2>Warum Zirbe, Leinen und Loden?</h2>
+        <p>Wir setzen auf drei Materialien, die in den Alpen seit Jahrhunderten verwendet werden. <strong>Zirbenholz</strong> ist leicht, formstabil und duftet bei Wärme. <strong>Leinen</strong> nimmt viel Feuchtigkeit auf und trocknet schnell. <strong>Loden</strong>, gewalkte Schafwolle, isoliert hervorragend und ist deshalb ideal für einen Saunahut.</p>
+        <p>Mehr Wissen dazu: <a href="/ratgeber/aufgusskuebel-kaufen/">Aufgusskübel kaufen: Holz oder Edelstahl?</a>, <a href="/ratgeber/saunahut-sinnvoll/">Saunahut: sinnvoll oder nicht?</a> und <a href="/ratgeber/thema/zubehoer/">alles rund ums Sauna-Zubehör</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sektion">
+    <div class="wrap" style="max-width:820px"><Faq faq={faq} titel="Fragen zum Sauna-Zubehör" /></div>
+  </section>
+</Base>
+<style>
+  .kopf-foto { min-height: 62vh; display: flex; align-items: flex-end; }
+  .kopf-foto .wrap { padding-block: 150px 64px; }
+  .kopf-foto .herkunft { color: rgb(255 255 255 / 85%); display: block; margin-bottom: 18px; }
+  .kopf-foto .lead { max-width: 50ch; }
+  .block { padding-block: 32px; }
+  .ritual { display: grid; background: var(--leinen); border-radius: var(--r); overflow: hidden; text-decoration: none; color: var(--graphit); }
+  .ritual img { width: 100%; aspect-ratio: 1; object-fit: cover; }
+  .ritual div { padding: clamp(28px, 5vw, 64px); align-self: center; }
+  .ritual h2 { font-size: clamp(2.2rem, 5vw, 3.6rem); margin: 10px 0 14px; }
+  .ritual p { color: var(--grau); max-width: 40ch; }
+  @media (min-width: 820px) { .ritual { grid-template-columns: 1fr 1fr; } }
+  .prosa-wrap { display: flex; justify-content: center; }
+  .prosa-wrap .prosa { min-width: 0; width: 100%; }
+</style>

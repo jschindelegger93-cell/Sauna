@@ -2,7 +2,7 @@
 name: "Probierset"
 kurz: "Das ALMGLUT-Probierset mit allen 4 alpinen Saunadüften à 15 ml: der günstige Einstieg, um Zirbe, Latsche, Heublume und Bergminze zu testen. Reicht für rund 24 Aufgüsse."
 typ: set
-preis: 14.90
+preis: 19.90
 inhalt: "4 × 15 ml"
 inhaltMl: 60
 anwendungen: 24
@@ -17,7 +17,7 @@ verfuegbar: false
 sku: "AG-SET-4x15"
 reihenfolge: 6
 verwandt: ["almbox-geschenkset", "zirbe", "bergminze"]
-ratgeber: ["saunaaufguss-selber-machen", "welcher-saunaduft-wofuer"]
+ratgeber: ["saunaaufguss-kaufen", "saunaaufguss-selber-machen", "welcher-saunaduft-wofuer"]
 faq:
   - q: "Für wie viele Aufgüsse reicht das Probierset?"
     a: "Pro Fläschchen etwa 5–6 Aufgüsse, insgesamt also rund 24 Aufgüsse."

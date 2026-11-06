@@ -1,0 +1,9 @@
+---
+import { getCollection } from 'astro:content';
+import ProduktSeite from '../../components/ProduktSeite.astro';
+export async function getStaticPaths() {
+  const alle = await getCollection('produkte');
+  return alle.filter((p) => p.data.typ === 'zubehoer').map((p) => ({ params: { slug: p.id }, props: { p } }));
+}
+---
+<ProduktSeite p={Astro.props.p} />

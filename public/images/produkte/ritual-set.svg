@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="800" height="800"><defs>
+  <linearGradient id="glas" x1="0" x2="1"><stop offset="0" stop-color="#1E0D03" stop-opacity=".6"/><stop offset=".35" stop-color="#B86426" stop-opacity=".22"/><stop offset=".7" stop-color="#1E0D03" stop-opacity=".18"/><stop offset="1" stop-color="#120700" stop-opacity=".65"/></linearGradient>
+  <linearGradient id="holz" x1="0" x2="1"><stop offset="0" stop-color="#6E4A26" stop-opacity=".5"/><stop offset=".5" stop-color="#EAD3B0" stop-opacity=".25"/><stop offset="1" stop-color="#5A3B1C" stop-opacity=".55"/></linearGradient>
+  <radialGradient id="buehne" cx=".5" cy=".38" r=".75"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#ECEAE6"/></radialGradient>
+</defs>
+<rect width="800" height="800" fill="url(#buehne)"/>
+  <defs><linearGradient id="vrs" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFB36B"/><stop offset="1" stop-color="#D9481A"/></linearGradient></defs>
+  <g transform="translate(60 300) scale(1.25)">
+  <ellipse cx="130" cy="232" rx="128" ry="10" fill="#000" opacity=".1"/>
+  <path d="M28 40 L50 226 Q52 232 60 232 L200 232 Q208 232 210 226 L232 40 Z" fill="#D9B98C"/>
+  <line x1="48" y1="40" x2="62" y2="230" stroke="#B48C5E" stroke-width="1.4" opacity=".7"/><line x1="76" y1="40" x2="85" y2="230" stroke="#B48C5E" stroke-width="1.4" opacity=".7"/><line x1="104" y1="40" x2="108" y2="230" stroke="#B48C5E" stroke-width="1.4" opacity=".7"/><line x1="132" y1="40" x2="131" y2="230" stroke="#B48C5E" stroke-width="1.4" opacity=".7"/><line x1="160" y1="40" x2="154" y2="230" stroke="#B48C5E" stroke-width="1.4" opacity=".7"/><line x1="188" y1="40" x2="177" y2="230" stroke="#B48C5E" stroke-width="1.4" opacity=".7"/><line x1="216" y1="40" x2="200" y2="230" stroke="#B48C5E" stroke-width="1.4" opacity=".7"/>
+  <rect x="34" y="84" width="192" height="12" rx="3" fill="#8A8A8E"/><rect x="44" y="178" width="172" height="12" rx="3" fill="#8A8A8E"/>
+  <ellipse cx="130" cy="40" rx="102" ry="16" fill="#B8B8BC"/><ellipse cx="130" cy="40" rx="92" ry="12" fill="#6E6E73"/>
+  <path d="M40 30 Q130 -70 220 30" stroke="#C9A57A" stroke-width="10" fill="none" stroke-linecap="round"/>
+</g>
+  <g transform="translate(150 640) rotate(-8) scale(0.95)">
+  <rect x="0" y="-7" width="300" height="14" rx="7" fill="#C9A57A"/>
+  <ellipse cx="330" cy="0" rx="42" ry="34" fill="#C9A57A"/><ellipse cx="330" cy="-2" rx="32" ry="24" fill="#A47E52"/>
+</g>
+  
+<g transform="translate(400 300) scale(0.5)">
+  <defs><linearGradient id="vrs0" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFB36B"/><stop offset="1" stop-color="#D9481A"/></linearGradient></defs>
+  <ellipse cx="100" cy="404" rx="92" ry="9" fill="#000" opacity=".10"/>
+  <rect x="64" y="0" width="72" height="56" rx="7" fill="#C49A6C"/>
+  <rect x="64" y="0" width="72" height="56" rx="7" fill="url(#holz)"/>
+  <rect x="74" y="54" width="52" height="24" fill="#3A220F"/>
+  <path d="M74 76 C74 102 20 110 20 148 L20 382 Q20 402 40 402 L160 402 Q180 402 180 382 L180 148 C180 110 126 102 126 76 Z" fill="#5C3212"/>
+  <path d="M74 76 C74 102 20 110 20 148 L20 382 Q20 402 40 402 L160 402 Q180 402 180 382 L180 148 C180 110 126 102 126 76 Z" fill="url(#glas)"/>
+  <rect x="32" y="168" width="136" height="196" rx="4" fill="#F1ECE3"/>
+  <g transform="translate(83 190) scale(0.46)"><path d="M30 52 L52 14 L74 52 Z" fill="url(#vrs0)"/><path d="M2 52 L28 6 L54 52 Z" fill="#1D1D1F"/></g>
+  <text x="100" y="240" text-anchor="middle" font-family="Inter, 'Inter Tight', Helvetica, Arial, sans-serif" font-weight="600" font-size="13.5" letter-spacing="4.2" fill="#1D1D1F">ALMGLUT</text>
+  <line x1="76" y1="254" x2="124" y2="254" stroke="#1D1D1F" stroke-width="0.8"/>
+  <text x="100" y="274" text-anchor="middle" font-family="Inter, 'Inter Tight', Helvetica, Arial, sans-serif" font-weight="500" font-size="8.5" letter-spacing="2.4" fill="#1D1D1F">No. 1</text>
+  <text x="100" y="300" text-anchor="middle" font-family="Inter, 'Inter Tight', Helvetica, Arial, sans-serif" font-weight="500" font-size="20" fill="#1D1D1F">Zirbe</text>
+  <text x="100" y="346" text-anchor="middle" font-family="Inter, 'Inter Tight', Helvetica, Arial, sans-serif" font-size="7" letter-spacing="1.8" fill="#6B655C">SAUNAAUFGUSS · 100 ML</text>
+  <path d="M33 148 Q37 126 55 116" stroke="#fff" stroke-width="5" opacity=".16" fill="none" stroke-linecap="round"/>
+  <rect x="160" y="150" width="6" height="220" rx="3" fill="#fff" opacity=".07"/>
+</g>
+<g transform="translate(492 300) scale(0.5)">
+  <defs><linearGradient id="vrs1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFB36B"/><stop offset="1" stop-color="#D9481A"/></linearGradient></defs>
+  <ellipse cx="100" cy="404" rx="92" ry="9" fill="#000" opacity=".10"/>
+  <rect x="64" y="0" width="72" height="56" rx="7" fill="#C49A6C"/>
+  <rect x="64" y="0" width="72" height="56" rx="7" fill="url(#holz)"/>
+  <rect x="74" y="54" width="52" height="24" fill="#3A220F"/>
+  <path d="M74 76 C74 102 20 110 20 148 L20 382 Q20 402 40 402 L160 402 Q180 402 180 382 L180 148 C180 110 126 102 126 76 Z" fill="#5C3212"/>
+  <path d="M74 76 C74 102 20 110 20 148 L20 382 Q20 402 40 402 L160 402 Q180 402 180 382 L180 148 C180 110 126 102 126 76 Z" fill="url(#glas)"/>
+  <rect x="32" y="168" width="136" height="196" rx="4" fill="#F1ECE3"/>
+  <g transform="translate(83 190) scale(0.46)"><path d="M30 52 L52 14 L74 52 Z" fill="url(#vrs1)"/><path d="M2 52 L28 6 L54 52 Z" fill="#1D1D1F"/></g>
+  <text x="100" y="240" text-anchor="middle" font-family="Inter, 'Inter Tight', Helvetica, Arial, sans-serif" font-weight="600" font-size="13.5" letter-spacing="4.2" fill="#1D1D1F">ALMGLUT</text>
+  <line x1="76" y1="254" x2="124" y2="254" stroke="#1D1D1F" stroke-width="0.8"/>
+  <text x="100" y="274" text-anchor="middle" font-family="Inter, 'Inter Tight', Helvetica, Arial, sans-serif" font-weight="500" font-size="8.5" letter-spacing="2.4" fill="#1D1D1F">No. 2</text>
+  <text x="100" y="300" text-anchor="middle" font-family="Inter, 'Inter Tight', Helvetica, Arial, sans-serif" font-weight="500" font-size="20" fill="#1D1D1F">Latsche</text>
+  <text x="100" y="346" text-anchor="middle" font-family="Inter, 'Inter Tight', Helvetica, Arial, sans-serif" font-size="7" letter-spacing="1.8" fill="#6B655C">SAUNAAUFGUSS · 100 ML</text>
+  <path d="M33 148 Q37 126 55 116" stroke="#fff" stroke-width="5" opacity=".16" fill="none" stroke-linecap="round"/>
+  <rect x="160" y="150" width="6" height="220" rx="3" fill="#fff" opacity=".07"/>
+</g>
+<g transform="translate(584 300) scale(0.5)">
+  <defs><linearGradient id="vrs2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFB36B"/><stop offset="1" stop-color="#D9481A"/></linearGradient></defs>
+  <ellipse cx="100" cy="404" rx="92" ry="9" fill="#000" opacity=".10"/>
+  <rect x="64" y="0" width="72" height="56" rx="7" fill="#C49A6C"/>
+  <rect x="64" y="0" width="72" height="56" rx="7" fill="url(#holz)"/>
+  <rect x="74" y="54" width="52" height="24" fill="#3A220F"/>
+  <path d="M74 76 C74 102 20 110 20 148 L20 382 Q20 402 40 402 L160 402 Q180 402 180 382 L180 148 C180 110 126 102 126 76 Z" fill="#5C3212"/>
+  <path d="M74 76 C74 102 20 110 20 148 L20 382 Q20 402 40 402 L160 402 Q180 402 180 382 L180 148 C180 110 126 102 126 76 Z" fill="url(#glas)"/>
+  <rect x="32" y="168" width="136" height="196" rx="4" fill="#F1ECE3"/>
+  <g transform="translate(83 190) scale(0.46)"><path d="M30 52 L52 14 L74 52 Z" fill="url(#vrs2)"/><path d="M2 52 L28 6 L54 52 Z" fill="#1D1D1F"/></g>
+  <text x="100" y="240" text-anchor="middle" font-family="Inter, 'Inter Tight', Helvetica, Arial, sans-serif" font-weight="600" font-size="13.5" letter-spacing="4.2" fill="#1D1D1F">ALMGLUT</text>
+  <line x1="76" y1="254" x2="124" y2="254" stroke="#1D1D1F" stroke-width="0.8"/>
+  <text x="100" y="274" text-anchor="middle" font-family="Inter, 'Inter Tight', Helvetica, Arial, sans-serif" font-weight="500" font-size="8.5" letter-spacing="2.4" fill="#1D1D1F">No. 3</text>
+  <text x="100" y="300" text-anchor="middle" font-family="Inter, 'Inter Tight', Helvetica, Arial, sans-serif" font-weight="500" font-size="20" fill="#1D1D1F">Heublume</text>
+  <text x="100" y="346" text-anchor="middle" font-family="Inter, 'Inter Tight', Helvetica, Arial, sans-serif" font-size="7" letter-spacing="1.8" fill="#6B655C">SAUNAAUFGUSS · 100 ML</text>
+  <path d="M33 148 Q37 126 55 116" stroke="#fff" stroke-width="5" opacity=".16" fill="none" stroke-linecap="round"/>
+  <rect x="160" y="150" width="6" height="220" rx="3" fill="#fff" opacity=".07"/>
+</g>
+<g transform="translate(676 300) scale(0.5)">
+  <defs><linearGradient id="vrs3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFB36B"/><stop offset="1" stop-color="#D9481A"/></linearGradient></defs>
+  <ellipse cx="100" cy="404" rx="92" ry="9" fill="#000" opacity=".10"/>
+  <rect x="64" y="0" width="72" height="56" rx="7" fill="#C49A6C"/>
+  <rect x="64" y="0" width="72" height="56" rx="7" fill="url(#holz)"/>
+  <rect x="74" y="54" width="52" height="24" fill="#3A220F"/>
+  <path d="M74 76 C74 102 20 110 20 148 L20 382 Q20 402 40 402 L160 402 Q180 402 180 382 L180 148 C180 110 126 102 126 76 Z" fill="#5C3212"/>
+  <path d="M74 76 C74 102 20 110 20 148 L20 382 Q20 402 40 402 L160 402 Q180 402 180 382 L180 148 C180 110 126 102 126 76 Z" fill="url(#glas)"/>
+  <rect x="32" y="168" width="136" height="196" rx="4" fill="#F1ECE3"/>
+  <g transform="translate(83 190) scale(0.46)"><path d="M30 52 L52 14 L74 52 Z" fill="url(#vrs3)"/><path d="M2 52 L28 6 L54 52 Z" fill="#1D1D1F"/></g>
+  <text x="100" y="240" text-anchor="middle" font-family="Inter, 'Inter Tight', Helvetica, Arial, sans-serif" font-weight="600" font-size="13.5" letter-spacing="4.2" fill="#1D1D1F">ALMGLUT</text>
+  <line x1="76" y1="254" x2="124" y2="254" stroke="#1D1D1F" stroke-width="0.8"/>
+  <text x="100" y="274" text-anchor="middle" font-family="Inter, 'Inter Tight', Helvetica, Arial, sans-serif" font-weight="500" font-size="8.5" letter-spacing="2.4" fill="#1D1D1F">No. 4</text>
+  <text x="100" y="300" text-anchor="middle" font-family="Inter, 'Inter Tight', Helvetica, Arial, sans-serif" font-weight="500" font-size="20" fill="#1D1D1F">Bergminze</text>
+  <text x="100" y="346" text-anchor="middle" font-family="Inter, 'Inter Tight', Helvetica, Arial, sans-serif" font-size="7" letter-spacing="1.8" fill="#6B655C">SAUNAAUFGUSS · 100 ML</text>
+  <path d="M33 148 Q37 126 55 116" stroke="#fff" stroke-width="5" opacity=".16" fill="none" stroke-linecap="round"/>
+  <rect x="160" y="150" width="6" height="220" rx="3" fill="#fff" opacity=".07"/>
+</g>
+  <text x="400" y="740" text-anchor="middle" font-family="Inter, 'Inter Tight', Helvetica, Arial, sans-serif" font-weight="500" font-size="14" letter-spacing="5" fill="#1D1D1F">RITUAL-SET · ZIRBE</text>
+</svg>

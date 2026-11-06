@@ -1,19 +1,20 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import { euro } from '../lib/site';
+import { euro, produktUrl } from '../lib/site';
 interface Props { p: CollectionEntry<'produkte'>; ueberschrift?: 'h2' | 'h3' }
 const { p, ueberschrift = 'h3' } = Astro.props;
 const d = p.data;
 const H = ueberschrift;
+const bild = d.bild.startsWith('/images/stock/') ? d.bild.replace('.webp', '-sm.webp') : d.bild;
 ---
 <article class="pk">
-  <a href={`/saunaaufguss/${p.id}/`} class="bild" tabindex="-1" aria-hidden="true">
-    <img src={d.bild} alt="" width="1200" height="1200" loading="lazy" decoding="async" />
-    {!d.verfuegbar && <span class="badge">Bald erhältlich</span>}
+  <a href={produktUrl(p)} class="bild" tabindex="-1" aria-hidden="true">
+    <img src={bild} alt="" width="1200" height="1200" loading="lazy" decoding="async" />
+    {d.limitiert ? <span class="badge badge--glut">Limitiert</span> : !d.verfuegbar && <span class="badge">Bald erhältlich</span>}
   </a>
   <div class="txt">
     {d.nummer && <p class="nr">{d.nummer}</p>}
-    <H class="titel"><a href={`/saunaaufguss/${p.id}/`}>{d.typ === 'duft' ? d.name.replace(/^No\. \d /, '') : d.name}</a></H>
+    <H class="titel"><a href={produktUrl(p)}>{d.typ === 'duft' ? d.name.replace(/^No\. \d /, '') : d.name}</a></H>
     <p class="noten">{d.stimmung.slice(0, 3).join(' · ')}</p>
     <p class="preis">{d.preisAlt && <s>{euro(d.preisAlt)}</s>} {euro(d.preis)} <span>· {d.inhalt}</span></p>
   </div>
@@ -25,6 +26,7 @@ const H = ueberschrift;
   .bild img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
   .pk:hover .bild img { transform: scale(1.04); }
   .badge { position: absolute; top: 16px; left: 16px; }
+  .badge--glut { background: var(--graphit); color: #fff; }
   .txt { padding: 22px 24px 26px; text-align: center; display: grid; gap: 4px; }
   .nr { margin: 0; font: 500 0.75rem/1 var(--titel); letter-spacing: 0.24em; text-transform: uppercase; color: var(--grau); }
   .titel { font-size: 1.6rem; margin: 4px 0 0; }

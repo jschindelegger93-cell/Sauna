@@ -6,8 +6,8 @@ const { ueberFoto = false } = Astro.props;
 const pfad = Astro.url.pathname;
 const nav = [
   { href: '/saunaaufguss/', label: 'Saunaaufguss' },
+  { href: '/sauna-zubehoer/', label: 'Zubehör' },
   { href: '/ratgeber/', label: 'Aufguss-Wissen' },
-  { href: '/aufguss-rechner/', label: 'Aufguss-Rechner' },
   { href: '/duft-finder/', label: 'Duft-Finder' },
   { href: '/ueber-uns/', label: 'Über uns' },
 ];
@@ -96,20 +96,20 @@ const a = S.announcement;
   .kopf.transparent { position: fixed; left: 0; right: 0; top: 38px; background: transparent; backdrop-filter: none; -webkit-backdrop-filter: none; border-color: transparent; }
   .kopf.menue-offen { background: #fff !important; }
   .kopf.transparent.fest, .kopf.transparent.menue-offen { top: 0; background: rgb(255 255 255 / 82%); backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px); border-color: rgb(0 0 0 / 6%); }
-  .kopf-in { display: flex; align-items: center; gap: 22px; min-height: 60px; }
+  .kopf-in { display: flex; align-items: center; gap: 28px; min-height: 80px; }
   .marke { text-decoration: none; margin-right: auto; display: grid; }
   .marke > span { grid-area: 1 / 1; transition: opacity 0.3s; }
   .logo-hell { opacity: 0; }
   .transparent:not(.fest):not(.menue-offen) .logo-hell { opacity: 1; }
   .transparent:not(.fest):not(.menue-offen) .logo-dunkel { opacity: 0; }
-  .nav ul { list-style: none; display: flex; gap: 28px; margin: 0; padding: 0; }
-  .nav a { text-decoration: none; font-size: 0.9rem; color: var(--graphit); opacity: 0.85; }
+  .nav ul { list-style: none; display: flex; gap: 34px; margin: 0; padding: 0; }
+  .nav a { text-decoration: none; font-size: 1.02rem; font-weight: 500; letter-spacing: -0.005em; color: var(--graphit); opacity: 0.85; }
   .nav a:hover, .nav a[aria-current] { opacity: 1; color: var(--graphit); }
   .nav a[aria-current] { font-weight: 600; }
   .transparent:not(.fest):not(.menue-offen) .nav a, .transparent:not(.fest):not(.menue-offen) .kopf-beratung { color: #fff; }
-  .kopf-beratung { background: none; border: 0; font: 500 0.9rem var(--text); color: var(--graphit); cursor: pointer; padding: 8px 4px; }
+  .kopf-beratung { background: none; border: 0; font: 500 1.02rem var(--text); color: var(--graphit); cursor: pointer; padding: 8px 4px; }
   .kopf-beratung:hover { color: var(--glut-dunkel); }
-  .kopf-cta { padding: 10px 18px; min-height: 38px; font-size: 0.88rem; }
+  .kopf-cta { padding: 12px 24px; min-height: 46px; font-size: 1rem; }
   .transparent:not(.fest):not(.menue-offen) .kopf-cta { background: #fff; color: var(--graphit); }
   .nur-mobil { display: none; }
   .menue { display: none; background: none; border: 0; width: 44px; height: 44px; cursor: pointer; position: relative; color: var(--graphit); }
@@ -119,11 +119,14 @@ const a = S.announcement;
   .menue span:last-child { top: 26px; }
   .menue[aria-expanded='true'] span:first-child { top: 22px; transform: rotate(45deg); }
   .menue[aria-expanded='true'] span:last-child { top: 22px; transform: rotate(-45deg); }
-  @media (max-width: 1060px) {
+  @media (max-width: 1180px) {
     .menue { display: block; }
+    .kopf-in { min-height: 70px; gap: 14px; }
+    .kopf-cta { padding: 10px 18px; min-height: 42px; font-size: 0.95rem; }
+    .nav { inset: 70px 0 0 !important; }
     .kopf-beratung { display: none; }
     .nur-mobil { display: block; }
-    .nav { position: fixed; inset: 60px 0 0; background: #fff; padding: 20px var(--pad); transform: translateY(-8px); opacity: 0; pointer-events: none; transition: opacity 0.25s, transform 0.25s; overflow-y: auto; }
+    .nav { position: fixed; inset: 80px 0 0; background: #fff; padding: 20px var(--pad); transform: translateY(-8px); opacity: 0; pointer-events: none; transition: opacity 0.25s, transform 0.25s; overflow-y: auto; }
     .nav.offen { opacity: 1; transform: none; pointer-events: auto; }
     .nav ul { flex-direction: column; gap: 0; }
     .nav a, .nav-beratung { display: block; width: 100%; text-align: left; font: 600 1.7rem/1.2 var(--titel); letter-spacing: -0.02em; color: var(--graphit) !important; opacity: 1; padding: 14px 0; border: 0; border-bottom: 1px solid var(--linie); background: none; cursor: pointer; }

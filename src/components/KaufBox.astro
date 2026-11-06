@@ -11,7 +11,7 @@ const cart = d.verfuegbar ? warenkorbUrl(d.shopifyVariantId) : null;
     <strong>{euro(d.preis)}</strong>
     {d.preisAlt && <s aria-label={`statt ${euro(d.preisAlt)}`}>{euro(d.preisAlt)}</s>}
   </p>
-  <p class="klein">inkl. MwSt. · {d.inhalt} ({grundpreis(d.preis, d.inhaltMl)}) · <a href="/versand/">zzgl. Versand</a>, ab {S.versandkostenfrei_ab} € versandkostenfrei</p>
+  <p class="klein">inkl. MwSt. · {d.inhalt}{d.inhaltMl ? ` (${grundpreis(d.preis, d.inhaltMl)})` : ''} · <a href="/versand/">zzgl. Versand</a>, ab {S.versandkostenfrei_ab} € versandkostenfrei</p>
 
   {cart ? (
     <a href={cart} class="btn btn--glut btn--block" rel="nofollow">In den Warenkorb</a>

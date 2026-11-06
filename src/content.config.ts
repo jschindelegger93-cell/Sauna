@@ -22,11 +22,15 @@ const produkte = defineCollection({
     name: z.string(),
     nummer: z.string().optional(), // "No. 1"
     kurz: z.string(), // 1-Satz-Antwort oben (GEO)
-    typ: z.enum(['duft', 'set']),
+    typ: z.enum(['duft', 'set', 'zubehoer']),
     preis: z.number(),
     preisAlt: z.number().optional(),
     inhalt: z.string(), // "100 ml"
-    inhaltMl: z.number(), // für Grundpreis
+    inhaltMl: z.number().optional(), // für Grundpreis (nur Flüssigkeiten)
+    material: z.string().optional(),
+    masse: z.string().optional(),
+    limitiert: z.boolean().default(false),
+    highlights: z.array(z.string()).default([]),
     anwendungen: z.number().optional(), // ca. Aufgüsse pro Flasche
     farbe: z.string().default('#1E3328'), // Akzent der Sorte
     bild: z.string(),
@@ -53,7 +57,7 @@ const ratgeber = defineCollection({
   schema: z.object({
     titel: z.string(),
     kurzantwort: z.string(), // 2–3 Sätze, zitierfähig
-    thema: z.enum(['grundlagen', 'duftlexikon', 'heimsauna', 'saunieren', 'rituale']),
+    thema: z.enum(['grundlagen', 'duftlexikon', 'heimsauna', 'saunieren', 'rituale', 'zubehoer']),
     datum: z.coerce.date(),
     aktualisiert: z.coerce.date().optional(),
     lesezeit: z.number().default(5),

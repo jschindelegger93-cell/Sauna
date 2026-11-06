@@ -8,15 +8,18 @@ import { S, THEMEN, faqLd } from '../lib/site';
 import { THEMA_FOTO } from '../lib/fotos';
 
 const produkte = (await getCollection('produkte')).sort((a, b) => a.data.reihenfolge - b.data.reihenfolge);
-const duefte = produkte.filter((p) => p.data.typ === 'duft');
+const duefte = produkte.filter((p) => p.data.typ === 'duft' && !p.data.limitiert);
 const almbox = produkte.find((p) => p.id === 'almbox-geschenkset')!;
 const artikel = (await getCollection('ratgeber')).sort((a, b) => +b.data.datum - +a.data.datum).slice(0, 3);
 const themen = (await getCollection('themen')).sort((a, b) => a.data.reihenfolge - b.data.reihenfolge);
 
 const faq = [
   { q: 'Was ist ALMGLUT?', a: 'ALMGLUT ist eine österreichische Marke für Saunaaufgüsse. Wir machen vier alpine Düfte (Zirbe, Latschenkiefer, Heublume, Bergminze) mit naturreinen ätherischen Ölen, abgefüllt in Österreich, und teilen unser Wissen rund um den Aufguss kostenlos im Ratgeber.' },
-  { q: 'Was kostet ein Saunaaufguss von ALMGLUT?', a: '100 ml kosten 14,90 € und reichen für rund 40 Aufgüsse. Das Probierset mit allen vier Düften à 15 ml kostet 14,90 €, die Almbox mit allen vier Düften à 100 ml 49,90 €.' },
+  { q: 'Was kostet ein Saunaaufguss von ALMGLUT?', a: '100 ml kosten 22,90 € und reichen für rund 40 Aufgüsse, also rund 57 Cent pro Aufguss. Das Probierset mit allen vier Düften à 15 ml kostet 19,90 €, die Almbox mit allen vier Düften à 100 ml 79 €.' },
   { q: 'Wohin liefert ALMGLUT?', a: `Nach Österreich und Deutschland, Lieferzeit ${S.lieferzeit}. Ab ${S.versandkostenfrei_ab} € ist der Versand kostenlos.` },
+  { q: 'Gibt es auch Sauna-Zubehör von ALMGLUT?', a: 'Ja: Aufgusskübel (139 €) und Aufgusskelle (49 €) aus Tiroler Zirbenholz, ein Saunatuch aus Leinen (79 €), einen Saunahut aus Loden (59 €) und ein Alpensalz-Peeling (26,90 €). Komplett mit allen Düften gibt es das Ritual-Set für 249 €.' },
+  { q: 'Was ist die Zirbe Reserve?', a: 'Unsere limitierte Edition No. 0: ein besonders hoch dosierter Aufguss mit Zirbenöl aus Osttirol, in nummerierten 50-ml-Flaschen für 34,90 €.' },
+  { q: 'Was ist das beste Geschenk für Saunafans?', a: 'Zum Kennenlernen das Probierset (19,90 €), für Genießer die Almbox mit allen vier Düften (79 €) und zur neuen Heimsauna das Ritual-Set mit Kübel, Kelle und Düften (249 €).' },
   { q: 'Für welche Sauna sind die Aufgüsse geeignet?', a: 'Für die klassische finnische Sauna und die Biosauna, egal ob Heimsauna, Fasssauna oder Gartensauna.' },
 ];
 ---
@@ -65,19 +68,19 @@ const faq = [
       </div>
       <ol class="ritual">
         <li class="rein">
-          <div class="r-bild"><Foto k="aufguss-kelle" sizes="(min-width: 900px) 33vw, 100vw" /></div>
+          <div class="r-bild"><Foto k="aufguss-frau" sizes="(min-width: 900px) 33vw, 100vw" /></div>
           <span class="r-nr">1. Gang</span>
           <h3>Bergminze oder Latsche</h3>
           <p>Kühl und klar. Die Luft wirkt frischer, obwohl es 85 Grad hat.</p>
         </li>
         <li class="rein">
-          <div class="r-bild"><Foto k="sauna-paar" sizes="(min-width: 900px) 33vw, 100vw" /></div>
+          <div class="r-bild"><Foto k="sauna-gruppe-dampf" sizes="(min-width: 900px) 33vw, 100vw" /></div>
           <span class="r-nr">2. Gang</span>
           <h3>Heublume</h3>
           <p>Warm und weich wie eine Almwiese im Juli. Jetzt wird es gemütlich.</p>
         </li>
         <li class="rein">
-          <div class="r-bild"><Foto k="sauna-entspannung" sizes="(min-width: 900px) 33vw, 100vw" /></div>
+          <div class="r-bild"><Foto k="sauna-holz-licht" sizes="(min-width: 900px) 33vw, 100vw" /></div>
           <span class="r-nr">3. Gang</span>
           <h3>Zirbe</h3>
           <p>Holzig und ruhig. Der Duft für den letzten Aufguss und einen langen Abend.</p>
@@ -107,13 +110,32 @@ const faq = [
       <div class="rein">
         <p class="augenbraue">Das Geschenk für Saunafans</p>
         <h2>Die Almbox.</h2>
-        <p class="lead">Alle vier Düfte à 100 ml in einer graphitfarbenen Box. Rund 160 Aufgüsse für 49,90 € statt 59,60 € einzeln.</p>
+        <p class="lead">Alle vier Düfte à 100 ml in einer graphitfarbenen Box. Rund 160 Aufgüsse für 79 € statt 91,60 € einzeln.</p>
         <div class="cta">
           <a href="/saunaaufguss/almbox-geschenkset/" class="btn btn--glut">Zur Almbox</a>
           <a href="/ratgeber/saunaaufguss-geschenkideen/" class="btn btn--glas">Geschenkideen</a>
         </div>
       </div>
       <div class="box-bild rein"><img src={almbox.data.bild} alt="ALMGLUT Almbox Geschenkset mit vier Saunaaufgüssen" width="1200" height="1200" loading="lazy" /></div>
+    </div>
+  </section>
+
+  <section class="sektion premium">
+    <div class="wrap">
+      <div class="kopf-mitte mitte">
+        <p class="augenbraue">Mehr als Aufguss</p>
+        <h2>Für Abende,<br />die bleiben.</h2>
+      </div>
+      <div class="p-raster">
+        <a href="/saunaaufguss/zirbe-reserve/" class="p-kachel foto rein">
+          <Foto k="sauna-dunkel-glas" sizes="(min-width: 900px) 50vw, 100vw" />
+          <div><p class="herkunft">Limitiert · No. 0</p><h3>Zirbe Reserve</h3><p>Höchstdosiertes Zirbenöl aus Osttirol. Nummerierte Flaschen.</p><span class="link-pfeil">Ab 34,90 €</span></div>
+        </a>
+        <a href="/sauna-zubehoer/" class="p-kachel foto rein">
+          <Foto k="kuebel-dunkel" sizes="(min-width: 900px) 50vw, 100vw" />
+          <div><p class="herkunft">Zirbe · Leinen · Loden</p><h3>Sauna-Zubehör</h3><p>Kübel und Kelle aus Tiroler Zirbe, Saunatuch aus Leinen, Saunahut aus Loden.</p><span class="link-pfeil">Entdecken</span></div>
+        </a>
+      </div>
     </div>
   </section>
 
@@ -255,4 +277,14 @@ const faq = [
   .schluss .herkunft { color: rgb(255 255 255 / 85%); margin-bottom: 20px; }
   .wl { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 32px; }
   .wl input { flex: 0 1 320px; min-height: 50px; padding: 0 20px; border-radius: 999px; border: 0; }
+  .p-raster { display: grid; gap: 20px; margin-top: 48px; }
+  @media (min-width: 860px) { .p-raster { grid-template-columns: 1fr 1fr; } }
+  .p-kachel { min-height: 560px; border-radius: var(--r); overflow: hidden; display: flex; align-items: flex-end; text-decoration: none; color: #fff; }
+  .p-kachel > div { position: relative; z-index: 2; padding: clamp(28px, 4vw, 48px); }
+  .p-kachel h3 { color: #fff; font-size: clamp(2rem, 4vw, 3rem); margin: 8px 0 10px; }
+  .p-kachel p { color: rgb(255 255 255 / 82%); max-width: 36ch; }
+  .p-kachel .herkunft { color: var(--glut); }
+  .p-kachel .link-pfeil { color: #fff; }
+  .p-kachel :global(img) { transition: transform 0.8s ease; }
+  .p-kachel:hover :global(img) { transform: scale(1.04); }
 </style>

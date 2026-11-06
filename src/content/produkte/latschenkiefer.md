@@ -3,7 +3,7 @@ name: "No. 2 Latsche"
 nummer: "No. 2"
 kurz: "Saunaaufguss mit Latschenkiefer und Fichtennadel: klar, frisch und würzig wie Bergluft über der Baumgrenze. Der Klassiker für einen tiefen, freien Atemzug in der Sauna. 100 ml für rund 40 Aufgüsse."
 typ: duft
-preis: 14.90
+preis: 22.90
 inhalt: "100 ml"
 inhaltMl: 100
 anwendungen: 40
@@ -19,7 +19,7 @@ verfuegbar: false
 sku: "AG-002-100"
 reihenfolge: 2
 verwandt: ["bergminze", "zirbe", "almbox-geschenkset"]
-ratgeber: ["saunaaufguss-latschenkiefer", "welcher-saunaduft-wofuer", "wie-viel-aufguss-pro-liter"]
+ratgeber: ["saunaaufguss-latschenkiefer", "saunaaufguss-eukalyptus", "welcher-saunaduft-wofuer"]
 faq:
   - q: "Wie riecht Latschenkiefer in der Sauna?"
     a: "Frisch, harzig und würzig, wie ein Spaziergang durch Latschenfelder über der Baumgrenze. Kräftiger und kühler als Zirbe."
