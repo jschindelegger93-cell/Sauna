@@ -10,14 +10,14 @@ const { links = '55%', breite = '40%' } = Astro.props;
   .dampf { position: absolute; left: var(--links); bottom: 0; width: var(--breite); height: 85%; z-index: 0; pointer-events: none; }
   .dampf span {
     position: absolute; bottom: -10%; left: calc(var(--i) * 8.5%); width: 46%; aspect-ratio: 1;
-    border-radius: 50%; background: radial-gradient(circle, rgb(255 255 255 / 40%) 0%, rgb(255 255 255 / 0%) 70%);
+    border-radius: 50%; background: radial-gradient(circle, rgb(255 255 255 / 32%) 0%, rgb(255 255 255 / 0%) 70%);
     filter: blur(22px); opacity: 0; mix-blend-mode: screen;
   }
   :global(.an) .dampf span { animation: steigen calc(7s + var(--i) * 0.8s) ease-out calc(var(--i) * 0.55s) infinite; }
   @keyframes steigen {
     0% { opacity: 0; transform: translate3d(0, 0, 0) scale(0.6); }
-    15% { opacity: 0.9; }
-    55% { opacity: 0.5; }
+    15% { opacity: 0.8; }
+    55% { opacity: 0.4; }
     100% { opacity: 0; transform: translate3d(calc((var(--i) - 5) * 22px), -105%, 0) scale(2.3); }
   }
   @media (prefers-reduced-motion: reduce) { :global(.an) .dampf span { animation: none; } }
