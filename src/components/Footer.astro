@@ -1,0 +1,75 @@
+---
+import Logo from './Logo.astro';
+import { S, THEMEN } from '../lib/site';
+import { getCollection } from 'astro:content';
+const produkte = (await getCollection('produkte')).sort((a, b) => a.data.reihenfolge - b.data.reihenfolge);
+const jahr = new Date().getFullYear();
+---
+<footer class="fuss">
+  <div class="wrap">
+    <div class="oben">
+      <div class="info">
+        <Logo hell />
+        <p>{S.beschreibung}</p>
+        <form name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot" action="/danke/" class="nl">
+          <input type="hidden" name="form-name" value="newsletter" />
+          <p class="visuell-versteckt"><label>Nicht ausfüllen <input name="bot" /></label></p>
+          <label for="nl-mail" class="nl-titel">Aufguss-Tipps per Mail, 2× im Monat</label>
+          <div class="nl-zeile">
+            <input id="nl-mail" type="email" name="email" required placeholder="deine@mail.at" autocomplete="email" />
+            <button class="btn btn--glut" type="submit">Anmelden</button>
+          </div>
+        </form>
+      </div>
+      <nav aria-label="Shop">
+        <h2>Saunaaufguss</h2>
+        <ul>{produkte.map((p) => <li><a href={`/saunaaufguss/${p.id}/`}>{p.data.name}</a></li>)}</ul>
+      </nav>
+      <nav aria-label="Aufguss-Wissen">
+        <h2>Aufguss-Wissen</h2>
+        <ul>
+          {Object.entries(THEMEN).map(([k, v]) => <li><a href={`/ratgeber/thema/${k}/`}>{v}</a></li>)}
+          <li><a href="/aufguss-rechner/">Aufguss-Rechner</a></li>
+          <li><a href="/duft-finder/">Duft-Finder</a></li>
+        </ul>
+      </nav>
+      <nav aria-label="Service">
+        <h2>Service</h2>
+        <ul>
+          <li><a href="/ueber-uns/">Über ALMGLUT</a></li>
+          <li><a href="/faq/">Häufige Fragen</a></li>
+          <li><a href="/versand/">Versand & Rückgabe</a></li>
+          <li><a href="/kontakt/">Kontakt</a></li>
+          <li><a href={`mailto:${S.email}`}>{S.email}</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="unten">
+      <p>© {jahr} {S.marke} · Abgefüllt in Österreich · {S.ort}</p>
+      <ul>
+        <li><a href="/impressum/">Impressum</a></li>
+        <li><a href="/datenschutz/">Datenschutz</a></li>
+        <li><a href="/agb/">AGB</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .fuss { background: var(--tanne); color: #c9d3cc; padding: clamp(56px, 8vw, 88px) 0 28px; font-size: 0.95rem; }
+  .oben { display: grid; gap: 40px; }
+  @media (min-width: 900px) { .oben { grid-template-columns: 1.6fr 1fr 1fr 1fr; } }
+  .info p { max-width: 42ch; margin-top: 18px; }
+  h2 { font: 700 0.75rem/1 var(--sans); letter-spacing: 0.16em; text-transform: uppercase; color: var(--zirbe); margin-bottom: 16px; }
+  ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+  a { color: var(--kalk); text-decoration: none; }
+  a:hover { color: var(--glut); text-decoration: underline; }
+  .nl { margin-top: 26px; }
+  .nl-titel { display: block; font-weight: 600; color: var(--kalk); margin-bottom: 10px; }
+  .nl-zeile { display: flex; gap: 8px; flex-wrap: wrap; }
+  .nl input { flex: 1 1 200px; min-height: 48px; padding: 0 16px; border-radius: 999px; border: 1px solid var(--tanne-3); background: var(--tanne-2); color: #fff; }
+  .nl input::placeholder { color: #9fb0a5; }
+  .unten { margin-top: 56px; padding-top: 22px; border-top: 1px solid var(--tanne-3); display: flex; flex-wrap: wrap; gap: 14px 24px; justify-content: space-between; font-size: 0.85rem; }
+  .unten p { margin: 0; }
+  .unten ul { display: flex; gap: 20px; }
+</style>

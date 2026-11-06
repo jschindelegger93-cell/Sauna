@@ -1,0 +1,85 @@
+---
+import Logo from './Logo.astro';
+import { S } from '../lib/site';
+const pfad = Astro.url.pathname;
+const nav = [
+  { href: '/saunaaufguss/', label: 'Saunaaufguss' },
+  { href: '/ratgeber/', label: 'Aufguss-Wissen' },
+  { href: '/aufguss-rechner/', label: 'Aufguss-Rechner' },
+  { href: '/duft-finder/', label: 'Duft-Finder' },
+  { href: '/ueber-uns/', label: 'Über uns' },
+];
+const a = S.announcement;
+---
+{a.aktiv && (
+  <div class="ansage" role="region" aria-label="Hinweise">
+    <a href={a.link} class="ansage-in">
+      {a.botschaften.map((b, i) => <span class:list={['msg', { an: i === 0 }]}>{b}</span>)}
+    </a>
+  </div>
+)}
+<header class="kopf">
+  <div class="wrap kopf-in">
+    <a href="/" class="marke" aria-label="ALMGLUT Startseite"><Logo /></a>
+    <nav aria-label="Hauptnavigation" id="nav" class="nav">
+      <ul>
+        {nav.map((n) => (
+          <li><a href={n.href} aria-current={pfad.startsWith(n.href) ? 'page' : undefined}>{n.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+    <a href="/saunaaufguss/" class="btn btn--tanne kopf-cta">Zum Shop</a>
+    <button class="menue" aria-controls="nav" aria-expanded="false" aria-label="Menü öffnen">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<script>
+  const btn = document.querySelector<HTMLButtonElement>('.menue');
+  const nav = document.getElementById('nav');
+  btn?.addEventListener('click', () => {
+    const offen = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', String(!offen));
+    btn.setAttribute('aria-label', offen ? 'Menü öffnen' : 'Menü schließen');
+    nav?.classList.toggle('offen', !offen);
+    document.body.style.overflow = offen ? '' : 'hidden';
+  });
+  const msgs = document.querySelectorAll('.ansage .msg');
+  if (msgs.length > 1 && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    let i = 0;
+    setInterval(() => {
+      msgs[i].classList.remove('an');
+      i = (i + 1) % msgs.length;
+      msgs[i].classList.add('an');
+    }, 4500);
+  }
+</script>
+
+<style>
+  .ansage { background: var(--tanne); color: var(--kalk); font-size: 0.86rem; }
+  .ansage-in { display: grid; place-items: center; min-height: 40px; color: inherit; text-decoration: none; padding: 0 16px; text-align: center; }
+  .msg { grid-area: 1 / 1; opacity: 0; transition: opacity 0.5s; }
+  .msg.an { opacity: 1; }
+  .kopf { position: sticky; top: 0; z-index: 50; background: rgb(243 239 232 / 92%); backdrop-filter: blur(10px); border-bottom: 1px solid var(--linie); }
+  .kopf-in { display: flex; align-items: center; gap: 24px; min-height: 72px; }
+  .marke { text-decoration: none; margin-right: auto; }
+  .nav ul { list-style: none; display: flex; gap: 26px; margin: 0; padding: 0; }
+  .nav a { text-decoration: none; font-weight: 600; font-size: 0.95rem; color: var(--granit); padding: 8px 0; border-bottom: 1.5px solid transparent; }
+  .nav a:hover, .nav a[aria-current] { color: var(--tanne); border-color: var(--glut); }
+  .kopf-cta { padding: 12px 20px; min-height: 44px; font-size: 0.92rem; }
+  .menue { display: none; background: none; border: 0; width: 44px; height: 44px; cursor: pointer; position: relative; }
+  .menue span { position: absolute; left: 11px; right: 11px; height: 1.5px; background: var(--tanne); transition: transform 0.25s, top 0.25s; }
+  .menue span:first-child { top: 17px; }
+  .menue span:last-child { top: 26px; }
+  .menue[aria-expanded='true'] span:first-child { top: 21px; transform: rotate(45deg); }
+  .menue[aria-expanded='true'] span:last-child { top: 21px; transform: rotate(-45deg); }
+  @media (max-width: 1060px) {
+    .menue { display: block; }
+    .kopf-cta { display: none; }
+    .nav { position: fixed; inset: 72px 0 0; background: var(--kalk); padding: 24px var(--pad); transform: translateX(100%); transition: transform 0.3s; overflow-y: auto; }
+    .nav.offen { transform: none; }
+    .nav ul { flex-direction: column; gap: 4px; }
+    .nav a { display: block; font-family: var(--serif); font-weight: 500; font-size: 1.6rem; color: var(--tanne); padding: 12px 0; border-bottom: 1px solid var(--linie); }
+  }
+</style>

@@ -1,0 +1,103 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import ProduktKarte from '../../components/ProduktKarte.astro';
+import Faq from '../../components/Faq.astro';
+import { S, abs, euro, breadcrumbLd, faqLd, png } from '../../lib/site';
+
+const produkte = (await getCollection('produkte')).sort((a, b) => a.data.reihenfolge - b.data.reihenfolge);
+const duefte = produkte.filter((p) => p.data.typ === 'duft');
+const sets = produkte.filter((p) => p.data.typ === 'set');
+const crumbs = [{ name: 'Startseite', href: '/' }, { name: 'Saunaaufguss', href: '/saunaaufguss/' }];
+
+const faq = [
+  { q: 'Welcher Saunaaufguss ist der beste?', a: 'Das hängt vom Moment ab: Frische Düfte wie Latschenkiefer oder Minze passen zum ersten Gang, warme Düfte wie Zirbe oder Heublume zum letzten. Wer unsicher ist, startet mit dem Probierset und testet alle vier.' },
+  { q: 'Wie viel Saunaaufguss nehme ich pro Liter Wasser?', a: 'Bei ALMGLUT 3–5 ml auf 1 Liter kaltes Aufgusswasser, bei Minze 2–4 ml. Für eine Heimsauna mit 6–8 m³ reichen pro Aufguss 2–3 Kellen. Genau rechnet es unser Aufguss-Rechner aus.' },
+  { q: 'Woher kommen die ALMGLUT-Aufgüsse?', a: 'Alle Aufgüsse werden in Österreich abgefüllt. Zirbe und Latschenkiefer stammen aus dem Alpenraum.' },
+  { q: 'Wie lange ist ein Saunaaufguss haltbar?', a: 'Ungeöffnet und kühl, dunkel gelagert mehrere Jahre. Nach dem Öffnen am besten innerhalb von 12 Monaten verbrauchen und die Flasche gut verschlossen halten. Fertig gemischtes Aufgusswasser am selben Tag verwenden.' },
+  { q: 'Wann sind die Aufgüsse erhältlich?', a: 'ALMGLUT startet in Kürze. Trag dich auf einer Produktseite in die Warteliste ein, dann bekommst du zum Start 10 % Rabatt.' },
+];
+const listeLd = {
+  '@type': 'CollectionPage',
+  '@id': abs('/saunaaufguss/') + '#seite',
+  name: 'Saunaaufguss aus Österreich',
+  url: abs('/saunaaufguss/'),
+  inLanguage: 'de-AT',
+  mainEntity: {
+    '@type': 'ItemList',
+    numberOfItems: produkte.length,
+    itemListElement: produkte.map((p, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      url: abs(`/saunaaufguss/${p.id}/`),
+      name: `ALMGLUT ${p.data.name}`,
+      image: abs(png(p.data.bild)),
+    })),
+  },
+};
+---
+<Base title="Saunaaufguss kaufen – alpine Aufgüsse aus Österreich"
+  description="Saunaaufguss aus Österreich: Zirbe, Latschenkiefer, Heublume und Bergminze mit naturreinen ätherischen Ölen. Ab 14,90 €, Probierset und Geschenkset."
+  schema={[listeLd, breadcrumbLd(crumbs), faqLd(faq)]}>
+  <Breadcrumbs items={crumbs} />
+  <header class="wrap kopfbereich">
+    <p class="augenbraue">Shop</p>
+    <h1>Saunaaufguss aus Österreich</h1>
+    <p class="lead">Vier alpine Saunadüfte mit naturreinen ätherischen Ölen, abgefüllt in Österreich: <strong>Zirbe</strong>, <strong>Latschenkiefer</strong>, <strong>Heublume</strong> und <strong>Bergminze</strong>. Je 100 ml für {euro(14.9)}, das reicht für rund 40 Aufgüsse in der Heimsauna.</p>
+  </header>
+
+  <section class="wrap block" aria-labelledby="duefte">
+    <h2 id="duefte" class="h-sek">Die vier Düfte</h2>
+    <div class="raster raster--4">{duefte.map((p) => <ProduktKarte p={p} />)}</div>
+  </section>
+
+  <section class="wrap block" aria-labelledby="sets">
+    <h2 id="sets" class="h-sek">Sets zum Kennenlernen und Verschenken</h2>
+    <div class="raster raster--2 sets">{sets.map((p) => <ProduktKarte p={p} />)}</div>
+  </section>
+
+  <section class="sektion sektion--hell">
+    <div class="wrap prosa-wrap">
+      <div class="prosa">
+        <h2>Welcher Saunaaufguss passt zu dir?</h2>
+        <p>Ein guter Saunagang hat einen Rhythmus: frisch zum Start, warm und ruhig zum Schluss. Unsere vier Düfte sind genau darauf abgestimmt.</p>
+        <table>
+          <thead><tr><th>Duft</th><th>Charakter</th><th>Passt zu</th><th>Dosierung</th></tr></thead>
+          <tbody>
+            {duefte.map((p) => (
+              <tr>
+                <td><a href={`/saunaaufguss/${p.id}/`}>{p.data.name}</a></td>
+                <td>{p.data.stimmung.join(', ')}</td>
+                <td>{p.data.duftnoten.join(', ')}</td>
+                <td>{p.data.dosierung?.split(',')[0]}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <p>Noch unsicher? Der <a href="/duft-finder/">Duft-Finder</a> empfiehlt dir in vier Fragen deinen Duft. Und wie viel Aufguss du für deine Sauna brauchst, rechnet der <a href="/aufguss-rechner/">Aufguss-Rechner</a> aus.</p>
+
+        <h2>Was einen guten Saunaaufguss ausmacht</h2>
+        <p>Ein Saunaaufguss ist ein Konzentrat aus ätherischen Ölen, das ins Aufgusswasser kommt. Auf den heißen Steinen verdampft es und verteilt den Duft im ganzen Raum. Worauf du beim Kauf achten solltest:</p>
+        <ul>
+          <li><strong>Naturreine ätherische Öle</strong> statt reiner Parfümöle: Sie riechen natürlicher und verfliegen nicht so schnell.</li>
+          <li><strong>Klare Herkunft:</strong> Zirbe und Latsche aus den Alpen haben ein anderes Duftprofil als günstige Importware.</li>
+          <li><strong>Ehrliche Dosierung:</strong> Gute Konzentrate brauchen nur wenige Milliliter pro Liter Wasser.</li>
+          <li><strong>Vollständige Kennzeichnung:</strong> Inhaltsstoffe und Sicherheitshinweise müssen auf dem Etikett stehen.</li>
+        </ul>
+        <p>Mehr dazu im großen <a href="/ratgeber/thema/grundlagen/">Saunaaufguss-Guide</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sektion">
+    <div class="wrap" style="max-width:820px"><Faq faq={faq} titel="Fragen zum Saunaaufguss" /></div>
+  </section>
+</Base>
+<style>
+  .kopfbereich { padding-block: 28px 8px; }
+  .block { padding-block: 32px; }
+  .h-sek { font-size: clamp(1.3rem, 2.4vw, 1.7rem); margin-bottom: 22px; }
+  .sets { max-width: 820px; }
+  .prosa-wrap { display: flex; justify-content: center; }
+</style>

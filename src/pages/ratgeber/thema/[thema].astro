@@ -1,0 +1,86 @@
+---
+import { getCollection, render, getEntry } from 'astro:content';
+import Base from '../../../layouts/Base.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import Faq from '../../../components/Faq.astro';
+import ProduktTipp from '../../../components/ProduktTipp.astro';
+import AutorBox from '../../../components/AutorBox.astro';
+import { abs, datum, iso, breadcrumbLd, faqLd, autor, ORG_ID, THEMEN } from '../../../lib/site';
+
+export async function getStaticPaths() {
+  const alle = await getCollection('themen');
+  return alle.map((t) => ({ params: { thema: t.id }, props: { t } }));
+}
+const { t } = Astro.props;
+const d = t.data;
+const { Content } = await render(t);
+const artikel = (await getCollection('ratgeber')).filter((a) => a.data.thema === t.id).sort((a, b) => +b.data.datum - +a.data.datum);
+const andere = (await getCollection('themen')).filter((x) => x.id !== t.id).sort((a, b) => a.data.reihenfolge - b.data.reihenfolge);
+const url = `/ratgeber/thema/${t.id}/`;
+const crumbs = [
+  { name: 'Startseite', href: '/' },
+  { name: 'Aufguss-Wissen', href: '/ratgeber/' },
+  { name: d.navTitel, href: url },
+];
+const seiteLd = {
+  '@type': 'CollectionPage',
+  '@id': abs(url),
+  name: d.titel,
+  description: d.kurzantwort,
+  url: abs(url),
+  inLanguage: 'de-AT',
+  dateModified: iso(d.aktualisiert),
+  author: autor(),
+  publisher: { '@id': ORG_ID },
+  hasPart: artikel.map((a) => ({ '@type': 'Article', headline: a.data.titel, url: abs(`/ratgeber/${a.id}/`) })),
+};
+---
+<Base title={d.seo.title ?? d.titel} description={d.seo.description ?? d.kurzantwort} noindex={d.seo.noindex}
+  schema={[seiteLd, breadcrumbLd(crumbs), faqLd(d.faq)]}>
+  <Breadcrumbs items={crumbs} />
+  <article class="wrap pillar">
+    <header>
+      <p class="augenbraue">Aufguss-Wissen · {d.navTitel}</p>
+      <h1>{d.titel}</h1>
+      <p class="meta">Von <a href="/ueber-uns/">Julian Schindelegger</a> · Aktualisiert am <time datetime={iso(d.aktualisiert)}>{datum(d.aktualisiert)}</time></p>
+    </header>
+    <p class="kurzantwort"><strong>Kurz gesagt</strong>{d.kurzantwort}</p>
+
+    {artikel.length > 0 && (
+      <section class="artikel-liste" aria-labelledby="alle-artikel">
+        <h2 id="alle-artikel" class="h-klein">Alle Artikel zu {THEMEN[t.id as keyof typeof THEMEN]}</h2>
+        <ul>{artikel.map((a) => <li><a href={`/ratgeber/${a.id}/`}>{a.data.titel}</a><span>{a.data.lesezeit} Min.</span></li>)}</ul>
+      </section>
+    )}
+
+    <div class="prosa"><Content /></div>
+    <ProduktTipp slug={d.produkt} />
+    <div style="max-width:var(--text);margin-top:48px"><Faq faq={d.faq} /></div>
+    <AutorBox />
+  </article>
+
+  <section class="sektion sektion--hell">
+    <div class="wrap">
+      <h2>Weitere Themen</h2>
+      <ul class="raster raster--4 themen">
+        {andere.map((o) => <li class="karte"><a href={`/ratgeber/thema/${o.id}/`}><strong>{o.data.navTitel}</strong><span>{o.data.titel}</span></a></li>)}
+      </ul>
+    </div>
+  </section>
+</Base>
+<style>
+  .pillar { padding-block: 24px clamp(56px, 8vw, 96px); }
+  .pillar header { max-width: 860px; margin-bottom: 24px; }
+  .meta { font-size: 0.9rem; color: var(--stein); }
+  .artikel-liste { max-width: var(--text); background: var(--weiss); border: 1px solid var(--linie); border-radius: var(--r); padding: 22px 24px; margin-bottom: 2.4em; }
+  .h-klein { font: 700 0.78rem/1 var(--sans); letter-spacing: 0.16em; text-transform: uppercase; color: var(--glut-dunkel); margin-bottom: 14px; }
+  .artikel-liste ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 0; }
+  .artikel-liste li { display: flex; justify-content: space-between; gap: 16px; padding: 10px 0; border-bottom: 1px solid var(--linie); }
+  .artikel-liste li:last-child { border: 0; }
+  .artikel-liste a { font-weight: 600; text-decoration: none; }
+  .artikel-liste span { font-size: 0.85rem; color: var(--stein); white-space: nowrap; }
+  .themen { list-style: none; padding: 0; margin: 0; }
+  .themen a { display: grid; gap: 6px; padding: 22px; text-decoration: none; height: 100%; }
+  .themen strong { font: 500 1.15rem/1.25 var(--serif); color: var(--tanne); }
+  .themen span { font-size: 0.86rem; color: var(--stein); }
+</style>

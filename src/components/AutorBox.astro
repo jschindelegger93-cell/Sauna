@@ -1,0 +1,18 @@
+---
+import { S } from '../lib/site';
+---
+<aside class="autor" aria-label="Über den Autor">
+  <div class="avatar" aria-hidden="true">JS</div>
+  <div>
+    <p class="name">{S.inhaber}</p>
+    <p class="rolle">Gründer von ALMGLUT · Heimsauna-Besitzer</p>
+    <p class="bio">Julian hat ALMGLUT gegründet, weil er Saunaaufgüsse wollte, die nach den Alpen riechen. Er testet jeden Duft selbst in seiner Heimsauna und schreibt hier über alles, was er über Aufgüsse gelernt hat. <a href="/ueber-uns/">Mehr über Julian</a></p>
+  </div>
+</aside>
+<style>
+  .autor { display: grid; grid-template-columns: 64px 1fr; gap: 18px; padding: 24px; background: var(--kalk); border-radius: var(--r); margin-top: 48px; max-width: var(--text); }
+  .avatar { width: 64px; height: 64px; border-radius: 50%; background: var(--tanne); color: var(--kalk); display: grid; place-items: center; font: 500 1.3rem/1 var(--serif); }
+  .name { font-weight: 700; color: var(--tanne); margin: 0; }
+  .rolle { font-size: 0.85rem; color: var(--stein); margin: 0 0 8px; }
+  .bio { font-size: 0.93rem; margin: 0; }
+</style>

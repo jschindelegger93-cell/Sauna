@@ -1,0 +1,27 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { S, abs, breadcrumbLd, ORG_ID } from '../lib/site';
+const crumbs = [{ name: 'Startseite', href: '/' }, { name: 'Kontakt', href: '/kontakt/' }];
+const ld = { '@type': 'ContactPage', '@id': abs('/kontakt/'), url: abs('/kontakt/'), name: 'Kontakt ALMGLUT', about: { '@id': ORG_ID } };
+---
+<Base title="Kontakt – ALMGLUT Saunaaufguss" description="Fragen zu Saunaaufgüssen, Bestellung oder Firmengeschenken? Schreib ALMGLUT, wir antworten persönlich." schema={[ld, breadcrumbLd(crumbs)]}>
+  <Breadcrumbs items={crumbs} />
+  <section class="schmal" style="padding-block:24px 96px">
+    <h1>Schreib uns</h1>
+    <p class="lead">Fragen zu einem Duft, zur Bestellung oder zu Firmengeschenken? Wir antworten persönlich, meist innerhalb von 24 Stunden. Oder direkt per Mail an <a href={`mailto:${S.email}`}>{S.email}</a>.</p>
+    <form name="kontakt" method="POST" data-netlify="true" netlify-honeypot="bot" action="/danke/" class="form">
+      <input type="hidden" name="form-name" value="kontakt" />
+      <p class="visuell-versteckt"><label>Nicht ausfüllen <input name="bot" /></label></p>
+      <div class="feld"><label for="k-name">Name</label><input id="k-name" name="name" required autocomplete="name" /></div>
+      <div class="feld"><label for="k-mail">E-Mail</label><input id="k-mail" type="email" name="email" required autocomplete="email" /></div>
+      <div class="feld"><label for="k-thema">Thema</label>
+        <select id="k-thema" name="thema"><option>Frage zu einem Duft</option><option>Bestellung</option><option>Firmengeschenke / B2B</option><option>Kooperation</option><option>Sonstiges</option></select>
+      </div>
+      <div class="feld"><label for="k-nachricht">Nachricht</label><textarea id="k-nachricht" name="nachricht" rows="6" required></textarea></div>
+      <button class="btn btn--glut" type="submit">Nachricht senden</button>
+      <p style="font-size:.82rem;color:var(--stein)">Mit dem Absenden stimmst du der Verarbeitung deiner Daten zur Beantwortung zu. <a href="/datenschutz/">Datenschutz</a></p>
+    </form>
+  </section>
+</Base>
+<style> .form { display: grid; gap: 16px; margin-top: 28px; } .form .btn { justify-self: start; } </style>

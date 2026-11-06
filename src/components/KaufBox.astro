@@ -1,0 +1,52 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { S, euro, grundpreis, warenkorbUrl } from '../lib/site';
+interface Props { p: CollectionEntry<'produkte'> }
+const { p } = Astro.props;
+const d = p.data;
+const cart = d.verfuegbar ? warenkorbUrl(d.shopifyVariantId) : null;
+---
+<div class="kauf">
+  <p class="preis">
+    <strong>{euro(d.preis)}</strong>
+    {d.preisAlt && <s aria-label={`statt ${euro(d.preisAlt)}`}>{euro(d.preisAlt)}</s>}
+  </p>
+  <p class="klein">inkl. MwSt. · {d.inhalt} ({grundpreis(d.preis, d.inhaltMl)}) · <a href="/versand/">zzgl. Versand</a>, ab {S.versandkostenfrei_ab} € versandkostenfrei</p>
+
+  {cart ? (
+    <a href={cart} class="btn btn--glut btn--block" rel="nofollow">In den Warenkorb</a>
+  ) : (
+    <form name="warteliste" method="POST" data-netlify="true" netlify-honeypot="bot" action="/danke/" class="wl">
+      <input type="hidden" name="form-name" value="warteliste" />
+      <input type="hidden" name="produkt" value={d.name} />
+      <p class="visuell-versteckt"><label>Nicht ausfüllen <input name="bot" /></label></p>
+      <p class="wl-text"><span class="punkt" aria-hidden="true"></span> <strong>Bald erhältlich.</strong> Trag dich ein, wir melden uns zum Start mit <strong>10 % Rabatt</strong>.</p>
+      <div class="feld">
+        <label for={`wl-${p.id}`}>Deine E-Mail-Adresse</label>
+        <input id={`wl-${p.id}`} type="email" name="email" required autocomplete="email" placeholder="deine@mail.at" />
+      </div>
+      <button type="submit" class="btn btn--glut btn--block">Auf die Warteliste</button>
+      <p class="mini">Kein Spam. Abmeldung jederzeit. <a href="/datenschutz/">Datenschutz</a></p>
+    </form>
+  )}
+
+  <ul class="usp">
+    <li>Abgefüllt in Österreich</li>
+    <li>Naturreine ätherische Öle</li>
+    <li>Lieferung {S.lieferzeit}</li>
+  </ul>
+</div>
+<style>
+  .kauf { display: grid; gap: 14px; }
+  .preis { margin: 0; display: flex; align-items: baseline; gap: 12px; }
+  .preis strong { font: 500 2.1rem/1 var(--serif); color: var(--tanne); }
+  .preis s { color: var(--stein); }
+  .klein { font-size: 0.85rem; color: var(--stein); margin: 0; }
+  .wl { display: grid; gap: 12px; background: var(--weiss); border: 1px solid var(--linie); border-radius: var(--r); padding: 20px; }
+  .wl-text { margin: 0; font-size: 0.95rem; }
+  .punkt { display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: var(--glut); box-shadow: 0 0 0 4px rgb(217 104 43 / 20%); vertical-align: 1px; }
+  .mini { font-size: 0.78rem; color: var(--stein); margin: 0; text-align: center; }
+  .usp { list-style: none; padding: 0; margin: 4px 0 0; display: grid; gap: 8px; font-size: 0.92rem; }
+  .usp li { padding-left: 26px; position: relative; }
+  .usp li::before { content: ''; position: absolute; left: 4px; top: 7px; width: 10px; height: 6px; border-left: 2px solid var(--glut); border-bottom: 2px solid var(--glut); transform: rotate(-45deg); }
+</style>

@@ -1,0 +1,90 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { S, SITE, abs, organisation, WEB_ID, ORG_ID } from '../lib/site';
+
+interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  ogImage?: string;
+  ogType?: 'website' | 'article' | 'product';
+  noindex?: boolean;
+  schema?: (Record<string, unknown> | null)[];
+}
+const { title, description, canonical, ogImage = '/images/og-almglut.png', ogType = 'website', noindex = false, schema = [] } = Astro.props;
+const kanon = canonical ? abs(canonical) : new URL(Astro.url.pathname, SITE).href;
+const vollerTitel = title.includes('ALMGLUT') ? title : `${title} | ALMGLUT`;
+
+const graph = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    organisation(),
+    {
+      '@type': 'WebSite',
+      '@id': WEB_ID,
+      url: SITE + '/',
+      name: S.marke,
+      inLanguage: 'de-AT',
+      publisher: { '@id': ORG_ID },
+    },
+    ...schema.filter(Boolean),
+  ],
+};
+const ga = S.tracking.ga4;
+---
+<!doctype html>
+<html lang="de-AT">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{vollerTitel}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={kanon} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
+    <link rel="alternate" hreflang="de-AT" href={kanon} />
+    <link rel="alternate" hreflang="de-DE" href={kanon} />
+    <link rel="alternate" hreflang="x-default" href={kanon} />
+    <meta name="theme-color" content="#1E3328" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/images/almglut-logo.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM-Zusammenfassung" />
+
+    <meta property="og:site_name" content="ALMGLUT" />
+    <meta property="og:locale" content="de_AT" />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:title" content={vollerTitel} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={kanon} />
+    <meta property="og:image" content={abs(ogImage)} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={vollerTitel} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={abs(ogImage)} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(graph)} />
+    <slot name="head" />
+    {ga && (
+      <>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${ga}`}></script>
+        <script is:inline define:vars={{ ga }}>
+          window.dataLayer = window.dataLayer || [];
+          function gtag() { dataLayer.push(arguments); }
+          gtag('consent', 'default', { analytics_storage: 'denied', ad_storage: 'denied' });
+          gtag('js', new Date());
+          gtag('config', ga);
+        </script>
+      </>
+    )}
+  </head>
+  <body>
+    <a href="#inhalt" class="skip">Zum Inhalt springen</a>
+    <Header />
+    <main id="inhalt">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

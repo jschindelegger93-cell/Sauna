@@ -1,0 +1,104 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { euro, breadcrumbLd } from '../lib/site';
+const duefte = (await getCollection('produkte')).filter((p) => p.data.typ === 'duft').sort((a, b) => a.data.reihenfolge - b.data.reihenfolge);
+const crumbs = [{ name: 'Startseite', href: '/' }, { name: 'Duft-Finder', href: '/duft-finder/' }];
+const fragen = [
+  { n: 'zeit', t: 'Wann saunierst du meistens?', o: [['abend', 'Am Abend, zum Runterkommen'], ['morgen', 'Morgens oder tagsüber'], ['sport', 'Nach dem Sport']] },
+  { n: 'gefuehl', t: 'Wie willst du dich danach fühlen?', o: [['ruhig', 'Ruhig und entspannt'], ['wach', 'Wach und frisch'], ['gemuetlich', 'Warm und gemütlich']] },
+  { n: 'duft', t: 'Welcher Duft spricht dich an?', o: [['holz', 'Holz und Stube'], ['wald', 'Wald und Bergluft'], ['wiese', 'Almwiese und Kräuter'], ['kuehl', 'Kühl und minzig']] },
+  { n: 'staerke', t: 'Wie intensiv darf es sein?', o: [['mild', 'Mild und weich'], ['mittel', 'Mittel'], ['kraeftig', 'Kräftig']] },
+];
+const daten = duefte.map((p) => ({ id: p.id, name: p.data.name, kurz: p.data.kurz.split('. ')[0] + '.', bild: p.data.bild, preis: euro(p.data.preis) }));
+---
+<Base title="Duft-Finder: Welcher Saunaduft passt zu dir?"
+  description="Welcher Saunaaufguss passt zu dir? Beantworte 4 kurze Fragen und der Duft-Finder empfiehlt dir Zirbe, Latsche, Heublume oder Bergminze."
+  schema={[breadcrumbLd(crumbs)]}>
+  <Breadcrumbs items={crumbs} />
+  <section class="wrap finder-seite">
+    <p class="augenbraue">Werkzeug</p>
+    <h1>Welcher Saunaduft passt zu dir?</h1>
+    <p class="lead">Vier Fragen, eine Empfehlung. Dauert keine Minute.</p>
+
+    <form id="finder" class="finder">
+      {fragen.map((f, i) => (
+        <fieldset class="karte">
+          <legend><span>{i + 1}/4</span> {f.t}</legend>
+          <div class="optionen">
+            {f.o.map(([v, l]) => (
+              <label><input type="radio" name={f.n} value={v} required /><span>{l}</span></label>
+            ))}
+          </div>
+        </fieldset>
+      ))}
+      <button class="btn btn--glut" type="submit">Meinen Duft anzeigen</button>
+    </form>
+
+    <div id="ergebnis" class="ergebnis karte" hidden aria-live="polite"></div>
+
+    <section class="alle" aria-labelledby="alle">
+      <h2 id="alle">Alle vier Düfte im Überblick</h2>
+      <ul class="raster raster--2">
+        {duefte.map((p) => (
+          <li class="karte"><a href={`/saunaaufguss/${p.id}/`}><strong>{p.data.name}</strong><span>{p.data.stimmung.join(', ')} · {p.data.duftnoten.join(', ')}</span></a></li>
+        ))}
+      </ul>
+    </section>
+  </section>
+  <script type="application/json" id="duft-daten" set:html={JSON.stringify(daten)} />
+</Base>
+
+<script>
+  type D = { id: string; name: string; kurz: string; bild: string; preis: string };
+  const daten: D[] = JSON.parse(document.getElementById('duft-daten')!.textContent || '[]');
+  const punkte: Record<string, Record<string, number>> = {
+    abend: { zirbe: 3, heublume: 2 }, morgen: { latschenkiefer: 2, bergminze: 2 }, sport: { bergminze: 3, latschenkiefer: 1 },
+    ruhig: { zirbe: 3, heublume: 1 }, wach: { bergminze: 2, latschenkiefer: 2 }, gemuetlich: { heublume: 3, zirbe: 1 },
+    holz: { zirbe: 3 }, wald: { latschenkiefer: 3 }, wiese: { heublume: 3 }, kuehl: { bergminze: 3 },
+    mild: { zirbe: 1, heublume: 2 }, mittel: { latschenkiefer: 1, zirbe: 1 }, kraeftig: { bergminze: 2, latschenkiefer: 1 },
+  };
+  const form = document.getElementById('finder') as HTMLFormElement;
+  const box = document.getElementById('ergebnis')!;
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const summe: Record<string, number> = {};
+    new FormData(form).forEach((v) => Object.entries(punkte[String(v)] || {}).forEach(([k, n]) => (summe[k] = (summe[k] || 0) + n)));
+    const [erst, zweit] = Object.entries(summe).sort((a, b) => b[1] - a[1]).map(([k]) => daten.find((d) => d.id === k)!);
+    box.innerHTML = `
+      <img src="${erst.bild}" alt="" width="220" height="220">
+      <div>
+        <p class="augenbraue">Dein Duft</p>
+        <h2>${erst.name}</h2>
+        <p>${erst.kurz}</p>
+        <p><a class="btn btn--glut" href="/saunaaufguss/${erst.id}/">Zu ${erst.name} · ${erst.preis}</a></p>
+        ${zweit ? `<p class="zweit">Auch gut für dich: <a href="/saunaaufguss/${zweit.id}/">${zweit.name}</a>. Oder teste alle mit dem <a href="/saunaaufguss/probierset/">Probierset</a>.</p>` : ''}
+      </div>`;
+    box.hidden = false;
+    box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
+</script>
+
+<style>
+  .finder-seite { padding-block: 24px clamp(56px, 8vw, 96px); }
+  .finder { display: grid; gap: 16px; max-width: 820px; margin: 32px 0; }
+  fieldset { padding: 22px; margin: 0; }
+  legend { font: 500 1.2rem/1.3 var(--serif); color: var(--tanne); padding: 0 6px; }
+  legend span { font: 700 0.75rem/1 var(--sans); color: var(--glut-dunkel); letter-spacing: 0.1em; margin-right: 6px; }
+  .optionen { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+  .optionen label { position: relative; }
+  .optionen input { position: absolute; opacity: 0; }
+  .optionen span { display: inline-block; padding: 12px 18px; border: 1.5px solid var(--linie); border-radius: 999px; cursor: pointer; font-weight: 600; font-size: 0.95rem; min-height: 44px; }
+  .optionen input:checked + span { background: var(--tanne); color: var(--kalk); border-color: var(--tanne); }
+  .optionen input:focus-visible + span { outline: 2px solid var(--glut); outline-offset: 2px; }
+  .finder .btn { justify-self: start; }
+  .ergebnis { max-width: 820px; padding: 28px; display: grid; gap: 24px; margin-bottom: 56px; border-left: 4px solid var(--glut); }
+  @media (min-width: 640px) { .ergebnis:not([hidden]) { grid-template-columns: 200px 1fr; align-items: center; } }
+  .ergebnis :global(img) { border-radius: var(--r); }
+  .ergebnis :global(.zweit) { font-size: 0.93rem; color: var(--stein); }
+  .alle ul { list-style: none; padding: 0; margin: 0; max-width: 820px; }
+  .alle a { display: grid; gap: 6px; padding: 20px; text-decoration: none; }
+  .alle strong { font: 500 1.2rem/1.2 var(--serif); color: var(--tanne); }
+  .alle span { font-size: 0.9rem; color: var(--stein); }
+</style>

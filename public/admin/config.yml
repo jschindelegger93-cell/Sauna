@@ -1,0 +1,187 @@
+# Sveltia CMS – ALMGLUT
+backend:
+  name: github
+  repo: jschindelegger93-cell/sauna
+  branch: main
+  # Anmeldung: auf /admin "Mit Token anmelden" (GitHub Personal Access Token mit repo-Rechten)
+  # oder später OAuth über Netlify einrichten.
+
+locale: de
+media_folder: public/images/uploads
+public_folder: /images/uploads
+site_url: https://almglut.at
+display_url: https://almglut.at
+
+seo: &seo
+  label: SEO
+  name: seo
+  widget: object
+  collapsed: true
+  required: false
+  fields:
+    - { label: "SEO-Titel (max. 60 Zeichen)", name: title, widget: string, required: false, maxlength: 70, hint: "Erscheint in Google als blaue Überschrift. Leer = automatisch." }
+    - { label: "Meta-Description (max. 155 Zeichen)", name: description, widget: text, required: false, maxlength: 170, hint: "Text unter dem Titel in Google." }
+    - { label: "Fokus-Keyword", name: keyword, widget: string, required: false }
+    - { label: "Social-Media-Bild", name: ogImage, widget: image, required: false }
+    - { label: "Canonical-URL", name: canonical, widget: string, required: false, hint: "Nur ausfüllen, wenn diese Seite eine Kopie einer anderen ist." }
+    - { label: "Nicht in Google anzeigen (noindex)", name: noindex, widget: boolean, default: false, required: false }
+
+faq: &faq
+  label: Häufige Fragen
+  name: faq
+  widget: list
+  required: false
+  fields:
+    - { label: Frage, name: q, widget: string }
+    - { label: Antwort, name: a, widget: text }
+
+collections:
+  - name: einstellungen
+    label: Einstellungen
+    files:
+      - name: allgemein
+        label: Firma, Shop & Announcement Bar
+        file: src/data/settings.json
+        format: json
+        fields:
+          - { label: Marke, name: marke, widget: string }
+          - { label: Claim, name: claim, widget: string }
+          - { label: Kurzbeschreibung (für Google & KI), name: beschreibung, widget: text }
+          - { label: Website-URL, name: url, widget: string }
+          - { label: Firmenwortlaut, name: firma, widget: string }
+          - { label: Inhaber, name: inhaber, widget: string }
+          - { label: E-Mail, name: email, widget: string }
+          - { label: Telefon, name: telefon, widget: string }
+          - { label: Straße, name: strasse, widget: string }
+          - { label: PLZ, name: plz, widget: string }
+          - { label: Ort, name: ort, widget: string }
+          - { label: Land (ISO), name: land, widget: string }
+          - { label: UID, name: uid, widget: string }
+          - { label: Versandkostenfrei ab (€), name: versandkostenfrei_ab, widget: number, value_type: float }
+          - { label: Versandkosten (€), name: versandkosten, widget: number, value_type: float }
+          - { label: Lieferzeit, name: lieferzeit, widget: string }
+          - label: Social Media
+            name: social
+            widget: object
+            fields:
+              - { label: Instagram, name: instagram, widget: string, required: false }
+              - { label: Pinterest, name: pinterest, widget: string, required: false }
+              - { label: YouTube, name: youtube, widget: string, required: false }
+              - { label: TikTok, name: tiktok, widget: string, required: false }
+          - label: Announcement Bar
+            name: announcement
+            widget: object
+            fields:
+              - { label: Aktiv, name: aktiv, widget: boolean }
+              - { label: Botschaften, name: botschaften, widget: list, field: { label: Text, name: text, widget: string } }
+              - { label: Link, name: link, widget: string }
+          - label: Shopify
+            name: shopify
+            widget: object
+            fields:
+              - { label: "Shopify-Domain (z. B. almglut.myshopify.com)", name: domain, widget: string, required: false, hint: "Sobald gesetzt und ein Produkt eine Variant-ID hat und 'verfügbar' ist, erscheint 'In den Warenkorb'." }
+              - { label: Hinweis, name: hinweis, widget: text, required: false }
+          - label: Tracking
+            name: tracking
+            widget: object
+            fields:
+              - { label: GA4 Mess-ID, name: ga4, widget: string, required: false }
+              - { label: Meta Pixel ID, name: metaPixel, widget: string, required: false }
+
+  - name: produkte
+    label: Produkte
+    label_singular: Produkt
+    folder: src/content/produkte
+    create: true
+    slug: "{{slug}}"
+    sortable_fields: [reihenfolge, name, preis]
+    summary: "{{name}} – {{preis}} €"
+    fields:
+      - { label: Name, name: name, widget: string }
+      - { label: Nummer (z. B. No. 1), name: nummer, widget: string, required: false }
+      - { label: "Kurzantwort (2–3 Sätze, erscheint oben und bei Google/KI)", name: kurz, widget: text }
+      - { label: Typ, name: typ, widget: select, options: [{ label: Einzelduft, value: duft }, { label: Set, value: set }] }
+      - { label: Preis (€ brutto), name: preis, widget: number, value_type: float }
+      - { label: Streichpreis (€), name: preisAlt, widget: number, value_type: float, required: false }
+      - { label: Inhalt (Text), name: inhalt, widget: string, hint: "z. B. 100 ml oder 4 × 100 ml" }
+      - { label: Inhalt in ml (für Grundpreis), name: inhaltMl, widget: number }
+      - { label: Anzahl Aufgüsse ca., name: anwendungen, widget: number, required: false }
+      - { label: Akzentfarbe, name: farbe, widget: color, required: false }
+      - { label: Produktbild, name: bild, widget: image, hint: "Quadratisch, mind. 1200 × 1200 px" }
+      - { label: Duftnoten, name: duftnoten, widget: list, required: false }
+      - { label: Stimmung, name: stimmung, widget: list, required: false }
+      - { label: Inhaltsstoffe, name: inhaltsstoffe, widget: text, required: false }
+      - { label: Herkunft, name: herkunft, widget: string, required: false }
+      - { label: Dosierung, name: dosierung, widget: string, required: false }
+      - { label: Sicherheitshinweise (CLP), name: sicherheit, widget: text, required: false }
+      - { label: "Verfügbar (aus = Warteliste)", name: verfuegbar, widget: boolean, default: false }
+      - { label: Shopify Variant-ID, name: shopifyVariantId, widget: string, required: false }
+      - { label: EAN/GTIN, name: gtin, widget: string, required: false }
+      - { label: Artikelnummer (SKU), name: sku, widget: string }
+      - { label: Reihenfolge, name: reihenfolge, widget: number, default: 10 }
+      - { label: Verwandte Produkte, name: verwandt, widget: relation, collection: produkte, value_field: "{{slug}}", search_fields: [name], display_fields: [name], multiple: true, required: false }
+      - { label: Passende Ratgeber, name: ratgeber, widget: relation, collection: ratgeber, value_field: "{{slug}}", search_fields: [titel], display_fields: [titel], multiple: true, required: false }
+      - *faq
+      - *seo
+      - { label: Beschreibung, name: body, widget: markdown }
+
+  - name: ratgeber
+    label: Ratgeber-Artikel
+    label_singular: Artikel
+    folder: src/content/ratgeber
+    create: true
+    slug: "{{slug}}"
+    summary: "{{titel}} ({{thema}})"
+    sortable_fields: [datum, titel]
+    fields:
+      - { label: Titel (H1), name: titel, widget: string }
+      - { label: "Kurzantwort (2–3 Sätze, direkte Antwort auf die Suchfrage)", name: kurzantwort, widget: text }
+      - label: Thema (Cluster)
+        name: thema
+        widget: select
+        options:
+          - { label: Aufguss-Grundlagen, value: grundlagen }
+          - { label: Duftlexikon, value: duftlexikon }
+          - { label: Heimsauna, value: heimsauna }
+          - { label: Richtig saunieren, value: saunieren }
+          - { label: Aufguss-Rituale, value: rituale }
+      - { label: Veröffentlicht am, name: datum, widget: datetime, time_format: false, format: YYYY-MM-DD }
+      - { label: Aktualisiert am, name: aktualisiert, widget: datetime, time_format: false, format: YYYY-MM-DD, required: false }
+      - { label: Lesezeit (Min.), name: lesezeit, widget: number, default: 5 }
+      - { label: Ziel-Produkt, name: produkt, widget: relation, collection: produkte, value_field: "{{slug}}", search_fields: [name], display_fields: [name], required: false }
+      - label: Anleitung (HowTo, optional)
+        name: howto
+        widget: object
+        required: false
+        collapsed: true
+        fields:
+          - { label: Name, name: name, widget: string }
+          - { label: "Dauer (ISO, z. B. PT5M)", name: dauer, widget: string, required: false }
+          - { label: Schritte, name: schritte, widget: list }
+      - *faq
+      - *seo
+      - { label: Inhalt, name: body, widget: markdown }
+
+  - name: themen
+    label: Themen (Pillar-Seiten)
+    folder: src/content/themen
+    create: false
+    fields:
+      - { label: Titel (H1), name: titel, widget: string }
+      - { label: Navigations-Titel, name: navTitel, widget: string }
+      - { label: Kurzantwort, name: kurzantwort, widget: text }
+      - { label: Reihenfolge, name: reihenfolge, widget: number }
+      - { label: Ziel-Produkt, name: produkt, widget: relation, collection: produkte, value_field: "{{slug}}", search_fields: [name], display_fields: [name], required: false }
+      - { label: Aktualisiert am, name: aktualisiert, widget: datetime, time_format: false, format: YYYY-MM-DD }
+      - *faq
+      - *seo
+      - { label: Inhalt, name: body, widget: markdown }
+
+  - name: seiten
+    label: Rechtstexte & Seiten
+    folder: src/content/seiten
+    create: true
+    fields:
+      - { label: Titel, name: titel, widget: string }
+      - *seo
+      - { label: Inhalt, name: body, widget: markdown }

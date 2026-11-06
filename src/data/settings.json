@@ -1,0 +1,41 @@
+{
+  "marke": "ALMGLUT",
+  "claim": "Die Alm in deiner Sauna.",
+  "beschreibung": "ALMGLUT macht alpine Saunaaufgüsse aus Österreich: Zirbe, Latschenkiefer, Heublume und Bergminze mit naturreinen ätherischen Ölen, abgefüllt in den Alpen.",
+  "url": "https://almglut.at",
+  "firma": "ALMGLUT – Julian Schindelegger",
+  "inhaber": "Julian Schindelegger",
+  "email": "servus@almglut.at",
+  "telefon": "[PLATZHALTER Telefon]",
+  "strasse": "[PLATZHALTER Straße]",
+  "plz": "[PLATZHALTER PLZ]",
+  "ort": "Wien",
+  "land": "AT",
+  "uid": "[PLATZHALTER UID]",
+  "versandkostenfrei_ab": 49,
+  "versandkosten": 4.9,
+  "lieferzeit": "2–4 Werktage in AT und DE",
+  "social": {
+    "instagram": "https://www.instagram.com/almglut/",
+    "pinterest": "https://www.pinterest.at/almglut/",
+    "youtube": "",
+    "tiktok": ""
+  },
+  "announcement": {
+    "aktiv": true,
+    "botschaften": [
+      "Bald erhältlich: Trag dich in die Warteliste ein und sichere dir 10 % zum Start",
+      "Versandkostenfrei ab 49 € in Österreich und Deutschland",
+      "Abgefüllt in den Alpen. Mit naturreinen ätherischen Ölen."
+    ],
+    "link": "/saunaaufguss/"
+  },
+  "shopify": {
+    "domain": "",
+    "hinweis": "Shopify-Domain (z. B. almglut.myshopify.com) eintragen und bei jedem Produkt die Variant-ID hinterlegen. Dann wird aus 'Warteliste' automatisch 'In den Warenkorb'."
+  },
+  "tracking": {
+    "ga4": "",
+    "metaPixel": ""
+  }
+}

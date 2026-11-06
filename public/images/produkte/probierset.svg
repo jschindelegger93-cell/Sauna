@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="800" height="800">
+<defs>
+  <linearGradient id="glas" x1="0" x2="1">
+    <stop offset="0" stop-color="#2B1305" stop-opacity=".55"/>
+    <stop offset=".35" stop-color="#C46A2A" stop-opacity=".25"/>
+    <stop offset=".7" stop-color="#2B1305" stop-opacity=".2"/>
+    <stop offset="1" stop-color="#1A0B02" stop-opacity=".6"/>
+  </linearGradient>
+  <linearGradient id="holz" x1="0" x2="1">
+    <stop offset="0" stop-color="#7A5530" stop-opacity=".5"/>
+    <stop offset=".5" stop-color="#E2C49B" stop-opacity=".25"/>
+    <stop offset="1" stop-color="#5E3F20" stop-opacity=".55"/>
+  </linearGradient>
+  <radialGradient id="licht" cx=".5" cy=".42" r=".6">
+    <stop offset="0" stop-color="#FFFDF9"/><stop offset="1" stop-color="#F3EFE8"/>
+  </radialGradient>
+</defs>
+<rect width="800" height="800" fill="url(#licht)"/>
+<path d="M0 620 L190 430 L290 520 L430 360 L620 560 L800 420 L800 800 L0 800 Z" fill="#C9A57A" opacity=".10"/>
+<path d="M0 690 L230 520 L380 610 L520 500 L800 660 L800 800 L0 800 Z" fill="#1E3328" opacity=".06"/>
+
+  <rect x="150" y="530" width="500" height="44" rx="8" fill="#B98D5E"/>
+  <rect x="150" y="530" width="500" height="44" rx="8" fill="url(#holz)"/>
+  <ellipse cx="400" cy="590" rx="270" ry="12" fill="#1E3328" opacity=".12"/>
+  
+<g transform="translate(190 300)">
+  <rect x="30" y="0" width="40" height="34" rx="4" fill="#B98D5E"/>
+  <rect x="38" y="32" width="24" height="16" fill="#5A3416"/>
+  <rect x="14" y="46" width="72" height="200" rx="12" fill="#6B3A14"/>
+  <rect x="14" y="46" width="72" height="200" rx="12" fill="url(#glas)"/>
+  <rect x="20" y="110" width="60" height="96" rx="3" fill="#F7F2E9"/>
+  <rect x="20" y="110" width="60" height="9" fill="#B5793F"/>
+  <text x="50" y="152" text-anchor="middle" font-family="Georgia, serif" font-size="13" fill="#1E3328">N°1</text>
+  <text x="50" y="176" text-anchor="middle" font-family="Georgia, serif" font-size="10.5" font-style="italic" fill="#1E3328">Zirbe</text>
+  <text x="50" y="194" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="7.5" fill="#6B6A63">15 ml</text>
+</g>
+<g transform="translate(300 300)">
+  <rect x="30" y="0" width="40" height="34" rx="4" fill="#B98D5E"/>
+  <rect x="38" y="32" width="24" height="16" fill="#5A3416"/>
+  <rect x="14" y="46" width="72" height="200" rx="12" fill="#6B3A14"/>
+  <rect x="14" y="46" width="72" height="200" rx="12" fill="url(#glas)"/>
+  <rect x="20" y="110" width="60" height="96" rx="3" fill="#F7F2E9"/>
+  <rect x="20" y="110" width="60" height="9" fill="#3D6B4F"/>
+  <text x="50" y="152" text-anchor="middle" font-family="Georgia, serif" font-size="13" fill="#1E3328">N°2</text>
+  <text x="50" y="176" text-anchor="middle" font-family="Georgia, serif" font-size="10.5" font-style="italic" fill="#1E3328">Latsche</text>
+  <text x="50" y="194" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="7.5" fill="#6B6A63">15 ml</text>
+</g>
+<g transform="translate(410 300)">
+  <rect x="30" y="0" width="40" height="34" rx="4" fill="#B98D5E"/>
+  <rect x="38" y="32" width="24" height="16" fill="#5A3416"/>
+  <rect x="14" y="46" width="72" height="200" rx="12" fill="#6B3A14"/>
+  <rect x="14" y="46" width="72" height="200" rx="12" fill="url(#glas)"/>
+  <rect x="20" y="110" width="60" height="96" rx="3" fill="#F7F2E9"/>
+  <rect x="20" y="110" width="60" height="9" fill="#C29A2E"/>
+  <text x="50" y="152" text-anchor="middle" font-family="Georgia, serif" font-size="13" fill="#1E3328">N°3</text>
+  <text x="50" y="176" text-anchor="middle" font-family="Georgia, serif" font-size="10.5" font-style="italic" fill="#1E3328">Heublume</text>
+  <text x="50" y="194" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="7.5" fill="#6B6A63">15 ml</text>
+</g>
+<g transform="translate(520 300)">
+  <rect x="30" y="0" width="40" height="34" rx="4" fill="#B98D5E"/>
+  <rect x="38" y="32" width="24" height="16" fill="#5A3416"/>
+  <rect x="14" y="46" width="72" height="200" rx="12" fill="#6B3A14"/>
+  <rect x="14" y="46" width="72" height="200" rx="12" fill="url(#glas)"/>
+  <rect x="20" y="110" width="60" height="96" rx="3" fill="#F7F2E9"/>
+  <rect x="20" y="110" width="60" height="9" fill="#4F8F8C"/>
+  <text x="50" y="152" text-anchor="middle" font-family="Georgia, serif" font-size="13" fill="#1E3328">N°4</text>
+  <text x="50" y="176" text-anchor="middle" font-family="Georgia, serif" font-size="10.5" font-style="italic" fill="#1E3328">Bergminze</text>
+  <text x="50" y="194" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="7.5" fill="#6B6A63">15 ml</text>
+</g>
+  <text x="400" y="650" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="14" letter-spacing="4" fill="#1E3328">PROBIERSET · 4 × 15 ML</text>
+</svg>

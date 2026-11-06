@@ -1,0 +1,48 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { S, abs, autor, breadcrumbLd, ORG_ID } from '../lib/site';
+const crumbs = [{ name: 'Startseite', href: '/' }, { name: 'Über uns', href: '/ueber-uns/' }];
+const ld = { '@type': 'AboutPage', '@id': abs('/ueber-uns/'), url: abs('/ueber-uns/'), name: 'Über ALMGLUT', about: { '@id': ORG_ID }, mainEntity: autor(), inLanguage: 'de-AT' };
+---
+<Base title="Über ALMGLUT – Saunaaufgüsse aus Österreich" description="Wer hinter ALMGLUT steckt: Gründer Julian Schindelegger, warum alpine Saunaaufgüsse und wie unsere Düfte entstehen." schema={[ld, breadcrumbLd(crumbs)]}>
+  <Breadcrumbs items={crumbs} />
+  <section class="wrap ueber">
+    <div>
+      <p class="augenbraue">Über uns</p>
+      <h1>Wir bringen die Alm in deine Sauna.</h1>
+      <p class="kurzantwort"><strong>Kurz gesagt</strong>ALMGLUT ist eine Saunaaufguss-Marke aus Wien, gegründet 2026 von {S.inhaber}. Wir machen vier alpine Düfte mit naturreinen ätherischen Ölen, abgefüllt in Österreich, und teilen im Ratgeber alles, was wir über den Aufguss wissen.</p>
+      <div class="prosa">
+        <h2 id="julian">Servus, ich bin Julian.</h2>
+        <p>[PLATZHALTER persönliche Geschichte: Wie bist du zur Sauna gekommen? Seit wann saunierst du? Was hat dich an den bestehenden Aufgüssen gestört?]</p>
+        <p>Was ich wollte, war einfach: Aufgüsse, die nach echter Zirbe und echter Latsche riechen, in einer schönen Flasche, zu einem fairen Preis. Also habe ich mit einem Familienbetrieb in den Alpen vier Düfte entwickelt und jeden davon wochenlang in meiner eigenen Sauna getestet.</p>
+        <h2>Woran wir glauben</h2>
+        <ul>
+          <li><strong>Echte Herkunft:</strong> Zirbe und Latsche aus dem Alpenraum, abgefüllt in Österreich.</li>
+          <li><strong>Ehrlichkeit:</strong> Keine Heilversprechen, vollständige Inhaltsstoffe, klare Dosierung.</li>
+          <li><strong>Weniger, aber besser:</strong> Vier Düfte, die wir wirklich lieben, statt fünfzig.</li>
+          <li><strong>Wissen teilen:</strong> Unser Ratgeber ist kostenlos und unabhängig davon, ob du bei uns kaufst.</li>
+        </ul>
+        <h2>Kontakt</h2>
+        <p>Fragen, Ideen, Feedback? Schreib mir an <a href={`mailto:${S.email}`}>{S.email}</a>. Ich antworte persönlich.</p>
+      </div>
+    </div>
+    <aside class="fakten karte">
+      <dl>
+        <dt>Gegründet</dt><dd>2026 in Wien</dd>
+        <dt>Gründer</dt><dd>{S.inhaber}</dd>
+        <dt>Abfüllung</dt><dd>Österreich [PLATZHALTER Partnerbetrieb]</dd>
+        <dt>Düfte</dt><dd>Zirbe, Latsche, Heublume, Bergminze</dd>
+        <dt>Lieferung</dt><dd>Österreich und Deutschland</dd>
+      </dl>
+    </aside>
+  </section>
+</Base>
+<style>
+  .ueber { display: grid; gap: 48px; padding-block: 24px 96px; }
+  @media (min-width: 980px) { .ueber { grid-template-columns: 1fr 320px; } .fakten { position: sticky; top: 100px; align-self: start; } }
+  .fakten { padding: 26px; }
+  dl { margin: 0; display: grid; gap: 4px; }
+  dt { font: 700 0.75rem/1 var(--sans); letter-spacing: 0.14em; text-transform: uppercase; color: var(--glut-dunkel); margin-top: 12px; }
+  dd { margin: 0; color: var(--tanne); font-weight: 600; }
+</style>

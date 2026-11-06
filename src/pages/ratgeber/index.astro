@@ -1,0 +1,90 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import { THEMEN, abs, breadcrumbLd, ORG_ID } from '../../lib/site';
+
+const themen = (await getCollection('themen')).sort((a, b) => a.data.reihenfolge - b.data.reihenfolge);
+const artikel = (await getCollection('ratgeber')).sort((a, b) => +b.data.datum - +a.data.datum);
+const crumbs = [{ name: 'Startseite', href: '/' }, { name: 'Aufguss-Wissen', href: '/ratgeber/' }];
+const ld = {
+  '@type': 'CollectionPage',
+  '@id': abs('/ratgeber/'),
+  name: 'Aufguss-Wissen: der Ratgeber rund um Saunaaufguss und Heimsauna',
+  url: abs('/ratgeber/'),
+  inLanguage: 'de-AT',
+  publisher: { '@id': ORG_ID },
+  hasPart: artikel.map((a) => ({ '@type': 'Article', headline: a.data.titel, url: abs(`/ratgeber/${a.id}/`) })),
+};
+---
+<Base title="Aufguss-Wissen: Ratgeber zu Saunaaufguss und Heimsauna"
+  description="Der Ratgeber rund um den Saunaaufguss: Anleitungen, Dosierung, Duftlexikon, Heimsauna-Tipps und Aufguss-Rituale. Kostenlos von ALMGLUT."
+  schema={[ld, breadcrumbLd(crumbs)]}>
+  <Breadcrumbs items={crumbs} />
+  <header class="wrap kopf">
+    <p class="augenbraue">Aufguss-Wissen</p>
+    <h1>Alles rund um den Saunaaufguss</h1>
+    <p class="lead">Anleitungen, Dosierung, Düfte und Tipps für deine Heimsauna. Ehrlich erklärt, ohne Heilversprechen, getestet in der eigenen Sauna.</p>
+  </header>
+
+  <section class="wrap themen" aria-label="Themen">
+    {themen.map((t) => {
+      const liste = artikel.filter((a) => a.data.thema === t.id);
+      return (
+        <div class="thema karte">
+          <h2><a href={`/ratgeber/thema/${t.id}/`}>{t.data.navTitel}</a></h2>
+          <p>{t.data.kurzantwort.split('. ')[0]}.</p>
+          {liste.length > 0 && <ul>{liste.map((a) => <li><a href={`/ratgeber/${a.id}/`}>{a.data.titel}</a></li>)}</ul>}
+          <a class="mehr" href={`/ratgeber/thema/${t.id}/`}>Zum Guide →</a>
+        </div>
+      );
+    })}
+    <div class="thema karte werkzeug">
+      <h2>Werkzeuge</h2>
+      <p>Rechnen statt raten.</p>
+      <ul>
+        <li><a href="/aufguss-rechner/">Aufguss-Rechner</a></li>
+        <li><a href="/duft-finder/">Duft-Finder</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="sektion">
+    <div class="wrap">
+      <h2>Neueste Artikel</h2>
+      <ul class="neu">
+        {artikel.map((a) => (
+          <li>
+            <a href={`/ratgeber/${a.id}/`}>
+              <span class="chip">{THEMEN[a.data.thema]}</span>
+              <strong>{a.data.titel}</strong>
+              <span class="kurz">{a.data.kurzantwort.split('. ')[0]}.</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</Base>
+<style>
+  .kopf { padding-block: 28px 32px; }
+  .themen { display: grid; gap: 20px; }
+  @media (min-width: 760px) { .themen { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1100px) { .themen { grid-template-columns: repeat(3, 1fr); } }
+  .thema { padding: 28px; display: flex; flex-direction: column; gap: 6px; }
+  .thema h2 { font-size: 1.5rem; margin: 0; }
+  .thema h2 a { text-decoration: none; }
+  .thema p { color: var(--stein); font-size: 0.93rem; }
+  .thema ul { list-style: none; padding: 0; margin: 0 0 12px; display: grid; gap: 8px; font-size: 0.95rem; }
+  .thema li { padding-left: 16px; position: relative; }
+  .thema li::before { content: ''; position: absolute; left: 0; top: 0.65em; width: 6px; height: 6px; border-radius: 50%; background: var(--glut); }
+  .mehr { margin-top: auto; font-weight: 700; color: var(--glut-dunkel); text-decoration: none; }
+  .werkzeug { background: var(--tanne); border-color: var(--tanne); color: var(--kalk); }
+  .werkzeug h2, .werkzeug a { color: var(--kalk); }
+  .werkzeug p { color: #c9d3cc; }
+  .neu { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--linie); }
+  .neu a { display: grid; gap: 8px; padding: 22px 0; border-bottom: 1px solid var(--linie); text-decoration: none; }
+  .neu .chip { justify-self: start; }
+  .neu strong { font: 500 1.3rem/1.3 var(--serif); color: var(--tanne); }
+  .neu .kurz { color: var(--stein); font-size: 0.95rem; max-width: 80ch; }
+</style>

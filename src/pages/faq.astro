@@ -1,0 +1,33 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Faq from '../components/Faq.astro';
+import { S, breadcrumbLd, faqLd } from '../lib/site';
+const crumbs = [{ name: 'Startseite', href: '/' }, { name: 'Häufige Fragen', href: '/faq/' }];
+const gruppen = [
+  { t: 'Produkte', id: 'produkte', f: [
+    { q: 'Was ist in den ALMGLUT-Aufgüssen?', a: 'Naturreine ätherische Öle (z. B. Zirbe, Latschenkiefer, Pfefferminze), ein Lösungsvermittler, damit sich das Öl im Wasser verteilt, und Wasser. Die genaue Zusammensetzung steht auf jeder Produktseite und auf dem Etikett.' },
+    { q: 'Wie lange reicht eine Flasche?', a: '100 ml reichen bei 3–5 ml pro Liter Aufgusswasser für rund 40 Aufgüsse in der Heimsauna.' },
+    { q: 'Wie lagere ich den Aufguss richtig?', a: 'Gut verschlossen, kühl, dunkel und außerhalb der Reichweite von Kindern. Nach dem Öffnen innerhalb von 12 Monaten verbrauchen.' },
+    { q: 'Sind die Aufgüsse vegan?', a: '[PLATZHALTER: mit Lohnabfüller klären]' },
+  ]},
+  { t: 'Anwendung', id: 'anwendung', f: [
+    { q: 'Wie viel Aufguss nehme ich pro Liter?', a: '3–5 ml auf 1 Liter kaltes Wasser, bei Bergminze 2–4 ml. Für deine Saunagröße hilft der Aufguss-Rechner.' },
+    { q: 'Kann ich die Aufgüsse auch im Dampfbad oder in der Infrarotkabine verwenden?', a: 'Sie sind für die finnische Sauna und Biosauna gemacht. Bei Dampfbädern und Infrarotkabinen bitte die Herstellerangaben des Geräts beachten.' },
+    { q: 'Sind die Aufgüsse für Kinder geeignet?', a: 'Minze und Eukalyptus sind für Säuglinge und Kleinkinder nicht geeignet. Für Saunagänge mit Kindern milde Düfte wie Zirbe oder Heublume niedrig dosieren und vorher ärztlich abklären.' },
+  ]},
+  { t: 'Bestellung & Versand', id: 'versand', f: [
+    { q: 'Wohin liefert ihr?', a: `Nach Österreich und Deutschland. Lieferzeit ${S.lieferzeit}.` },
+    { q: 'Was kostet der Versand?', a: `${S.versandkosten.toFixed(2).replace('.', ',')} €, ab ${S.versandkostenfrei_ab} € versandkostenfrei.` },
+    { q: 'Kann ich zurückgeben?', a: 'Ungeöffnete Produkte innerhalb von 14 Tagen. Details unter Versand & Rückgabe.' },
+  ]},
+];
+const alle = gruppen.flatMap((g) => g.f);
+---
+<Base title="Häufige Fragen zu ALMGLUT Saunaaufgüssen" description="Antworten auf häufige Fragen zu ALMGLUT: Inhaltsstoffe, Dosierung, Lagerung, Versand und Rückgabe." schema={[breadcrumbLd(crumbs), faqLd(alle)]}>
+  <Breadcrumbs items={crumbs} />
+  <section class="schmal" style="padding-block:24px 96px">
+    <h1>Häufige Fragen</h1>
+    {gruppen.map((g) => <div style="margin-top:40px"><Faq faq={g.f} titel={g.t} id={g.id} /></div>)}
+  </section>
+</Base>
