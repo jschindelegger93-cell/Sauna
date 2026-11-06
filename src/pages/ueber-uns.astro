@@ -7,7 +7,7 @@ const crumbs = [{ name: 'Startseite', href: '/' }, { name: 'Über uns', href: '/
 const ld = { '@type': 'AboutPage', '@id': abs('/ueber-uns/'), url: abs('/ueber-uns/'), name: 'Über ALMGLUT', about: { '@id': ORG_ID }, mainEntity: autor(), inLanguage: 'de-AT' };
 ---
 <Base title="Über ALMGLUT – Saunaaufgüsse aus Österreich" description="Wer hinter ALMGLUT steckt: Gründer Julian Schindelegger, warum alpine Saunaaufgüsse und wie unsere Düfte entstehen." schema={[ld, breadcrumbLd(crumbs)]} ueberFoto>
-  <header class="u-kopf foto"><Foto k="huette-sonnenuntergang" prio /><div class="wrap"><p class="herkunft">47° N · Aufguss aus den Alpen</p><h1>Wir bringen die Alm<br />in deine Sauna.</h1></div></header>
+  <header class="u-kopf foto" data-anim><Foto k="huette-sonnenuntergang" prio /><div class="wrap"><p class="herkunft">47° N · Aufguss aus den Alpen</p><h1>Wir bringen die Alm<br />in deine Sauna.</h1></div></header>
   <Breadcrumbs items={crumbs} />
   <section class="wrap ueber">
     <div>

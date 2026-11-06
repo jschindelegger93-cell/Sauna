@@ -4,6 +4,7 @@ import Base from '../../layouts/Base.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import ProduktKarte from '../../components/ProduktKarte.astro';
 import Faq from '../../components/Faq.astro';
+import Dampf from '../../components/Dampf.astro';
 import Foto from '../../components/Foto.astro';
 import { S, abs, euro, breadcrumbLd, faqLd, png, produktUrl } from '../../lib/site';
 
@@ -43,8 +44,9 @@ const listeLd = {
 <Base title="Saunaaufguss kaufen – alpine Aufgüsse aus Österreich"
   description="Saunaaufguss aus Österreich mit naturreinen ätherischen Ölen: Zirbe, Latsche, Heublume, Bergminze. Ab 19,90 €, Sets und Zirben-Zubehör."
   schema={[listeLd, breadcrumbLd(crumbs), faqLd(faq)]} ueberFoto>
-  <header class="shop-kopf foto">
+  <header class="shop-kopf foto" data-anim>
     <Foto k="sauna-dunkel-glas" prio />
+    <Dampf links="30%" breite="50%" />
     <div class="wrap">
       <p class="herkunft">47° N · Aufguss aus den Alpen</p>
       <h1>Saunaaufguss aus Österreich</h1>
@@ -121,7 +123,7 @@ const listeLd = {
 </Base>
 <style>
   .shop-kopf { min-height: 62vh; display: flex; align-items: flex-end; }
-  .shop-kopf .wrap { padding-block: 140px 64px; }
+  .shop-kopf .wrap { padding-block: 140px 64px; position: relative; z-index: 1; }
   .shop-kopf .herkunft { color: rgb(255 255 255 / 85%); display: block; margin-bottom: 18px; }
   .shop-kopf .lead { max-width: 48ch; }
   .shop-kopf strong { color: #fff; }

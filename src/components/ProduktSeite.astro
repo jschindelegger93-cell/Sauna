@@ -6,6 +6,7 @@ import KaufBox from './KaufBox.astro';
 import ProduktKarte from './ProduktKarte.astro';
 import Faq from './Faq.astro';
 import Foto from './Foto.astro';
+import Dampf from './Dampf.astro';
 import type { FotoKey } from '../lib/fotos';
 import { S, SITE, abs, png, breadcrumbLd, faqLd, ORG_ID, produktUrl } from '../lib/site';
 
@@ -108,8 +109,9 @@ const beschreibung = d.seo.description ?? d.kurz;
     </div>
   </section>
 
-  <section class="stimmung foto">
+  <section class="stimmung foto" data-anim>
     <Foto k={stimmungFoto} />
+    <Dampf links="45%" breite="50%" />
     <div class="wrap stimmung-in">
       <p class="augenbraue">{d.nummer ? `${d.nummer} · ` : ''}{d.duftnoten.length ? 'Duftbild' : 'Gemacht für die Sauna'}</p>
       <h2>{bandTitel}</h2>
@@ -174,7 +176,7 @@ const beschreibung = d.seo.description ?? d.kurz;
   @media (min-width: 900px) { .produkt { grid-template-columns: 1.1fr 1fr; align-items: start; } .galerie { position: sticky; top: 110px; } }
   .galerie img { width: 100%; border-radius: var(--r); background: var(--weiss); }
   .stimmung { min-height: 70vh; display: flex; align-items: flex-end; }
-  .stimmung-in { padding-block: 120px 80px; }
+  .stimmung-in { padding-block: 120px 80px; position: relative; z-index: 1; }
   .stimmung h2 { max-width: 18ch; }
   .galerie img { background: #f3f2ef; aspect-ratio: 1; object-fit: cover; }
   .kurz { font-size: 1.08rem; color: var(--graphit); }

@@ -1,0 +1,19 @@
+---
+/** Glut-Funken: wenige, langsam aufsteigende Glutpunkte. Rein dekorativ. */
+const funken = Array.from({ length: 14 }, (_, i) => ({ x: (i * 37) % 100, d: 7 + ((i * 13) % 9), v: (i * 0.9) % 8, s: 2 + (i % 3) }));
+---
+<div class="funken" aria-hidden="true">
+  {funken.map((f) => <span style={`left:${f.x}%;--d:${f.d}s;--v:${f.v}s;--s:${f.s}px`}></span>)}
+</div>
+<style>
+  .funken { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+  .funken span { position: absolute; bottom: -10px; width: var(--s); height: var(--s); border-radius: 50%; background: #ffb36b; box-shadow: 0 0 8px 2px rgb(226 98 43 / 70%); opacity: 0; }
+  :global(.an) .funken span { animation: funke var(--d) linear var(--v) infinite; }
+  @keyframes funke {
+    0% { opacity: 0; transform: translate3d(0, 0, 0); }
+    10% { opacity: 0.9; }
+    50% { transform: translate3d(14px, -45vh, 0); opacity: 0.6; }
+    100% { opacity: 0; transform: translate3d(-10px, -90vh, 0); }
+  }
+  @media (prefers-reduced-motion: reduce) { :global(.an) .funken span { animation: none; } }
+</style>

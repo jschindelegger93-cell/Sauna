@@ -63,7 +63,7 @@ const howtoLd = d.howto
     <meta property="article:modified_time" content={iso(geaendert)} />
     <meta property="article:section" content={THEMEN[d.thema]} />
   </Fragment>
-  <header class="a-kopf foto">
+  <header class="a-kopf foto" data-anim>
     <Foto k={THEMA_FOTO[d.thema]} prio />
     <div class="wrap">
       <a class="chip" href={`/ratgeber/thema/${d.thema}/`}>{THEMEN[d.thema]}</a>

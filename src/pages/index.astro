@@ -3,6 +3,8 @@ import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import ProduktKarte from '../components/ProduktKarte.astro';
 import Faq from '../components/Faq.astro';
+import Dampf from '../components/Dampf.astro';
+import Funken from '../components/Funken.astro';
 import Foto from '../components/Foto.astro';
 import { S, THEMEN, faqLd } from '../lib/site';
 import { THEMA_FOTO } from '../lib/fotos';
@@ -27,7 +29,7 @@ const faq = [
   description="ALMGLUT: alpine Saunaaufgüsse aus Österreich mit naturreinen ätherischen Ölen. Zirbe, Latschenkiefer, Heublume, Bergminze. Plus kostenloses Aufguss-Wissen."
   schema={[faqLd(faq)]} ueberFoto preload="/images/stock/hero-sonnenaufgang.webp">
 
-  <section class="hero foto">
+  <section class="hero foto" data-anim data-anim>
     <Foto k="hero-sonnenaufgang" prio />
     <div class="wrap hero-in">
       <p class="herkunft">47° N · Aufguss aus den Alpen</p>
@@ -51,8 +53,9 @@ const faq = [
     </div>
   </section>
 
-  <section class="moment foto">
+  <section class="moment foto" data-anim data-anim>
     <Foto k="saunasteine-dampf" />
+    <Dampf links="38%" breite="55%" />
     <div class="wrap moment-in rein">
       <p class="augenbraue">Der Moment</p>
       <h2>Wenn der Aufguss zischt,<br />steht die Welt still.</h2>
@@ -127,11 +130,11 @@ const faq = [
         <h2>Für Abende,<br />die bleiben.</h2>
       </div>
       <div class="p-raster">
-        <a href="/saunaaufguss/zirbe-reserve/" class="p-kachel foto rein">
+        <a href="/saunaaufguss/zirbe-reserve/" class="p-kachel foto rein" data-anim>
           <Foto k="sauna-dunkel-glas" sizes="(min-width: 900px) 50vw, 100vw" />
           <div><p class="herkunft">Limitiert · No. 0</p><h3>Zirbe Reserve</h3><p>Höchstdosiertes Zirbenöl aus Osttirol. Nummerierte Flaschen.</p><span class="link-pfeil">Ab 34,90 €</span></div>
         </a>
-        <a href="/sauna-zubehoer/" class="p-kachel foto rein">
+        <a href="/sauna-zubehoer/" class="p-kachel foto rein" data-anim>
           <Foto k="kuebel-dunkel" sizes="(min-width: 900px) 50vw, 100vw" />
           <div><p class="herkunft">Zirbe · Leinen · Loden</p><h3>Sauna-Zubehör</h3><p>Kübel und Kelle aus Tiroler Zirbe, Saunatuch aus Leinen, Saunahut aus Loden.</p><span class="link-pfeil">Entdecken</span></div>
         </a>
@@ -189,7 +192,8 @@ const faq = [
     <div class="wrap" style="max-width:820px"><Faq faq={faq} /></div>
   </section>
 
-  <section class="schluss foto">
+  <section class="schluss foto" data-anim data-anim>
+    <Funken />
     <Foto k="huette-schnee-nacht" />
     <div class="wrap mitte rein">
       <p class="herkunft">47° N · Aufguss aus den Alpen</p>
@@ -223,7 +227,8 @@ const faq = [
 
   .moment { min-height: 88vh; display: flex; align-items: center; }
   .moment::after { background: linear-gradient(90deg, rgb(0 0 0 / 70%) 0%, rgb(0 0 0 / 20%) 65%); }
-  .moment-in { padding-block: 120px; }
+  .moment-in { padding-block: 120px; position: relative; z-index: 1; }
+  .schluss :global(.wrap) { position: relative; z-index: 1; }
   .moment .lead { max-width: 38ch; }
 
   .kopf-mitte { margin-bottom: 56px; }

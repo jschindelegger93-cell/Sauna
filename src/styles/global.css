@@ -128,4 +128,25 @@ input, select, textarea { font: inherit; }
 /* Einblenden beim Scrollen */
 .rein { opacity: 0; transform: translateY(24px); transition: opacity 0.9s ease, transform 0.9s ease; }
 .rein.sichtbar { opacity: 1; transform: none; }
-@media (prefers-reduced-motion: reduce) { .rein { opacity: 1; transform: none; } }
+/* Animationen – ruhig, unterschwellig */
+.raster.rein > * { opacity: 0; transform: translateY(28px); transition: opacity 0.9s ease, transform 0.9s cubic-bezier(.2,.7,.2,1); }
+.raster.rein.sichtbar > * { opacity: 1; transform: none; }
+.raster.rein.sichtbar > :nth-child(2) { transition-delay: 0.12s; }
+.raster.rein.sichtbar > :nth-child(3) { transition-delay: 0.24s; }
+.raster.rein.sichtbar > :nth-child(4) { transition-delay: 0.36s; }
+.raster.rein { opacity: 1; transform: none; }
+.foto[data-anim] > img { transform: scale(1.08); transition: transform 2.8s cubic-bezier(.2,.7,.2,1); }
+.foto[data-anim].an > img { transform: scale(1); }
+.hero > img { animation: kenburns 18s ease-out both; }
+@keyframes kenburns { from { transform: scale(1.12); } to { transform: scale(1); } }
+.hero h1, .hero .lead, .hero .herkunft, .hero .btn { animation: auftauchen 1.4s cubic-bezier(.2,.7,.2,1) both; }
+.hero .lead { animation-delay: 0.25s; } .hero .btn { animation-delay: 0.45s; }
+@keyframes auftauchen { from { opacity: 0; transform: translateY(18px); filter: blur(8px); } to { opacity: 1; transform: none; filter: none; } }
+.btn--glut { position: relative; overflow: hidden; }
+.btn--glut::after { content: ''; position: absolute; inset: 0; background: linear-gradient(110deg, transparent 30%, rgb(255 255 255 / 35%) 50%, transparent 70%); transform: translateX(-120%); transition: transform 0.8s ease; }
+.btn--glut:hover::after { transform: translateX(120%); }
+@media (prefers-reduced-motion: reduce) {
+  .rein, .raster.rein > * { opacity: 1; transform: none; }
+  .foto[data-anim] > img, .hero > img { transform: none; animation: none; }
+  .hero h1, .hero .lead, .hero .herkunft, .hero .btn { animation: none; }
+}

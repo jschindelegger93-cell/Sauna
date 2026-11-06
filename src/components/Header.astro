@@ -84,6 +84,9 @@ const a = S.announcement;
   }
   const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('sichtbar'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -10% 0px' });
   document.querySelectorAll('.rein').forEach((el) => io.observe(el));
+  // Animationen nur laufen lassen, solange die Sektion sichtbar ist
+  const anim = new IntersectionObserver((es) => es.forEach((e) => e.target.classList.toggle('an', e.isIntersecting)), { threshold: 0.25 });
+  document.querySelectorAll('[data-anim]').forEach((el) => anim.observe(el));
 </script>
 
 <style>

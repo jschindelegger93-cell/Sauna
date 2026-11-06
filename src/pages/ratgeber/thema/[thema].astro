@@ -39,7 +39,7 @@ const seiteLd = {
 ---
 <Base title={d.seo.title ?? d.titel} description={d.seo.description ?? d.kurzantwort} noindex={d.seo.noindex} ueberFoto
   schema={[seiteLd, breadcrumbLd(crumbs), faqLd(d.faq)]}>
-  <header class="p-kopf foto">
+  <header class="p-kopf foto" data-anim>
     <Foto k={THEMA_FOTO[t.id]} prio />
     <div class="wrap">
       <p class="augenbraue">Aufguss-Wissen · {d.navTitel}</p>
