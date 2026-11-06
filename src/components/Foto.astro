@@ -1,0 +1,16 @@
+---
+import { foto, type FotoKey } from '../lib/fotos';
+interface Props { k: FotoKey; prio?: boolean; class?: string; sizes?: string; dekor?: boolean }
+const { k, prio = false, sizes = '100vw', dekor = false } = Astro.props;
+const f = foto(k);
+---
+<img
+  src={f.src}
+  srcset={`${f.klein} 900w, ${f.src} 2000w`}
+  sizes={sizes}
+  alt={dekor ? '' : f.alt}
+  class={Astro.props.class}
+  loading={prio ? 'eager' : 'lazy'}
+  fetchpriority={prio ? 'high' : undefined}
+  decoding="async"
+/>

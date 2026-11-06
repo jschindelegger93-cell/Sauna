@@ -7,6 +7,8 @@ import ProduktTipp from '../../components/ProduktTipp.astro';
 import AutorBox from '../../components/AutorBox.astro';
 import { THEMEN, abs, datum, iso, breadcrumbLd, faqLd, autor, ORG_ID, png } from '../../lib/site';
 import { getEntry } from 'astro:content';
+import Foto from '../../components/Foto.astro';
+import { THEMA_FOTO } from '../../lib/fotos';
 
 export async function getStaticPaths() {
   const alle = await getCollection('ratgeber');
@@ -53,7 +55,7 @@ const howtoLd = d.howto
     }
   : null;
 ---
-<Base title={d.seo.title ?? d.titel} description={d.seo.description ?? d.kurzantwort} ogType="article" noindex={d.seo.noindex} canonical={d.seo.canonical}
+<Base title={d.seo.title ?? d.titel} description={d.seo.description ?? d.kurzantwort} ogType="article" ueberFoto noindex={d.seo.noindex} canonical={d.seo.canonical}
   ogImage={d.seo.ogImage ?? (produkt ? png(produkt.data.bild) : undefined)}
   schema={[artikelLd, howtoLd, breadcrumbLd(crumbs), faqLd(d.faq)]}>
   <Fragment slot="head">
@@ -61,13 +63,16 @@ const howtoLd = d.howto
     <meta property="article:modified_time" content={iso(geaendert)} />
     <meta property="article:section" content={THEMEN[d.thema]} />
   </Fragment>
-  <Breadcrumbs items={crumbs} />
-  <article class="wrap artikel">
-    <header class="kopf">
+  <header class="a-kopf foto">
+    <Foto k={THEMA_FOTO[d.thema]} prio />
+    <div class="wrap">
       <a class="chip" href={`/ratgeber/thema/${d.thema}/`}>{THEMEN[d.thema]}</a>
       <h1>{d.titel}</h1>
       <p class="meta">Von <a href="/ueber-uns/">Julian Schindelegger</a> · Aktualisiert am <time datetime={iso(geaendert)}>{datum(geaendert)}</time> · {d.lesezeit} Min. Lesezeit</p>
-    </header>
+    </div>
+  </header>
+  <Breadcrumbs items={crumbs} />
+  <article class="wrap artikel">
     <div class="grid">
       <div>
         <p class="kurzantwort"><strong>Kurz gesagt</strong>{d.kurzantwort}</p>
@@ -86,7 +91,7 @@ const howtoLd = d.howto
   </article>
 
   {weitere.length > 0 && (
-    <section class="sektion sektion--hell">
+    <section class="sektion sektion--nebel">
       <div class="wrap">
         <h2>Mehr zu {THEMEN[d.thema]}</h2>
         <ul class="raster raster--3 liste">
@@ -99,16 +104,21 @@ const howtoLd = d.howto
 </Base>
 <style>
   .artikel { padding-block: 24px clamp(56px, 8vw, 96px); }
-  .kopf { max-width: 860px; margin-bottom: 28px; }
+  .a-kopf { min-height: 58vh; display: flex; align-items: flex-end; }
+  .a-kopf .wrap { padding-block: 140px 56px; }
+  .a-kopf h1 { font-size: clamp(2.1rem, 5vw, 3.8rem); max-width: 20ch; margin: 18px 0 14px; }
+  .a-kopf .chip { text-decoration: none; background: rgb(255 255 255 / 92%); }
+  .a-kopf .meta { color: rgb(255 255 255 / 85%); }
+  .a-kopf .meta a { color: #fff; }
   .kopf .chip { text-decoration: none; margin-bottom: 18px; }
   .kopf h1 { font-size: clamp(2rem, 4.6vw, 3.2rem); }
-  .meta { font-size: 0.9rem; color: var(--stein); }
-  .toc { max-width: var(--text); border: 1px solid var(--linie); border-radius: var(--r); padding: 18px 22px; margin-bottom: 2em; font-size: 0.95rem; }
-  .toc p { font-weight: 700; color: var(--tanne); margin: 0 0 8px; }
+  .meta { font-size: 0.9rem; color: var(--grau); }
+  .toc { max-width: var(--lesebreite); border: 1px solid var(--linie); border-radius: var(--r); padding: 18px 22px; margin-bottom: 2em; font-size: 0.95rem; }
+  .toc p { font-weight: 700; color: var(--graphit); margin: 0 0 8px; }
   .toc ol { margin: 0; padding-left: 1.2em; display: grid; gap: 4px; }
-  .faq-w { max-width: var(--text); margin-top: 48px; }
+  .faq-w { max-width: var(--lesebreite); margin-top: 48px; }
   .liste { list-style: none; padding: 0; margin: 0; }
   .liste a { display: grid; gap: 8px; padding: 22px; text-decoration: none; height: 100%; }
-  .liste strong { font: 500 1.15rem/1.3 var(--serif); color: var(--tanne); }
-  .liste span { font-size: 0.85rem; color: var(--stein); }
+  .liste strong { font: 500 1.15rem/1.3 var(--titel); color: var(--graphit); }
+  .liste span { font-size: 0.85rem; color: var(--grau); }
 </style>

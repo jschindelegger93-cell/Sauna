@@ -12,8 +12,10 @@ interface Props {
   ogType?: 'website' | 'article' | 'product';
   noindex?: boolean;
   schema?: (Record<string, unknown> | null)[];
+  ueberFoto?: boolean;
+  preload?: string;
 }
-const { title, description, canonical, ogImage = '/images/og-almglut.png', ogType = 'website', noindex = false, schema = [] } = Astro.props;
+const { title, description, canonical, ogImage = '/images/og-almglut.png', ogType = 'website', noindex = false, schema = [], ueberFoto = false, preload } = Astro.props;
 const kanon = canonical ? abs(canonical) : new URL(Astro.url.pathname, SITE).href;
 const vollerTitel = title.includes('ALMGLUT') ? title : `${title} | ALMGLUT`;
 
@@ -46,9 +48,10 @@ const ga = S.tracking.ga4;
     <link rel="alternate" hreflang="de-AT" href={kanon} />
     <link rel="alternate" hreflang="de-DE" href={kanon} />
     <link rel="alternate" hreflang="x-default" href={kanon} />
-    <meta name="theme-color" content="#1E3328" />
+    <meta name="theme-color" content="#1D1D1F" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="apple-touch-icon" href="/images/almglut-logo.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    {preload && <link rel="preload" as="image" href={preload} fetchpriority="high" />}
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM-Zusammenfassung" />
 
@@ -81,7 +84,7 @@ const ga = S.tracking.ga4;
   </head>
   <body>
     <a href="#inhalt" class="skip">Zum Inhalt springen</a>
-    <Header />
+    <Header ueberFoto={ueberFoto} />
     <main id="inhalt">
       <slot />
     </main>

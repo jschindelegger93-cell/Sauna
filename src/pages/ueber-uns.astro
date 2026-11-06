@@ -1,16 +1,17 @@
 ---
 import Base from '../layouts/Base.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Foto from '../components/Foto.astro';
 import { S, abs, autor, breadcrumbLd, ORG_ID } from '../lib/site';
 const crumbs = [{ name: 'Startseite', href: '/' }, { name: 'Über uns', href: '/ueber-uns/' }];
 const ld = { '@type': 'AboutPage', '@id': abs('/ueber-uns/'), url: abs('/ueber-uns/'), name: 'Über ALMGLUT', about: { '@id': ORG_ID }, mainEntity: autor(), inLanguage: 'de-AT' };
 ---
-<Base title="Über ALMGLUT – Saunaaufgüsse aus Österreich" description="Wer hinter ALMGLUT steckt: Gründer Julian Schindelegger, warum alpine Saunaaufgüsse und wie unsere Düfte entstehen." schema={[ld, breadcrumbLd(crumbs)]}>
+<Base title="Über ALMGLUT – Saunaaufgüsse aus Österreich" description="Wer hinter ALMGLUT steckt: Gründer Julian Schindelegger, warum alpine Saunaaufgüsse und wie unsere Düfte entstehen." schema={[ld, breadcrumbLd(crumbs)]} ueberFoto>
+  <header class="u-kopf foto"><Foto k="huette-sonnenuntergang" prio /><div class="wrap"><p class="herkunft">47° N · Aufguss aus den Alpen</p><h1>Wir bringen die Alm<br />in deine Sauna.</h1></div></header>
   <Breadcrumbs items={crumbs} />
   <section class="wrap ueber">
     <div>
       <p class="augenbraue">Über uns</p>
-      <h1>Wir bringen die Alm in deine Sauna.</h1>
       <p class="kurzantwort"><strong>Kurz gesagt</strong>ALMGLUT ist eine Saunaaufguss-Marke aus Wien, gegründet 2026 von {S.inhaber}. Wir machen vier alpine Düfte mit naturreinen ätherischen Ölen, abgefüllt in Österreich, und teilen im Ratgeber alles, was wir über den Aufguss wissen.</p>
       <div class="prosa">
         <h2 id="julian">Servus, ich bin Julian.</h2>
@@ -39,10 +40,13 @@ const ld = { '@type': 'AboutPage', '@id': abs('/ueber-uns/'), url: abs('/ueber-u
   </section>
 </Base>
 <style>
+  .u-kopf { min-height: 62vh; display: flex; align-items: flex-end; }
+  .u-kopf .wrap { padding-block: 140px 64px; }
+  .u-kopf .herkunft { color: rgb(255 255 255 / 85%); display: block; margin-bottom: 18px; }
   .ueber { display: grid; gap: 48px; padding-block: 24px 96px; }
   @media (min-width: 980px) { .ueber { grid-template-columns: 1fr 320px; } .fakten { position: sticky; top: 100px; align-self: start; } }
   .fakten { padding: 26px; }
   dl { margin: 0; display: grid; gap: 4px; }
-  dt { font: 700 0.75rem/1 var(--sans); letter-spacing: 0.14em; text-transform: uppercase; color: var(--glut-dunkel); margin-top: 12px; }
-  dd { margin: 0; color: var(--tanne); font-weight: 600; }
+  dt { font: 700 0.75rem/1 var(--text); letter-spacing: 0.14em; text-transform: uppercase; color: var(--glut-dunkel); margin-top: 12px; }
+  dd { margin: 0; color: var(--graphit); font-weight: 600; }
 </style>

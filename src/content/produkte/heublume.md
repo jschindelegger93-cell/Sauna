@@ -8,7 +8,7 @@ inhalt: "100 ml"
 inhaltMl: 100
 anwendungen: 40
 farbe: "#C29A2E"
-bild: "/images/produkte/heublume.svg"
+bild: "/images/produkte/heublume.webp"
 duftnoten: ["Heu", "Almkräuter", "ein Hauch Honig"]
 stimmung: ["warm", "gemütlich", "nostalgisch"]
 inhaltsstoffe: "[PLATZHALTER INCI/Zusammensetzung laut Lohnabfüller]"

@@ -39,13 +39,13 @@ const cart = d.verfuegbar ? warenkorbUrl(d.shopifyVariantId) : null;
 <style>
   .kauf { display: grid; gap: 14px; }
   .preis { margin: 0; display: flex; align-items: baseline; gap: 12px; }
-  .preis strong { font: 500 2.1rem/1 var(--serif); color: var(--tanne); }
-  .preis s { color: var(--stein); }
-  .klein { font-size: 0.85rem; color: var(--stein); margin: 0; }
+  .preis strong { font: 500 2.1rem/1 var(--titel); color: var(--graphit); }
+  .preis s { color: var(--grau); }
+  .klein { font-size: 0.85rem; color: var(--grau); margin: 0; }
   .wl { display: grid; gap: 12px; background: var(--weiss); border: 1px solid var(--linie); border-radius: var(--r); padding: 20px; }
   .wl-text { margin: 0; font-size: 0.95rem; }
   .punkt { display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: var(--glut); box-shadow: 0 0 0 4px rgb(217 104 43 / 20%); vertical-align: 1px; }
-  .mini { font-size: 0.78rem; color: var(--stein); margin: 0; text-align: center; }
+  .mini { font-size: 0.78rem; color: var(--grau); margin: 0; text-align: center; }
   .usp { list-style: none; padding: 0; margin: 4px 0 0; display: grid; gap: 8px; font-size: 0.92rem; }
   .usp li { padding-left: 26px; position: relative; }
   .usp li::before { content: ''; position: absolute; left: 4px; top: 7px; width: 10px; height: 6px; border-left: 2px solid var(--glut); border-bottom: 2px solid var(--glut); transform: rotate(-45deg); }

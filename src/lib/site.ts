@@ -16,7 +16,7 @@ export const datum = (d: Date) =>
 export const iso = (d: Date) => d.toISOString().slice(0, 10);
 
 /** PNG-Variante eines Produkt-SVG (für Google, Open Graph) */
-export const png = (bild: string) => bild.replace(/\.svg$/, '.png');
+export const png = (bild: string) => bild.replace(/\.(svg|webp)$/, '.png');
 
 /** Warenkorb-Link: Shopify-Cart-Permalink, sobald Domain + Variant-ID gesetzt sind */
 export const warenkorbUrl = (variantId?: string) =>

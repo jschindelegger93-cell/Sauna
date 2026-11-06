@@ -8,7 +8,7 @@ inhalt: "4 × 100 ml"
 inhaltMl: 400
 anwendungen: 160
 farbe: "#D9682B"
-bild: "/images/produkte/almbox-geschenkset.svg"
+bild: "/images/produkte/almbox-geschenkset.webp"
 duftnoten: ["Zirbe", "Latschenkiefer", "Heublume", "Bergminze"]
 stimmung: ["Geschenk", "alle 4 Düfte"]
 herkunft: "Abgefüllt in Österreich"

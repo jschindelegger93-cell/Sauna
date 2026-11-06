@@ -1,39 +1,37 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import { euro, grundpreis } from '../lib/site';
+import { euro } from '../lib/site';
 interface Props { p: CollectionEntry<'produkte'>; ueberschrift?: 'h2' | 'h3' }
 const { p, ueberschrift = 'h3' } = Astro.props;
 const d = p.data;
 const H = ueberschrift;
 ---
-<article class="pk karte" style={`--akzent:${d.farbe}`}>
+<article class="pk">
   <a href={`/saunaaufguss/${p.id}/`} class="bild" tabindex="-1" aria-hidden="true">
-    <img src={d.bild} alt="" width="800" height="800" loading="lazy" decoding="async" />
+    <img src={d.bild} alt="" width="1200" height="1200" loading="lazy" decoding="async" />
     {!d.verfuegbar && <span class="badge">Bald erhältlich</span>}
   </a>
   <div class="txt">
-    <H class="titel"><a href={`/saunaaufguss/${p.id}/`}>{d.name}</a></H>
-    <p class="noten">{d.duftnoten.slice(0, 3).join(' · ')}</p>
-    <p class="preis">
-      <strong>{euro(d.preis)}</strong>
-      {d.preisAlt && <s>{euro(d.preisAlt)}</s>}
-      <span>{d.inhalt} · {grundpreis(d.preis, d.inhaltMl)}</span>
-    </p>
+    {d.nummer && <p class="nr">{d.nummer}</p>}
+    <H class="titel"><a href={`/saunaaufguss/${p.id}/`}>{d.typ === 'duft' ? d.name.replace(/^No\. \d /, '') : d.name}</a></H>
+    <p class="noten">{d.stimmung.slice(0, 3).join(' · ')}</p>
+    <p class="preis">{d.preisAlt && <s>{euro(d.preisAlt)}</s>} {euro(d.preis)} <span>· {d.inhalt}</span></p>
   </div>
 </article>
 <style>
-  .pk { overflow: hidden; display: flex; flex-direction: column; transition: transform 0.25s, box-shadow 0.25s; position: relative; }
-  .pk:hover { transform: translateY(-3px); box-shadow: var(--schatten); }
-  .bild { display: block; position: relative; aspect-ratio: 1; background: var(--kalk); border-bottom: 3px solid var(--akzent); }
-  .bild img { width: 100%; height: 100%; object-fit: cover; }
-  .badge { position: absolute; top: 14px; left: 14px; }
-  .txt { padding: 20px 22px 24px; display: grid; gap: 6px; }
-  .titel { font-size: 1.3rem; margin: 0; }
-  .titel a { text-decoration: none; color: var(--tanne); }
+  .pk { position: relative; background: #fff; border-radius: var(--r); overflow: hidden; display: flex; flex-direction: column; transition: transform 0.35s ease, box-shadow 0.35s ease; }
+  .pk:hover { transform: translateY(-4px); box-shadow: var(--schatten); }
+  .bild { display: block; position: relative; aspect-ratio: 1; background: #f3f2ef; overflow: hidden; }
+  .bild img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+  .pk:hover .bild img { transform: scale(1.04); }
+  .badge { position: absolute; top: 16px; left: 16px; }
+  .txt { padding: 22px 24px 26px; text-align: center; display: grid; gap: 4px; }
+  .nr { margin: 0; font: 500 0.75rem/1 var(--titel); letter-spacing: 0.24em; text-transform: uppercase; color: var(--grau); }
+  .titel { font-size: 1.6rem; margin: 4px 0 0; }
+  .titel a { text-decoration: none; color: var(--graphit); }
   .titel a::after { content: ''; position: absolute; inset: 0; }
-  .noten { margin: 0; font-size: 0.9rem; color: var(--stein); }
-  .preis { margin: 6px 0 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; }
-  .preis strong { font: 600 1.15rem/1 var(--sans); color: var(--tanne); }
-  .preis s { color: var(--stein); font-size: 0.9rem; }
-  .preis span { flex-basis: 100%; font-size: 0.8rem; color: var(--stein); }
+  .noten { margin: 0; font-size: 0.9rem; color: var(--grau); }
+  .preis { margin: 10px 0 0; font-weight: 600; }
+  .preis s { color: var(--grau); font-weight: 400; margin-right: 4px; }
+  .preis span { font-weight: 400; color: var(--grau); }
 </style>

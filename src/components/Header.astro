@@ -1,6 +1,8 @@
 ---
 import Logo from './Logo.astro';
 import { S } from '../lib/site';
+interface Props { ueberFoto?: boolean }
+const { ueberFoto = false } = Astro.props;
 const pfad = Astro.url.pathname;
 const nav = [
   { href: '/saunaaufguss/', label: 'Saunaaufguss' },
@@ -18,24 +20,45 @@ const a = S.announcement;
     </a>
   </div>
 )}
-<header class="kopf">
+<header class:list={['kopf', { transparent: ueberFoto }]} data-kopf>
   <div class="wrap kopf-in">
-    <a href="/" class="marke" aria-label="ALMGLUT Startseite"><Logo /></a>
+    <a href="/" class="marke" aria-label="ALMGLUT Startseite"><span class="logo-dunkel"><Logo klein /></span><span class="logo-hell"><Logo klein hell /></span></a>
     <nav aria-label="Hauptnavigation" id="nav" class="nav">
       <ul>
         {nav.map((n) => (
           <li><a href={n.href} aria-current={pfad.startsWith(n.href) ? 'page' : undefined}>{n.label}</a></li>
         ))}
+        <li class="nur-mobil"><button type="button" class="nav-beratung" data-beratung>Persönliche Duftberatung</button></li>
       </ul>
     </nav>
-    <a href="/saunaaufguss/" class="btn btn--tanne kopf-cta">Zum Shop</a>
-    <button class="menue" aria-controls="nav" aria-expanded="false" aria-label="Menü öffnen">
-      <span></span><span></span>
-    </button>
+    <button type="button" class="kopf-beratung" data-beratung>Beratung</button>
+    <a href="/saunaaufguss/" class="btn btn--dunkel kopf-cta">Shop</a>
+    <button class="menue" aria-controls="nav" aria-expanded="false" aria-label="Menü öffnen"><span></span><span></span></button>
   </div>
 </header>
 
+<dialog class="beratung" id="beratung" aria-labelledby="beratung-titel">
+  <form method="dialog" class="schliessen-form"><button class="schliessen" aria-label="Schließen">×</button></form>
+  <p class="augenbraue">Persönliche Duftberatung</p>
+  <h2 id="beratung-titel">Welcher Aufguss passt zu dir?</h2>
+  <p class="text">Schreib uns kurz, wie du saunierst. Wir empfehlen dir persönlich deinen Duft, meist innerhalb von 24 Stunden.</p>
+  <form name="beratung" method="POST" data-netlify="true" netlify-honeypot="bot" action="/danke/" class="b-form">
+    <input type="hidden" name="form-name" value="beratung" />
+    <p class="visuell-versteckt"><label>Nicht ausfüllen <input name="bot" /></label></p>
+    <div class="feld"><label for="b-name">Vorname</label><input id="b-name" name="name" autocomplete="given-name" required /></div>
+    <div class="feld"><label for="b-mail">E-Mail</label><input id="b-mail" type="email" name="email" autocomplete="email" required /></div>
+    <div class="feld">
+      <label for="b-sauna">Deine Sauna</label>
+      <select id="b-sauna" name="sauna"><option>Heimsauna (finnisch)</option><option>Biosauna</option><option>Fass- oder Gartensauna</option><option>Noch keine, suche ein Geschenk</option></select>
+    </div>
+    <div class="feld"><label for="b-frage">Was magst du? (optional)</label><textarea id="b-frage" name="frage" rows="3" placeholder="z. B. eher frisch oder holzig, für den Abend …"></textarea></div>
+    <button type="submit" class="btn btn--glut btn--block">Beratung anfragen</button>
+    <p class="mini">Kostenlos und unverbindlich. <a href="/datenschutz/">Datenschutz</a></p>
+  </form>
+</dialog>
+
 <script>
+  const kopf = document.querySelector<HTMLElement>('[data-kopf]');
   const btn = document.querySelector<HTMLButtonElement>('.menue');
   const nav = document.getElementById('nav');
   btn?.addEventListener('click', () => {
@@ -43,43 +66,76 @@ const a = S.announcement;
     btn.setAttribute('aria-expanded', String(!offen));
     btn.setAttribute('aria-label', offen ? 'Menü öffnen' : 'Menü schließen');
     nav?.classList.toggle('offen', !offen);
+    kopf?.classList.toggle('menue-offen', !offen);
     document.body.style.overflow = offen ? '' : 'hidden';
   });
+  if (kopf?.classList.contains('transparent')) {
+    const pruefe = () => kopf.classList.toggle('fest', scrollY > 40);
+    addEventListener('scroll', pruefe, { passive: true });
+    pruefe();
+  }
+  const dlg = document.getElementById('beratung') as HTMLDialogElement | null;
+  document.querySelectorAll('[data-beratung]').forEach((b) => b.addEventListener('click', () => dlg?.showModal()));
+  dlg?.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });
   const msgs = document.querySelectorAll('.ansage .msg');
   if (msgs.length > 1 && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
     let i = 0;
-    setInterval(() => {
-      msgs[i].classList.remove('an');
-      i = (i + 1) % msgs.length;
-      msgs[i].classList.add('an');
-    }, 4500);
+    setInterval(() => { msgs[i].classList.remove('an'); i = (i + 1) % msgs.length; msgs[i].classList.add('an'); }, 4500);
   }
+  const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('sichtbar'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -10% 0px' });
+  document.querySelectorAll('.rein').forEach((el) => io.observe(el));
 </script>
 
 <style>
-  .ansage { background: var(--tanne); color: var(--kalk); font-size: 0.86rem; }
-  .ansage-in { display: grid; place-items: center; min-height: 40px; color: inherit; text-decoration: none; padding: 0 16px; text-align: center; }
-  .msg { grid-area: 1 / 1; opacity: 0; transition: opacity 0.5s; }
+  .ansage { background: var(--graphit); color: #f5f5f7; font-size: 0.8rem; position: relative; z-index: 1; height: 38px; overflow: hidden; }
+  .ansage-in { display: grid; place-items: center; height: 38px; color: inherit; text-decoration: none; padding: 0 16px; text-align: center; }
+  .msg { grid-area: 1 / 1; opacity: 0; transition: opacity 0.6s; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: calc(100vw - 32px); }
   .msg.an { opacity: 1; }
-  .kopf { position: sticky; top: 0; z-index: 50; background: rgb(243 239 232 / 92%); backdrop-filter: blur(10px); border-bottom: 1px solid var(--linie); }
-  .kopf-in { display: flex; align-items: center; gap: 24px; min-height: 72px; }
-  .marke { text-decoration: none; margin-right: auto; }
-  .nav ul { list-style: none; display: flex; gap: 26px; margin: 0; padding: 0; }
-  .nav a { text-decoration: none; font-weight: 600; font-size: 0.95rem; color: var(--granit); padding: 8px 0; border-bottom: 1.5px solid transparent; }
-  .nav a:hover, .nav a[aria-current] { color: var(--tanne); border-color: var(--glut); }
-  .kopf-cta { padding: 12px 20px; min-height: 44px; font-size: 0.92rem; }
-  .menue { display: none; background: none; border: 0; width: 44px; height: 44px; cursor: pointer; position: relative; }
-  .menue span { position: absolute; left: 11px; right: 11px; height: 1.5px; background: var(--tanne); transition: transform 0.25s, top 0.25s; }
-  .menue span:first-child { top: 17px; }
+
+  .kopf { position: sticky; top: 0; z-index: 50; background: rgb(255 255 255 / 80%); backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px); border-bottom: 1px solid rgb(0 0 0 / 6%); transition: background 0.3s, border-color 0.3s; }
+  .kopf.transparent { position: fixed; left: 0; right: 0; top: 38px; background: transparent; backdrop-filter: none; -webkit-backdrop-filter: none; border-color: transparent; }
+  .kopf.menue-offen { background: #fff !important; }
+  .kopf.transparent.fest, .kopf.transparent.menue-offen { top: 0; background: rgb(255 255 255 / 82%); backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px); border-color: rgb(0 0 0 / 6%); }
+  .kopf-in { display: flex; align-items: center; gap: 22px; min-height: 60px; }
+  .marke { text-decoration: none; margin-right: auto; display: grid; }
+  .marke > span { grid-area: 1 / 1; transition: opacity 0.3s; }
+  .logo-hell { opacity: 0; }
+  .transparent:not(.fest):not(.menue-offen) .logo-hell { opacity: 1; }
+  .transparent:not(.fest):not(.menue-offen) .logo-dunkel { opacity: 0; }
+  .nav ul { list-style: none; display: flex; gap: 28px; margin: 0; padding: 0; }
+  .nav a { text-decoration: none; font-size: 0.9rem; color: var(--graphit); opacity: 0.85; }
+  .nav a:hover, .nav a[aria-current] { opacity: 1; color: var(--graphit); }
+  .nav a[aria-current] { font-weight: 600; }
+  .transparent:not(.fest):not(.menue-offen) .nav a, .transparent:not(.fest):not(.menue-offen) .kopf-beratung { color: #fff; }
+  .kopf-beratung { background: none; border: 0; font: 500 0.9rem var(--text); color: var(--graphit); cursor: pointer; padding: 8px 4px; }
+  .kopf-beratung:hover { color: var(--glut-dunkel); }
+  .kopf-cta { padding: 10px 18px; min-height: 38px; font-size: 0.88rem; }
+  .transparent:not(.fest):not(.menue-offen) .kopf-cta { background: #fff; color: var(--graphit); }
+  .nur-mobil { display: none; }
+  .menue { display: none; background: none; border: 0; width: 44px; height: 44px; cursor: pointer; position: relative; color: var(--graphit); }
+  .transparent:not(.fest):not(.menue-offen) .menue { color: #fff; }
+  .menue span { position: absolute; left: 12px; right: 12px; height: 1.5px; background: currentColor; transition: transform 0.25s, top 0.25s; }
+  .menue span:first-child { top: 18px; }
   .menue span:last-child { top: 26px; }
-  .menue[aria-expanded='true'] span:first-child { top: 21px; transform: rotate(45deg); }
-  .menue[aria-expanded='true'] span:last-child { top: 21px; transform: rotate(-45deg); }
+  .menue[aria-expanded='true'] span:first-child { top: 22px; transform: rotate(45deg); }
+  .menue[aria-expanded='true'] span:last-child { top: 22px; transform: rotate(-45deg); }
   @media (max-width: 1060px) {
     .menue { display: block; }
-    .kopf-cta { display: none; }
-    .nav { position: fixed; inset: 72px 0 0; background: var(--kalk); padding: 24px var(--pad); transform: translateX(100%); transition: transform 0.3s; overflow-y: auto; }
-    .nav.offen { transform: none; }
-    .nav ul { flex-direction: column; gap: 4px; }
-    .nav a { display: block; font-family: var(--serif); font-weight: 500; font-size: 1.6rem; color: var(--tanne); padding: 12px 0; border-bottom: 1px solid var(--linie); }
+    .kopf-beratung { display: none; }
+    .nur-mobil { display: block; }
+    .nav { position: fixed; inset: 60px 0 0; background: #fff; padding: 20px var(--pad); transform: translateY(-8px); opacity: 0; pointer-events: none; transition: opacity 0.25s, transform 0.25s; overflow-y: auto; }
+    .nav.offen { opacity: 1; transform: none; pointer-events: auto; }
+    .nav ul { flex-direction: column; gap: 0; }
+    .nav a, .nav-beratung { display: block; width: 100%; text-align: left; font: 600 1.7rem/1.2 var(--titel); letter-spacing: -0.02em; color: var(--graphit) !important; opacity: 1; padding: 14px 0; border: 0; border-bottom: 1px solid var(--linie); background: none; cursor: pointer; }
+    .nav-beratung { color: var(--glut-dunkel) !important; }
   }
+
+  .beratung { border: 0; border-radius: var(--r); padding: 36px clamp(22px, 5vw, 40px); width: min(520px, calc(100% - 32px)); max-height: calc(100dvh - 32px); box-shadow: 0 30px 80px rgb(0 0 0 / 30%); color: var(--graphit); }
+  .beratung::backdrop { background: rgb(0 0 0 / 45%); backdrop-filter: blur(6px); }
+  .beratung h2 { font-size: clamp(1.7rem, 4vw, 2.2rem); }
+  .beratung .text { color: var(--grau); }
+  .schliessen-form { position: absolute; top: 14px; right: 14px; margin: 0; }
+  .schliessen { width: 40px; height: 40px; border-radius: 50%; border: 0; background: var(--nebel); font-size: 1.4rem; line-height: 1; cursor: pointer; color: var(--graphit); }
+  .b-form { display: grid; gap: 14px; margin-top: 8px; }
+  .mini { font-size: 0.78rem; color: var(--grau); text-align: center; margin: 0; }
 </style>

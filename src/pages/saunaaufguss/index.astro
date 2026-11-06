@@ -4,6 +4,7 @@ import Base from '../../layouts/Base.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import ProduktKarte from '../../components/ProduktKarte.astro';
 import Faq from '../../components/Faq.astro';
+import Foto from '../../components/Foto.astro';
 import { S, abs, euro, breadcrumbLd, faqLd, png } from '../../lib/site';
 
 const produkte = (await getCollection('produkte')).sort((a, b) => a.data.reihenfolge - b.data.reihenfolge);
@@ -39,13 +40,16 @@ const listeLd = {
 ---
 <Base title="Saunaaufguss kaufen – alpine Aufgüsse aus Österreich"
   description="Saunaaufguss aus Österreich: Zirbe, Latschenkiefer, Heublume und Bergminze mit naturreinen ätherischen Ölen. Ab 14,90 €, Probierset und Geschenkset."
-  schema={[listeLd, breadcrumbLd(crumbs), faqLd(faq)]}>
-  <Breadcrumbs items={crumbs} />
-  <header class="wrap kopfbereich">
-    <p class="augenbraue">Shop</p>
-    <h1>Saunaaufguss aus Österreich</h1>
-    <p class="lead">Vier alpine Saunadüfte mit naturreinen ätherischen Ölen, abgefüllt in Österreich: <strong>Zirbe</strong>, <strong>Latschenkiefer</strong>, <strong>Heublume</strong> und <strong>Bergminze</strong>. Je 100 ml für {euro(14.9)}, das reicht für rund 40 Aufgüsse in der Heimsauna.</p>
+  schema={[listeLd, breadcrumbLd(crumbs), faqLd(faq)]} ueberFoto>
+  <header class="shop-kopf foto">
+    <Foto k="sauna-modern" prio />
+    <div class="wrap">
+      <p class="herkunft">47° N · Aufguss aus den Alpen</p>
+      <h1>Saunaaufguss aus Österreich</h1>
+      <p class="lead">Vier alpine Saunadüfte mit naturreinen ätherischen Ölen: <strong>Zirbe</strong>, <strong>Latschenkiefer</strong>, <strong>Heublume</strong> und <strong>Bergminze</strong>. Je 100 ml für {euro(14.9)}, rund 40 Aufgüsse in der Heimsauna.</p>
+    </div>
   </header>
+  <Breadcrumbs items={crumbs} />
 
   <section class="wrap block" aria-labelledby="duefte">
     <h2 id="duefte" class="h-sek">Die vier Düfte</h2>
@@ -57,7 +61,7 @@ const listeLd = {
     <div class="raster raster--2 sets">{sets.map((p) => <ProduktKarte p={p} />)}</div>
   </section>
 
-  <section class="sektion sektion--hell">
+  <section class="sektion sektion--nebel">
     <div class="wrap prosa-wrap">
       <div class="prosa">
         <h2>Welcher Saunaaufguss passt zu dir?</h2>
@@ -95,9 +99,14 @@ const listeLd = {
   </section>
 </Base>
 <style>
-  .kopfbereich { padding-block: 28px 8px; }
+  .shop-kopf { min-height: 62vh; display: flex; align-items: flex-end; }
+  .shop-kopf .wrap { padding-block: 140px 64px; }
+  .shop-kopf .herkunft { color: rgb(255 255 255 / 85%); display: block; margin-bottom: 18px; }
+  .shop-kopf .lead { max-width: 48ch; }
+  .shop-kopf strong { color: #fff; }
   .block { padding-block: 32px; }
   .h-sek { font-size: clamp(1.3rem, 2.4vw, 1.7rem); margin-bottom: 22px; }
   .sets { max-width: 820px; }
   .prosa-wrap { display: flex; justify-content: center; }
+  .prosa-wrap .prosa { min-width: 0; width: 100%; }
 </style>

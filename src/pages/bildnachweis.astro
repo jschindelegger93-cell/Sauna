@@ -1,0 +1,21 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { FOTOS } from '../lib/fotos';
+const crumbs = [{ name: 'Startseite', href: '/' }, { name: 'Bildnachweis', href: '/bildnachweis/' }];
+---
+<Base title="Bildnachweis" description="Bildnachweis der auf almglut.at verwendeten Fotos." noindex>
+  <Breadcrumbs items={crumbs} />
+  <section class="schmal" style="padding-block:24px 96px">
+    <h1>Bildnachweis</h1>
+    <p>Die Stimmungsfotos stammen von <a href="https://unsplash.com/" rel="noopener">Unsplash</a> und werden gemäß der Unsplash-Lizenz verwendet. Danke an die Fotografinnen und Fotografen. Produktbilder: ALMGLUT.</p>
+    <ul class="liste">
+      {Object.entries(FOTOS).map(([k, f]) => <li><strong>{f.alt}</strong><span>Foto: <a href={f.quelle} rel="noopener nofollow">{f.von}</a> auf Unsplash</span></li>)}
+    </ul>
+  </section>
+</Base>
+<style>
+  .liste { list-style: none; padding: 0; margin: 32px 0 0; border-top: 1px solid var(--linie); }
+  .liste li { display: grid; gap: 2px; padding: 14px 0; border-bottom: 1px solid var(--linie); font-size: 0.95rem; }
+  .liste span { color: var(--grau); font-size: 0.85rem; }
+</style>

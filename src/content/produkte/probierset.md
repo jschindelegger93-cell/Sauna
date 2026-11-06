@@ -7,7 +7,7 @@ inhalt: "4 × 15 ml"
 inhaltMl: 60
 anwendungen: 24
 farbe: "#C9A57A"
-bild: "/images/produkte/probierset.svg"
+bild: "/images/produkte/probierset.webp"
 duftnoten: ["Zirbe", "Latschenkiefer", "Heublume", "Bergminze"]
 stimmung: ["zum Kennenlernen"]
 herkunft: "Abgefüllt in Österreich"

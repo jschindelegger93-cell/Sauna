@@ -3,7 +3,9 @@ import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import ProduktKarte from '../components/ProduktKarte.astro';
 import Faq from '../components/Faq.astro';
+import Foto from '../components/Foto.astro';
 import { S, THEMEN, faqLd } from '../lib/site';
+import { THEMA_FOTO } from '../lib/fotos';
 
 const produkte = (await getCollection('produkte')).sort((a, b) => a.data.reihenfolge - b.data.reihenfolge);
 const duefte = produkte.filter((p) => p.data.typ === 'duft');
@@ -20,98 +22,121 @@ const faq = [
 ---
 <Base title="ALMGLUT – Saunaaufguss aus Österreich | Zirbe, Latsche, Heublume"
   description="ALMGLUT: alpine Saunaaufgüsse aus Österreich mit naturreinen ätherischen Ölen. Zirbe, Latschenkiefer, Heublume, Bergminze. Plus kostenloses Aufguss-Wissen."
-  schema={[faqLd(faq)]}>
+  schema={[faqLd(faq)]} ueberFoto preload="/images/stock/hero-sonnenaufgang.webp">
 
-  <section class="hero">
+  <section class="hero foto">
+    <Foto k="hero-sonnenaufgang" prio />
     <div class="wrap hero-in">
-      <div class="hero-txt">
-        <p class="augenbraue">Saunaaufguss aus Österreich</p>
-        <h1>Die Alm in <em>deiner Sauna.</em></h1>
-        <p class="lead">Alpine Saunaaufgüsse mit naturreinen ätherischen Ölen: Zirbe, Latschenkiefer, Heublume und Bergminze. Abgefüllt in Österreich, gemacht für deine Heimsauna.</p>
-        <div class="cta">
-          <a href="/saunaaufguss/" class="btn btn--glut">Düfte entdecken</a>
-          <a href="/duft-finder/" class="btn btn--linie">Welcher Duft passt zu mir?</a>
-        </div>
-      </div>
-      <div class="hero-bild">
-        <svg class="dampf" viewBox="0 0 200 160" aria-hidden="true">
-          <path d="M60 150 C40 110 90 95 70 55 C58 30 80 15 76 0" />
-          <path d="M100 150 C80 105 130 90 108 48 C96 25 116 12 112 0" />
-          <path d="M140 150 C122 112 168 98 148 60 C138 38 156 22 152 4" />
-        </svg>
-        <img src="/images/produkte/zirbe.svg" alt="ALMGLUT No. 1 Zirbe Saunaaufguss in der Braunglasflasche" width="800" height="800" fetchpriority="high" />
+      <p class="herkunft">47° N · Aufguss aus den Alpen</p>
+      <h1>Die Alm in<br />deiner Sauna.</h1>
+      <p class="lead">Saunaaufgüsse mit naturreinem Zirbenöl, Latschenkiefer und Bergkräutern. Abgefüllt in Österreich, gemacht für deine Heimsauna.</p>
+      <div class="cta">
+        <a href="/saunaaufguss/" class="btn btn--hell">Düfte entdecken</a>
+        <a href="/duft-finder/" class="btn btn--glas">Welcher Duft passt zu mir?</a>
       </div>
     </div>
-    <svg class="berge" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M0 120 L0 80 L180 30 L320 70 L520 10 L700 75 L860 40 L1040 90 L1240 25 L1440 70 L1440 120 Z" />
-    </svg>
+    <a href="#kollektion" class="scroll" aria-label="Weiter nach unten"><span></span></a>
   </section>
 
-  <section class="vertrauen" aria-label="Unsere Versprechen">
-    <ul class="wrap">
-      <li><strong>Abgefüllt in Österreich</strong><span>Zirbe und Latsche aus den Alpen</span></li>
-      <li><strong>Naturreine Öle</strong><span>ätherische Öle, keine Billig-Parfüms</span></li>
-      <li><strong>Rund 40 Aufgüsse</strong><span>pro 100-ml-Flasche</span></li>
-      <li><strong>Versandkostenfrei</strong><span>ab {S.versandkostenfrei_ab} € nach AT und DE</span></li>
-    </ul>
-  </section>
-
-  <section class="sektion">
+  <section class="sektion mitte" id="kollektion">
     <div class="wrap">
-      <div class="sek-kopf">
-        <div>
-          <p class="augenbraue">Die Kollektion</p>
-          <h2>Vier Düfte. Ein Saunaabend.</h2>
-        </div>
-        <a href="/saunaaufguss/" class="btn btn--linie">Alle Produkte</a>
-      </div>
-      <div class="raster raster--4">{duefte.map((p) => <ProduktKarte p={p} />)}</div>
+      <p class="augenbraue">Die Kollektion</p>
+      <h2>Vier Düfte. <span class="glut-text">Ein Ritual.</span></h2>
+      <p class="lead">Von kühl und klar bis warm und holzig. Je 100 ml für rund 40 Aufgüsse, nummeriert wie die Gänge eines Saunaabends.</p>
+      <div class="raster raster--4 produkte rein">{duefte.map((p) => <ProduktKarte p={p} />)}</div>
+      <p style="margin-top:40px"><a href="/saunaaufguss/" class="link-pfeil">Alle Produkte ansehen</a></p>
     </div>
   </section>
 
-  <section class="sektion sektion--dunkel ritual">
+  <section class="moment foto">
+    <Foto k="saunasteine-dampf" />
+    <div class="wrap moment-in rein">
+      <p class="augenbraue">Der Moment</p>
+      <h2>Wenn der Aufguss zischt,<br />steht die Welt still.</h2>
+      <p class="lead">Die Steine glühen, der Dampf steigt, und für ein paar Minuten riecht die ganze Sauna nach Zirbenwald. Genau dafür machen wir ALMGLUT.</p>
+    </div>
+  </section>
+
+  <section class="sektion sektion--nebel">
     <div class="wrap">
-      <p class="augenbraue">Das ALMGLUT-Ritual</p>
-      <h2>Frisch beginnen, warm enden.</h2>
-      <p class="lead">Ein guter Saunaabend hat einen Rhythmus. Unsere Düfte folgen ihm, vom kühlen ersten Gang bis zum ruhigen letzten.</p>
-      <ol class="schritte">
-        <li><span class="nr">1. Gang</span><h3>Bergminze oder Latsche</h3><p>Kühl und klar. Der Duft öffnet, die Luft wirkt frischer, obwohl es heiß ist.</p></li>
-        <li><span class="nr">2. Gang</span><h3>Heublume</h3><p>Warm und weich wie eine Almwiese im Juli. Jetzt wird es gemütlich.</p></li>
-        <li><span class="nr">3. Gang</span><h3>Zirbe</h3><p>Holzig und ruhig. Der Duft für den letzten Aufguss und einen langen Abend.</p></li>
+      <div class="kopf-mitte mitte">
+        <p class="augenbraue">Das ALMGLUT-Ritual</p>
+        <h2>Frisch beginnen.<br />Warm enden.</h2>
+      </div>
+      <ol class="ritual">
+        <li class="rein">
+          <div class="r-bild"><Foto k="aufguss-kelle" sizes="(min-width: 900px) 33vw, 100vw" /></div>
+          <span class="r-nr">1. Gang</span>
+          <h3>Bergminze oder Latsche</h3>
+          <p>Kühl und klar. Die Luft wirkt frischer, obwohl es 85 Grad hat.</p>
+        </li>
+        <li class="rein">
+          <div class="r-bild"><Foto k="sauna-paar" sizes="(min-width: 900px) 33vw, 100vw" /></div>
+          <span class="r-nr">2. Gang</span>
+          <h3>Heublume</h3>
+          <p>Warm und weich wie eine Almwiese im Juli. Jetzt wird es gemütlich.</p>
+        </li>
+        <li class="rein">
+          <div class="r-bild"><Foto k="sauna-entspannung" sizes="(min-width: 900px) 33vw, 100vw" /></div>
+          <span class="r-nr">3. Gang</span>
+          <h3>Zirbe</h3>
+          <p>Holzig und ruhig. Der Duft für den letzten Aufguss und einen langen Abend.</p>
+        </li>
       </ol>
-      <a href="/ratgeber/saunaaufguss-selber-machen/" class="btn btn--linie">So machst du den perfekten Aufguss</a>
+      <p class="mitte" style="margin-top:48px"><a href="/ratgeber/saunaaufguss-selber-machen/" class="link-pfeil">So machst du den perfekten Aufguss</a></p>
+    </div>
+  </section>
+
+  <section class="herkunft-sek">
+    <div class="h-bild"><Foto k="almhuette-schnee" sizes="(min-width: 900px) 50vw, 100vw" /></div>
+    <div class="h-txt rein">
+      <p class="augenbraue">Herkunft</p>
+      <h2>Aus den Alpen.<br />Nicht aus dem Labor.</h2>
+      <p class="lead">Unsere Zirbe wächst auf bis zu 2.300 Metern, die Latsche dort, wo der Wald aufhört. Destilliert und abgefüllt wird in Österreich, bei einem Familienbetrieb, der seit Jahrzehnten mit Bergpflanzen arbeitet.</p>
+      <ul class="fakten">
+        <li><strong>100 %</strong><span>naturreine ätherische Öle</span></li>
+        <li><strong>4</strong><span>Düfte statt 50</span></li>
+        <li><strong>~40</strong><span>Aufgüsse pro Flasche</span></li>
+      </ul>
+      <a href="/ueber-uns/" class="link-pfeil">Unsere Geschichte</a>
+    </div>
+  </section>
+
+  <section class="sektion sektion--dunkel almbox">
+    <div class="wrap zwei">
+      <div class="rein">
+        <p class="augenbraue">Das Geschenk für Saunafans</p>
+        <h2>Die Almbox.</h2>
+        <p class="lead">Alle vier Düfte à 100 ml in einer graphitfarbenen Box. Rund 160 Aufgüsse für 49,90 € statt 59,60 € einzeln.</p>
+        <div class="cta">
+          <a href="/saunaaufguss/almbox-geschenkset/" class="btn btn--glut">Zur Almbox</a>
+          <a href="/ratgeber/saunaaufguss-geschenkideen/" class="btn btn--glas">Geschenkideen</a>
+        </div>
+      </div>
+      <div class="box-bild rein"><img src={almbox.data.bild} alt="ALMGLUT Almbox Geschenkset mit vier Saunaaufgüssen" width="1200" height="1200" loading="lazy" /></div>
     </div>
   </section>
 
   <section class="sektion">
-    <div class="wrap zwei">
-      <div class="box-bild"><img src={almbox.data.bild} alt="ALMGLUT Almbox Geschenkset mit vier Saunaaufgüssen" width="800" height="800" loading="lazy" /></div>
-      <div>
-        <p class="augenbraue">Das Geschenk für Saunafans</p>
-        <h2>Die Almbox</h2>
-        <p class="lead">Alle vier Düfte à 100 ml in einer tannengrünen Box mit Holzwolle. Rund 160 Aufgüsse für 49,90 € statt 59,60 € einzeln.</p>
-        <a href="/saunaaufguss/almbox-geschenkset/" class="btn btn--tanne">Zur Almbox</a>
-      </div>
-    </div>
-  </section>
-
-  <section class="sektion sektion--hell">
     <div class="wrap">
-      <div class="sek-kopf">
-        <div>
-          <p class="augenbraue">Aufguss-Wissen</p>
-          <h2>Alles rund um den Saunaaufguss</h2>
-        </div>
-        <a href="/ratgeber/" class="btn btn--linie">Zum Ratgeber</a>
+      <div class="kopf-mitte mitte">
+        <p class="augenbraue">Aufguss-Wissen</p>
+        <h2>Alles, was du über<br />den Aufguss wissen willst.</h2>
+        <p class="lead">Anleitungen, Dosierung, Düfte und Tipps für die Heimsauna. Ehrlich erklärt und kostenlos.</p>
       </div>
       <ul class="themen">
         {themen.map((t) => (
-          <li><a href={`/ratgeber/thema/${t.id}/`}><strong>{t.data.navTitel}</strong><span>{t.data.kurzantwort.split('. ')[0]}.</span></a></li>
+          <li class="rein">
+            <a href={`/ratgeber/thema/${t.id}/`}>
+              <Foto k={THEMA_FOTO[t.id]} sizes="(min-width: 900px) 20vw, 50vw" dekor />
+              <span>{t.data.navTitel}</span>
+            </a>
+          </li>
         ))}
       </ul>
       <div class="raster raster--3 artikel">
         {artikel.map((a) => (
-          <a class="karte" href={`/ratgeber/${a.id}/`}>
+          <a class="art rein" href={`/ratgeber/${a.id}/`}>
             <span class="chip">{THEMEN[a.data.thema]}</span>
             <strong>{a.data.titel}</strong>
             <span class="meta">{a.data.lesezeit} Min. Lesezeit</span>
@@ -121,98 +146,113 @@ const faq = [
     </div>
   </section>
 
-  <section class="sektion">
+  <section class="sektion sektion--nebel">
     <div class="wrap werkzeuge">
-      <a href="/aufguss-rechner/" class="werkzeug karte">
+      <a href="/aufguss-rechner/" class="werkzeug rein">
         <span class="augenbraue">Werkzeug</span>
         <h3>Aufguss-Rechner</h3>
         <p>Saunagröße eingeben und sofort sehen, wie viel Wasser und wie viel Aufguss du brauchst.</p>
-        <span class="pfeil">Jetzt berechnen →</span>
+        <span class="link-pfeil">Jetzt berechnen</span>
       </a>
-      <a href="/duft-finder/" class="werkzeug karte">
+      <a href="/duft-finder/" class="werkzeug rein">
         <span class="augenbraue">Werkzeug</span>
         <h3>Duft-Finder</h3>
         <p>Vier kurze Fragen, eine klare Empfehlung: Welcher Saunaduft passt zu dir?</p>
-        <span class="pfeil">Duft finden →</span>
+        <span class="link-pfeil">Duft finden</span>
       </a>
-    </div>
-  </section>
-
-  <section class="sektion sektion--hell">
-    <div class="wrap zwei gruender">
-      <div>
-        <p class="augenbraue">Wer hinter ALMGLUT steht</p>
-        <h2>Gemacht von einem, der selbst gern sauniert.</h2>
-        <p>Servus, ich bin {S.inhaber}. Ich wollte Saunaaufgüsse, die nach den Alpen riechen und nicht nach Duftbaum. Also habe ich mit einem Familienbetrieb in den Alpen vier Düfte entwickelt, die ich selbst in meiner Sauna verwende. [PLATZHALTER persönliche Geschichte]</p>
-        <a href="/ueber-uns/">Mehr über ALMGLUT</a>
-      </div>
-      <div class="zitat"><p>„Ein Aufguss soll riechen wie ein Abend auf der Alm. Nicht mehr, nicht weniger.“</p><span>{S.inhaber}, Gründer</span></div>
     </div>
   </section>
 
   <section class="sektion">
     <div class="wrap" style="max-width:820px"><Faq faq={faq} /></div>
   </section>
+
+  <section class="schluss foto">
+    <Foto k="huette-schnee-nacht" />
+    <div class="wrap mitte rein">
+      <p class="herkunft">47° N · Aufguss aus den Alpen</p>
+      <h2>Bald in deiner Sauna.</h2>
+      <p class="lead">Trag dich ein und sichere dir zum Start 10 % auf deine erste Bestellung.</p>
+      <form name="warteliste-start" method="POST" data-netlify="true" netlify-honeypot="bot" action="/danke/" class="wl">
+        <input type="hidden" name="form-name" value="warteliste-start" />
+        <p class="visuell-versteckt"><label>Nicht ausfüllen <input name="bot" /></label></p>
+        <label for="wl-start" class="visuell-versteckt">E-Mail-Adresse</label>
+        <input id="wl-start" type="email" name="email" required placeholder="deine@mail.at" autocomplete="email" />
+        <button type="submit" class="btn btn--glut">Auf die Warteliste</button>
+      </form>
+    </div>
+  </section>
 </Base>
 
 <style>
-  .hero { background: var(--tanne); color: var(--kalk); position: relative; overflow: hidden; }
-  .hero-in { display: grid; gap: 24px; padding-block: clamp(48px, 8vw, 96px) clamp(80px, 10vw, 120px); align-items: center; }
-  @media (min-width: 900px) { .hero-in { grid-template-columns: 1.15fr 0.85fr; } }
-  .hero h1 { color: var(--kalk); font-size: clamp(2.6rem, 6.6vw, 5rem); }
-  .hero h1 em { font-style: italic; color: var(--zirbe); }
-  .hero .lead { color: #c9d3cc; }
-  .hero .augenbraue { color: var(--zirbe); }
-  .cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
-  .hero .btn--linie { color: var(--kalk); }
-  .hero .btn--linie:hover { background: var(--kalk); color: var(--tanne); }
-  .hero-bild { position: relative; max-width: 460px; justify-self: center; width: 100%; }
-  .hero-bild img { border-radius: 50%; background: var(--kalk); box-shadow: 0 30px 80px rgb(0 0 0 / 30%); }
-  .dampf { position: absolute; top: -22%; left: 30%; width: 40%; z-index: 2; fill: none; stroke: rgb(243 239 232 / 35%); stroke-width: 2; stroke-linecap: round; }
-  .dampf path { stroke-dasharray: 220; animation: dampf 6s ease-in-out infinite; }
-  .dampf path:nth-child(2) { animation-delay: 1.5s; }
-  .dampf path:nth-child(3) { animation-delay: 3s; }
-  @keyframes dampf { 0% { stroke-dashoffset: 220; opacity: 0; } 30% { opacity: 1; } 100% { stroke-dashoffset: -220; opacity: 0; } }
-  .berge { position: absolute; bottom: -1px; left: 0; width: 100%; height: 70px; fill: var(--kalk); }
+  .hero { min-height: 100svh; display: flex; align-items: flex-end; }
+  .hero::after { background: linear-gradient(180deg, rgb(0 0 0 / 35%) 0%, rgb(0 0 0 / 5%) 35%, rgb(0 0 0 / 60%) 100%); }
+  .hero-in { padding-block: 160px clamp(80px, 12vh, 140px); }
+  .hero h1 { font-size: clamp(3rem, 9vw, 7.5rem); line-height: 0.95; letter-spacing: -0.045em; margin-bottom: 24px; }
+  .hero .herkunft { color: rgb(255 255 255 / 85%); margin-bottom: 22px; }
+  .hero .lead { max-width: 34ch; }
+  .cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+  .scroll { position: absolute; left: 50%; bottom: 28px; width: 26px; height: 42px; border: 1.5px solid rgb(255 255 255 / 70%); border-radius: 14px; transform: translateX(-50%); }
+  .scroll span { position: absolute; left: 50%; top: 8px; width: 3px; height: 8px; border-radius: 2px; background: #fff; transform: translateX(-50%); animation: scroll 2s infinite; }
+  @keyframes scroll { 0% { opacity: 0; transform: translate(-50%, 0); } 40% { opacity: 1; } 100% { opacity: 0; transform: translate(-50%, 14px); } }
+  @media (max-width: 700px) { .scroll { display: none; } }
 
-  .vertrauen ul { list-style: none; margin-block: 0; padding: 28px 0; display: grid; gap: 18px; grid-template-columns: repeat(2, 1fr); }
-  @media (min-width: 900px) { .vertrauen ul { grid-template-columns: repeat(4, 1fr); } }
-  .vertrauen li { display: grid; gap: 2px; padding-left: 16px; border-left: 2px solid var(--glut); }
-  .vertrauen strong { color: var(--tanne); font-size: 0.98rem; }
-  .vertrauen span { font-size: 0.85rem; color: var(--stein); }
+  .produkte { margin-top: 56px; text-align: left; }
 
-  .sek-kopf { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 16px; margin-bottom: 32px; }
-  .sek-kopf h2 { margin: 0; }
+  .moment { min-height: 88vh; display: flex; align-items: center; }
+  .moment::after { background: linear-gradient(90deg, rgb(0 0 0 / 70%) 0%, rgb(0 0 0 / 20%) 65%); }
+  .moment-in { padding-block: 120px; }
+  .moment .lead { max-width: 38ch; }
 
-  .ritual .schritte { list-style: none; padding: 0; margin: 40px 0; display: grid; gap: 1px; background: var(--tanne-3); border: 1px solid var(--tanne-3); border-radius: var(--r); overflow: hidden; }
-  @media (min-width: 820px) { .ritual .schritte { grid-template-columns: repeat(3, 1fr); } }
-  .schritte li { background: var(--tanne); padding: 30px 28px; }
-  .schritte .nr { font: 600 0.8rem/1 var(--sans); letter-spacing: 0.16em; text-transform: uppercase; color: var(--glut); }
-  .schritte h3 { margin: 14px 0 8px; }
-  .schritte p { color: #c9d3cc; margin: 0; }
+  .kopf-mitte { margin-bottom: 56px; }
+  .ritual { list-style: none; padding: 0; margin: 0; display: grid; gap: 24px; }
+  @media (min-width: 900px) { .ritual { grid-template-columns: repeat(3, 1fr); } }
+  .ritual li { background: #fff; border-radius: var(--r); overflow: hidden; padding-bottom: 28px; }
+  .r-bild { aspect-ratio: 4 / 3; overflow: hidden; margin-bottom: 24px; }
+  .r-bild :global(img) { width: 100%; height: 100%; object-fit: cover; }
+  .r-nr { display: block; padding: 0 28px; font: 600 0.75rem/1 var(--text); letter-spacing: 0.2em; text-transform: uppercase; color: var(--glut-dunkel); }
+  .ritual h3 { padding: 0 28px; margin: 12px 0 8px; }
+  .ritual p { padding: 0 28px; margin: 0; color: var(--grau); }
 
-  .zwei { display: grid; gap: clamp(28px, 5vw, 72px); align-items: center; }
+  .herkunft-sek { display: grid; background: var(--leinen); }
+  @media (min-width: 900px) { .herkunft-sek { grid-template-columns: 1fr 1fr; min-height: 720px; } }
+  .h-bild { min-height: 420px; position: relative; }
+  .h-bild :global(img) { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .h-txt { padding: clamp(56px, 8vw, 110px) clamp(24px, 6vw, 88px); align-self: center; }
+  .fakten { list-style: none; padding: 0; margin: 36px 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .fakten li { display: grid; gap: 4px; }
+  .fakten strong { font: 600 clamp(1.8rem, 3vw, 2.6rem)/1 var(--titel); letter-spacing: -0.03em; }
+  .fakten span { font-size: 0.85rem; color: var(--grau); }
+
+  .zwei { display: grid; gap: clamp(32px, 5vw, 72px); align-items: center; }
   @media (min-width: 860px) { .zwei { grid-template-columns: 1fr 1fr; } }
+  .almbox h2 { color: #fff; }
   .box-bild img { border-radius: var(--r); }
 
-  .themen { list-style: none; padding: 0; margin: 0 0 32px; display: grid; gap: 12px; }
+  .themen { list-style: none; padding: 0; margin: 0 0 40px; display: grid; gap: 12px; grid-template-columns: repeat(2, 1fr); }
   @media (min-width: 860px) { .themen { grid-template-columns: repeat(5, 1fr); } }
-  .themen a { display: grid; gap: 6px; padding: 18px; border: 1px solid var(--linie); border-radius: var(--r); text-decoration: none; height: 100%; background: var(--kalk); }
-  .themen a:hover { border-color: var(--tanne); }
-  .themen strong { font: 500 1.08rem/1.25 var(--serif); color: var(--tanne); }
-  .themen span { font-size: 0.85rem; color: var(--stein); line-height: 1.45; }
-  .artikel a { display: grid; gap: 12px; padding: 24px; text-decoration: none; align-content: start; }
-  .artikel strong { font: 500 1.2rem/1.3 var(--serif); color: var(--tanne); }
-  .artikel .chip { justify-self: start; }
-  .meta { font-size: 0.85rem; color: var(--stein); }
+  .themen a { position: relative; display: block; aspect-ratio: 3 / 4; border-radius: var(--r-m); overflow: hidden; text-decoration: none; color: #fff; }
+  .themen a :global(img) { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+  .themen a:hover :global(img) { transform: scale(1.05); }
+  .themen a::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, rgb(0 0 0 / 65%)); }
+  .themen a span { position: absolute; left: 18px; right: 18px; bottom: 16px; z-index: 1; font: 600 1.15rem/1.2 var(--titel); letter-spacing: -0.01em; }
+  .art { display: grid; gap: 12px; padding: 28px; border-radius: var(--r); background: var(--nebel); text-decoration: none; color: var(--graphit); align-content: start; transition: background 0.2s; }
+  .art:hover { background: #ececef; color: var(--graphit); }
+  .art strong { font: 600 1.3rem/1.25 var(--titel); letter-spacing: -0.02em; }
+  .art .chip { justify-self: start; background: #fff; }
+  .meta { font-size: 0.85rem; color: var(--grau); }
 
   .werkzeuge { display: grid; gap: 20px; }
   @media (min-width: 760px) { .werkzeuge { grid-template-columns: 1fr 1fr; } }
-  .werkzeug { padding: clamp(24px, 4vw, 40px); text-decoration: none; color: var(--granit); display: grid; gap: 4px; transition: border-color 0.2s, box-shadow 0.2s; }
-  .werkzeug:hover { border-color: var(--tanne); box-shadow: var(--schatten); }
-  .pfeil { font-weight: 700; color: var(--glut-dunkel); margin-top: 8px; }
+  .werkzeug { background: #fff; border-radius: var(--r); padding: clamp(28px, 4vw, 48px); text-decoration: none; color: var(--graphit); display: grid; gap: 6px; transition: transform 0.3s, box-shadow 0.3s; }
+  .werkzeug:hover { transform: translateY(-3px); box-shadow: var(--schatten); color: var(--graphit); }
+  .werkzeug h3 { font-size: clamp(1.6rem, 3vw, 2.2rem); margin: 0; }
+  .werkzeug p { color: var(--grau); margin: 6px 0 10px; }
 
-  .zitat { background: var(--tanne); color: var(--kalk); border-radius: var(--r); padding: clamp(28px, 4vw, 48px); }
-  .zitat p { font: italic 400 clamp(1.4rem, 2.6vw, 2rem)/1.3 var(--serif); }
-  .zitat span { color: var(--zirbe); font-size: 0.9rem; }
+  .schluss { min-height: 80vh; display: flex; align-items: center; }
+  .schluss::after { background: rgb(0 0 0 / 45%); }
+  .schluss .wrap { padding-block: 120px; }
+  .schluss .herkunft { color: rgb(255 255 255 / 85%); margin-bottom: 20px; }
+  .wl { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 32px; }
+  .wl input { flex: 0 1 320px; min-height: 50px; padding: 0 20px; border-radius: 999px; border: 0; }
 </style>

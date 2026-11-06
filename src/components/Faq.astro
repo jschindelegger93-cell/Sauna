@@ -18,9 +18,9 @@ const { faq, titel = 'Häufige Fragen', id = 'faq' } = Astro.props;
 <style>
   .liste { border-top: 1px solid var(--linie); }
   details { border-bottom: 1px solid var(--linie); }
-  summary { list-style: none; cursor: pointer; padding: 20px 40px 20px 0; position: relative; font: 600 1.05rem/1.4 var(--sans); color: var(--tanne); }
+  summary { list-style: none; cursor: pointer; padding: 20px 40px 20px 0; position: relative; font: 600 1.05rem/1.4 var(--text); color: var(--graphit); }
   summary::-webkit-details-marker { display: none; }
   summary::after { content: ''; position: absolute; right: 6px; top: 50%; width: 10px; height: 10px; border-right: 1.5px solid var(--glut); border-bottom: 1.5px solid var(--glut); transform: translateY(-70%) rotate(45deg); transition: transform 0.2s; }
   details[open] summary::after { transform: translateY(-30%) rotate(-135deg); }
-  details p { margin: 0 0 22px; max-width: 70ch; color: var(--granit); }
+  details p { margin: 0 0 22px; max-width: 70ch; color: var(--graphit); }
 </style>

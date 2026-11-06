@@ -11,7 +11,7 @@ export default defineConfig({
   prefetch: { prefetchAll: true, defaultStrategy: 'hover' },
   integrations: [
     sitemap({
-      filter: (page) => !/\/(danke|admin|impressum|datenschutz|agb)\//.test(page),
+      filter: (page) => !/\/(danke|admin|impressum|datenschutz|agb|bildnachweis)\//.test(page),
       i18n: { defaultLocale: 'de', locales: { de: 'de-AT' } },
     }),
   ],

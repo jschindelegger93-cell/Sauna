@@ -8,7 +8,7 @@ inhalt: "100 ml"
 inhaltMl: 100
 anwendungen: 40
 farbe: "#3D6B4F"
-bild: "/images/produkte/latschenkiefer.svg"
+bild: "/images/produkte/latschenkiefer.webp"
 duftnoten: ["Latschenkiefer", "Fichtennadel", "Bergluft"]
 stimmung: ["frisch", "klar", "belebend"]
 inhaltsstoffe: "[PLATZHALTER INCI/Zusammensetzung laut Lohnabfüller], naturreines ätherisches Latschenkiefernöl, Fichtennadelöl"

@@ -8,7 +8,7 @@ inhalt: "100 ml"
 inhaltMl: 100
 anwendungen: 40
 farbe: "#4F8F8C"
-bild: "/images/produkte/bergminze.svg"
+bild: "/images/produkte/bergminze.webp"
 duftnoten: ["Pfefferminze", "Eukalyptus", "Bergkräuter"]
 stimmung: ["kühl", "frisch", "belebend"]
 inhaltsstoffe: "[PLATZHALTER INCI/Zusammensetzung laut Lohnabfüller], naturreines Pfefferminzöl, Eukalyptusöl"

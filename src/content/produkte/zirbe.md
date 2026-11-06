@@ -8,7 +8,7 @@ inhalt: "100 ml"
 inhaltMl: 100
 anwendungen: 40
 farbe: "#B5793F"
-bild: "/images/produkte/zirbe.svg"
+bild: "/images/produkte/zirbe.webp"
 duftnoten: ["Zirbenholz", "Harz", "ein Hauch Zeder"]
 stimmung: ["beruhigend", "warm", "abendlich"]
 inhaltsstoffe: "[PLATZHALTER INCI/Zusammensetzung laut Lohnabfüller], naturreines ätherisches Zirbenöl"
