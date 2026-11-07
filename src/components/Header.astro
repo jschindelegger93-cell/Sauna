@@ -110,10 +110,14 @@ const a = S.announcement;
   .msg { grid-area: 1 / 1; opacity: 0; transition: opacity 0.6s; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: calc(100vw - 32px); }
   .msg.an { opacity: 1; }
 
-  .kopf { position: sticky; top: 0; z-index: 50; background: rgb(255 255 255 / 80%); backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px); border-bottom: 1px solid rgb(0 0 0 / 6%); transition: background 0.3s, border-color 0.3s; }
-  .kopf.transparent { position: fixed; left: 0; right: 0; top: 38px; background: transparent; backdrop-filter: none; -webkit-backdrop-filter: none; border-color: transparent; }
-  .kopf.menue-offen { background: #fff !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
-  .kopf.transparent.fest, .kopf.transparent.menue-offen { top: 0; background: rgb(255 255 255 / 82%); backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px); border-color: rgb(0 0 0 / 6%); }
+  /* Hintergrund + Blur liegen auf ::before, damit das fixierte Menü nie vom Header beschnitten wird (iOS Safari) */
+  .kopf { position: sticky; top: 0; z-index: 50; border-bottom: 1px solid rgb(0 0 0 / 6%); transition: border-color 0.3s; }
+  .kopf::before { content: ''; position: absolute; inset: 0; z-index: -1; background: rgb(255 255 255 / 82%); backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px); transition: opacity 0.3s; }
+  .kopf.transparent { position: fixed; left: 0; right: 0; top: 38px; border-color: transparent; }
+  .kopf.transparent::before { opacity: 0; }
+  .kopf.transparent.fest, .kopf.transparent.menue-offen { top: 0; border-color: rgb(0 0 0 / 6%); }
+  .kopf.transparent.fest::before { opacity: 1; }
+  .kopf.menue-offen::before { opacity: 1; background: #fff; backdrop-filter: none; -webkit-backdrop-filter: none; }
   .kopf-in { display: flex; align-items: center; gap: 28px; min-height: 80px; }
   .marke { text-decoration: none; margin-right: auto; display: grid; }
   .marke > span { grid-area: 1 / 1; transition: opacity 0.3s; }
