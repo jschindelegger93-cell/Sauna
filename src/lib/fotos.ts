@@ -34,7 +34,9 @@ export const FOTOS = {
 } as const;
 
 export type FotoKey = keyof typeof FOTOS;
-export const foto = (k: FotoKey) => ({ src: `/images/stock/${k}.webp`, klein: `/images/stock/${k}-sm.webp`, ...FOTOS[k] });
+const v = (k: string, w: number) => `/images/stock/${k}-${w}.webp`;
+export const srcset = (k: string) => `${v(k, 640)} 640w, ${v(k, 1080)} 1080w, ${v(k, 1600)} 1600w`;
+export const foto = (k: FotoKey) => ({ src: v(k, 1080), srcset: srcset(k), ...FOTOS[k] });
 
 /** Themenbild je Ratgeber-Cluster */
 export const THEMA_FOTO: Record<string, FotoKey> = {

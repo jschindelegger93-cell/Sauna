@@ -7,6 +7,7 @@ import ProduktKarte from './ProduktKarte.astro';
 import Faq from './Faq.astro';
 import Foto from './Foto.astro';
 import Dampf from './Dampf.astro';
+import { srcset } from '../lib/fotos';
 import type { FotoKey } from '../lib/fotos';
 import { S, SITE, abs, png, breadcrumbLd, faqLd, ORG_ID, produktUrl } from '../lib/site';
 
@@ -20,6 +21,7 @@ const verwandt = d.verwandt.map((s) => alle.find((x) => x.id === s)).filter(Bool
 const artikel = (await getCollection('ratgeber')).filter((a) => d.ratgeber.includes(a.id));
 
 const zub = d.typ === 'zubehoer';
+const stock = d.bild.startsWith('/images/stock/');
 const url = produktUrl(p);
 const crumbs = [
   { name: 'Startseite', href: '/' },
@@ -90,7 +92,7 @@ const beschreibung = d.seo.description ?? d.kurz;
   <Breadcrumbs items={crumbs} />
   <section class="wrap produkt" style={`--akzent:${d.farbe}`}>
     <div class="galerie">
-      <img src={d.bild} alt={bildAlt} width="800" height="800" fetchpriority="high" />
+      <img src={stock ? d.bild.replace('.webp', '-1080.webp') : d.bild} srcset={stock ? srcset(d.bild.split('/').pop()!.replace('.webp', '')) : undefined} sizes="(min-width: 900px) 50vw, 100vw" alt={bildAlt} width="800" height="800" fetchpriority="high" decoding="async" />
     </div>
     <div class="info">
       <p class="augenbraue">{d.limitiert ? 'Limitierte Edition · ' : ''}{d.nummer ? `${d.nummer} · ` : ''}{zub ? 'Sauna-Zubehör' : d.typ === 'set' ? 'Set' : 'Saunaaufguss'}</p>

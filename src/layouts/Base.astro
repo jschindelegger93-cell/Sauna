@@ -1,4 +1,5 @@
 ---
+import { srcset } from '../lib/fotos';
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
@@ -51,7 +52,7 @@ const ga = S.tracking.ga4;
     <meta name="theme-color" content="#1D1D1F" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    {preload && <link rel="preload" as="image" href={preload} fetchpriority="high" />}
+    {preload && <link rel="preload" as="image" href={preload.replace('.webp', '-1080.webp')} imagesrcset={preload.startsWith('/images/stock/') ? srcset(preload.split('/').pop()!.replace('.webp', '')) : undefined} imagesizes="100vw" fetchpriority="high" />}
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM-Zusammenfassung" />
 

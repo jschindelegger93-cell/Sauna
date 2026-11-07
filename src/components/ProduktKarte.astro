@@ -5,7 +5,7 @@ interface Props { p: CollectionEntry<'produkte'>; ueberschrift?: 'h2' | 'h3' }
 const { p, ueberschrift = 'h3' } = Astro.props;
 const d = p.data;
 const H = ueberschrift;
-const bild = d.bild.startsWith('/images/stock/') ? d.bild.replace('.webp', '-sm.webp') : d.bild;
+const bild = d.bild.startsWith('/images/stock/') ? d.bild.replace('.webp', '-640.webp') : d.bild;
 ---
 <article class="pk">
   <a href={produktUrl(p)} class="bild" tabindex="-1" aria-hidden="true">

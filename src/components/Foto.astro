@@ -6,7 +6,9 @@ const f = foto(k);
 ---
 <img
   src={f.src}
-  srcset={`${f.klein} 900w, ${f.src} 2000w`}
+  srcset={f.srcset}
+  width="1600"
+  height="1067"
   sizes={sizes}
   alt={dekor ? '' : f.alt}
   class={Astro.props.class}
