@@ -112,7 +112,7 @@ const a = S.announcement;
 
   .kopf { position: sticky; top: 0; z-index: 50; background: rgb(255 255 255 / 80%); backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px); border-bottom: 1px solid rgb(0 0 0 / 6%); transition: background 0.3s, border-color 0.3s; }
   .kopf.transparent { position: fixed; left: 0; right: 0; top: 38px; background: transparent; backdrop-filter: none; -webkit-backdrop-filter: none; border-color: transparent; }
-  .kopf.menue-offen { background: #fff !important; }
+  .kopf.menue-offen { background: #fff !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
   .kopf.transparent.fest, .kopf.transparent.menue-offen { top: 0; background: rgb(255 255 255 / 82%); backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px); border-color: rgb(0 0 0 / 6%); }
   .kopf-in { display: flex; align-items: center; gap: 28px; min-height: 80px; }
   .marke { text-decoration: none; margin-right: auto; display: grid; }
@@ -141,7 +141,7 @@ const a = S.announcement;
     .menue { display: block; }
     .kopf-in { min-height: 70px; gap: 14px; }
     .kopf-cta { padding: 10px 18px; min-height: 42px; font-size: 0.95rem; }
-    .nav { inset: 70px 0 0 !important; }
+    .nav { inset: 70px 0 auto 0 !important; height: calc(100vh - 70px); height: calc(100dvh - 70px); }
     .kopf-beratung { display: none; }
     .nur-mobil { display: block !important; }
     .nav-extra.nur-mobil { display: grid !important; }
